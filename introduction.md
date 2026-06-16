@@ -123,7 +123,7 @@ Many modern packaging tools still rely on `setuptools` behind the scenes, even w
 #### `pip`
 
 `pip` is Python's traditional package installer. 
-It allows users to install packages from package repositories such as PyPI, as well as from local directories, archives or source code repositories such as GitHub.
+It allows users to install packages from package repositories such as [PyPI][pypi], as well as from local directories, archives or source code repositories such as GitHub.
 
 While `pip` remains the standard installer included with Python, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
 
@@ -155,7 +155,7 @@ Modern Python projects increasingly adopt the following tools that manage packag
 
 ### `uv`
 
-Uv is a modern package and project management tool developed by Astral. 
+[Uv][uv] is a modern package and project management tool developed by Astral. 
 It combines dependency management, virtual environment management and package installation into a single, high-performance tool.
 
 Many common tasks that previously required several separate tools can now be performed through a single command-line interface.
@@ -163,12 +163,12 @@ We will use `uv` tool in the practical part of this session.
 
 ### Poetry
 
-Poetry focuses on dependency management, reproducible environments and simplified package publishing. 
+[Poetry][poetry] focuses on dependency management, reproducible environments and simplified package publishing. 
 It introduced many of the ideas that influenced modern Python project management and remains popular in both industry and research.
 
 ### Hatch
 
-Hatch provides a flexible framework for managing Python projects, environments and package builds. 
+[Hatch][hatch] provides a flexible framework for managing Python projects, environments and package builds. 
 It is particularly popular among developers who require more advanced build and release workflows.
 
 ## Managing dependencies
