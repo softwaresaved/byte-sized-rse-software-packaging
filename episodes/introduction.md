@@ -226,6 +226,9 @@ Package repositories provide a central location where users can discover, downlo
 
 ## Summary
 
+Software packaging is a fundamental practice that helps make software easier to share, install, reuse and maintain. 
+This session introduces the concepts behind software packaging, explains why packaging is important for reproducible and sustainable research software, and provides an overview of the modern Python packaging ecosystem. 
+Participants will learn about package structure, dependency management, packaging tools and distribution formats before exploring modern Python packaging workflows using `uv` in a practical session.
 
 ::: keypoints
 
