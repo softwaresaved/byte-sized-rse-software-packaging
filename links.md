@@ -18,3 +18,4 @@ any links that you are not going to use.
 [zotero]: https://www.zotero.org/
 [cffinit-webapp]: https://citation-file-format.github.io/cff-initializer-javascript/#/
 [vscode]: https://code.visualstudio.com/
+[toml]: https://toml.io/en/
