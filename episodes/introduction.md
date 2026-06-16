@@ -6,15 +6,22 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- Why is documenting software important?
-- How should we document our code?
-- What are the minimum elements of software documentation needed?
+- What is software packaging and why should researchers care about it?
+- How does packaging make software easier to share, install and maintain?
+- What information is typically included in a software package?
+- How are software dependencies managed in modern Python projects?
+- What is the difference between a source distribution and a wheel?
+- How are Python packages published and distributed?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Describe the main types of software documentation and identify their primary audiences, including end users, developers, maintainers, contributors and system administrators.
+- Explain what software packaging is and why it is important for software reuse, reproducibility and sustainability.
+- Describe the key components of a Python package and the role of package metadata, dependencies and documentation.
+- Distinguish between traditional and modern Python packaging tools and standards, including `setup.py`, `pip`, `pyproject.toml` and `uv`.
+- Explain how package managers help manage dependencies and create reproducible software environments.
+- Describe the difference between source distributions (sdists) and wheels.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -217,18 +224,17 @@ Once packages have been built, they are typically published to a package reposit
 The most widely used repository for Python packages is the Python Package Index (PyPI), which hosts hundreds of thousands of open-source packages.
 Package repositories provide a central location where users can discover, download and install software.
 
-
+## Summary
 
 
 ::: keypoints
 
-- Documentation allows users to run and understand software without having to work things out for themselves directly from the source code.
-- Different audiences (e.g. end users, developers, administrators) interact with our software in different ways and require different types of documentation.
-- Documentation can be provided at different levels 
-  - code-level documentation embedded within the source code to understand the implementation details,
-  - software-level documentation on how to install, use, configure and modify the code, 
-  - project-level documentation on how to contribute to, maintain and govern the software project.
-- A (good) README, CITATION and LICENSE files are the minimum project-level documentation elements required to make research code understandable and reusable (and research it supports reproducible).
-- Documentation frameworks such as Diátaxis provide content and style guidelines that can helps us write high quality documentation.
+- Software packaging bundles code, metadata, dependencies and documentation into a distributable artefact.
+- Packaging makes software easier to share, install, reuse and reproduce.
+- Python packages are commonly distributed as source distributions (sdists) or wheels.
+- Modern Python packaging is built around the `pyproject.toml` standard.
+- Package managers such as `uv` simplify dependency management, environment creation and package installation.
+- Lock files help create reproducible software environments by recording exact dependency versions.
+- Package repositories such as PyPI provide a central location for publishing and installing software.
 
 :::
