@@ -592,6 +592,32 @@ package managers help by:</p>
 compatible versions and records them in a “lock” file. The lock file
 ensures that collaborators can recreate the same software environment
 later. This is an important contribution to reproducibility.</p>
+<div class="section level3">
+<h3 id="lock-files">Lock files<a class="anchor" aria-label="anchor" href="#lock-files"></a>
+</h3>
+<p>A lock file records the exact versions of all packages and
+dependencies used in a software environment. While a project’s
+<code>pyproject.toml</code> file specifies the packages that a project
+depends on, it often allows a range of compatible versions to be
+installed. As a result, two people installing the same project at
+different times may receive slightly different versions of the
+underlying dependencies.</p>
+<p>A lock file removes this uncertainty by recording the precise version
+of every package that was resolved during installation, including
+indirect dependencies (dependencies of dependencies). This allows the
+same software environment to be recreated consistently across different
+machines and at different points in time.</p>
+<p>For example, a project may specify a dependency on
+<code>pandas &gt;=2.0</code>. Without a lock file, one user might
+install version 2.1 while another installs version 2.3. With a lock
+file, both users install exactly the same version that was originally
+tested with the project.</p>
+<p>Modern package managers such as <code>uv</code> automatically
+generate and maintain lock files (e.g. <code>uv.lock</code>). These
+files play an important role in reproducible research by helping
+collaborators recreate the same software environment and reducing the
+risk of unexpected behaviour caused by dependency updates.</p>
+</div>
 </section><section><h2 class="section-heading" id="packaging-and-distribution-formats">Packaging and distribution formats<a class="anchor" aria-label="anchor" href="#packaging-and-distribution-formats"></a>
 </h2>
 <hr class="half-width">
@@ -621,15 +647,14 @@ reliable.</p>
 package managers automatically select a compatible wheel when one is
 available.</p>
 </div>
-<div class="section level3">
-<h3 id="package-repositories">Package repositories<a class="anchor" aria-label="anchor" href="#package-repositories"></a>
-</h3>
+</section><section><h2 class="section-heading" id="package-repositories">Package repositories<a class="anchor" aria-label="anchor" href="#package-repositories"></a>
+</h2>
+<hr class="half-width">
 <p>Once packages have been built, they are typically published to a
 package repository. The most widely used repository for Python packages
 is the Python Package Index (PyPI), which hosts hundreds of thousands of
 open-source packages. Package repositories provide a central location
 where users can discover, download and install software.</p>
-</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
@@ -806,7 +831,7 @@ missing?</h3>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>What documentation would you need to be able to run the code?</p>
 </div>
