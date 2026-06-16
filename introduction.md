@@ -188,6 +188,22 @@ With `uv`, dependencies are declared in `pyproject.toml`.
 The lock file ensures that collaborators can recreate the same software environment later.
 This is an important contribution to reproducibility.
 
+### Lock files
+
+A lock file records the exact versions of all packages and dependencies used in a software environment. 
+While a project's `pyproject.toml` file specifies the packages that a project depends on, it often allows a range of compatible versions to be installed. 
+As a result, two people installing the same project at different times may receive slightly different versions of the underlying dependencies.
+
+A lock file removes this uncertainty by recording the precise version of every package that was resolved during installation, including indirect dependencies (dependencies of dependencies). 
+This allows the same software environment to be recreated consistently across different machines and at different points in time.
+
+For example, a project may specify a dependency on `pandas >=2.0`. 
+Without a lock file, one user might install version 2.1 while another installs version 2.3. 
+With a lock file, both users install exactly the same version that was originally tested with the project.
+
+Modern package managers such as `uv` automatically generate and maintain lock files (e.g. `uv.lock`). 
+These files play an important role in reproducible research by helping collaborators recreate the same software environment and reducing the risk of unexpected behaviour caused by dependency updates.
+
 ## Packaging and distribution formats
 
 When discussing Python packaging, it is important to distinguish between source code, packages and distributions.
@@ -218,7 +234,7 @@ This makes installation faster and more reliable.
 
 Most users install wheel packages without realising it because package managers automatically select a compatible wheel when one is available.
 
-### Package repositories
+## Package repositories
 
 Once packages have been built, they are typically published to a package repository.
 The most widely used repository for Python packages is the Python Package Index (PyPI), which hosts hundreds of thousands of open-source packages.
