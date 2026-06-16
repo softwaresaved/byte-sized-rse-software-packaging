@@ -10,10 +10,16 @@
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/aio.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/example-code.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/generating-documentation-mkdocs.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/images.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/index.html</loc>
@@ -28,16 +34,28 @@
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/aio.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/example-code.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/generating-documentation-mkdocs.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/index.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/profiles.html</loc>
@@ -46,7 +64,13 @@
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/reference.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor-notes.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/key-points.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/profiles.html</loc>
