@@ -19,3 +19,7 @@ any links that you are not going to use.
 [cffinit-webapp]: https://citation-file-format.github.io/cff-initializer-javascript/#/
 [vscode]: https://code.visualstudio.com/
 [toml]: https://toml.io/en/
+[pypi]: https://pypi.org/
+[uv]: https://docs.astral.sh/uv/
+[hatch]: https://hatch.pypa.io/latest/
+[poetry]: https://python-poetry.org/
