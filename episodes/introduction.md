@@ -54,16 +54,31 @@ Packages are used in almost all programming languages, operating systems and com
 
 ## Software packaging and dependency management
 
-Software packaging and dependency management are closely related but serve different purposes. 
+**Software packaging** and **dependency management** are closely related but serve different purposes. 
 
-Dependency management focuses on identifying, installing and maintaining the external libraries that the software relies on - making sure that all the external libraries required by the software are available and compatible.
+**Dependency management** focuses on identifying, installing and maintaining the external libraries that the software relies on - making sure that all the external libraries required by the software are available and compatible.
 Dependency management is useful even if the software is never distributed as a package. 
-Many research projects manage their dependencies to create reproducible software environments for reuse without packaging their code. 
+Many research projects manage their dependencies to create **virtual reproducible software environments** for reuse without packaging their code.
 
-Packaging goes a step further by preparing the software for distribution (e.g. via PyPI or other software registries), bundling the code, metadata and other supporting files into into a distributable and installable artefact ("archive"). 
+**Packaging** goes a step further by preparing the software for distribution (e.g. via PyPI or other software registries), bundling the code, metadata and other supporting files into into a distributable and installable artefact ("archive"). 
 
-Modern tools such as `uv` combine these capabilities for Python, making it easy to manage dependencies while also building and distributing packages.
-By contrast, more traditional tools such as `pip` and `venv` each address a specific part of the workflow: `pip` installs and manages Python packages, while `venv` creates isolated Python environments, requiring multiple tools to accomplish what `uv` provides through a single interface.
+Modern tools such as `uv` combine these capabilities for Python, making it easy to manage dependencies while also building and distributing packages (and uploading them to a package repository).
+
+By contrast, more traditional tools such as `pip` and `venv` each address a specific part of the workflow: `pip` manages installation of Python packages, while `venv` creates isolated Python environments, requiring multiple tools to accomplish what `uv` provides through a single interface.
+
+::: callout
+
+### Dependencies and virtual reproducible environments 
+
+Software often relies on dozens or hundreds of external packages (dependencies).
+Managing these manually (while possible) quickly becomes difficult - dependencies are one of the biggest challenges in software development.
+
+We need a mechanism of isolating the environment for developing and running a software project from the host machine and other projects on the same machine.
+You could use a separate machine per project but it is not practical; other approaches include virtual machines or development containers.
+These options are not always convenient, so many developers opt for a more lightweight form of isolation: **virtual reproducible environments**.
+
+Modern package managers help with virtual reproducible environments by tracking dependencies and recording exact package versions, and resolving version conflicts.
+:::
 
 ## Why packaging software matters?
 
@@ -89,11 +104,13 @@ Packaging helps ensure that software can be shared, reused and reproduced by oth
 Packaging captures important information about dependencies, versions and installation requirements, making it easier for collaborators to run your software and obtain consistent results. 
 Good packaging practices also support software sustainability by making projects easier to maintain, distribute and build upon over time.
 
-## Python Packaging Ecosystem
+## Python packaging and dependency management tooling ecosystem
 
-Packaging tools help with preparing metadata files, building packages and uploading them to a package repository.
+Python packaging and dependency management tooling ecosystem is complicated and often confusing.
+There are tools that install packages only, then install and create and dependency management tools and environment isolation.
+Check out this [very good and complete-ish guide to dependency management in Python](https://nielscautaerts.xyz/python-dependency-management-is-a-dumpster-fire.html).
 
-### Traditional packaging tools
+### Traditional tools
 
 Historically, many researchers created Python packages using a combination of the following tools.
 
@@ -113,7 +130,7 @@ Many modern packaging tools still rely on `setuptools` behind the scenes, even w
 
 #### `pip`
 
-`pip` is Python's traditional package installer. 
+`pip` is Python's traditional package installer.
 It allows users to install packages from package repositories such as [PyPI][pypi], as well as from local directories, archives or source code repositories such as GitHub.
 
 While `pip` remains the standard installer included with Python, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
@@ -125,7 +142,7 @@ It is commonly used to specify the packages and versions needed to recreate a so
 
 Although still widely used, many modern projects now manage dependencies directly through `pyproject.toml` and lock files.
 
-### Modern packaging tools
+### Modern tools
 
 Python packaging has evolved significantly over time.
 
