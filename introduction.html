@@ -663,48 +663,13 @@ framework for managing Python projects, environments and package builds.
 It is particularly popular among developers who require more advanced
 build and release workflows.</p>
 </div>
-</div>
-</section><section><h2 class="section-heading" id="packaging-and-distribution-formats">Packaging and distribution formats<a class="anchor" aria-label="anchor" href="#packaging-and-distribution-formats"></a></h2>
-<hr class="half-width"><p>When discussing Python packaging, it is important to distinguish
-between source code, packages and distributions.</p>
-<div class="section level3">
-<h3 id="source-distribution-sdist">Source distribution (sdist)<a class="anchor" aria-label="anchor" href="#source-distribution-sdist"></a></h3>
-<p>A source distribution contains the original source code and all the
-files needed to build the package. Source distributions are typically
-distributed as compressed archives such as:</p>
-<pre class="text"><code>my_package-1.0.0.tar.gz</code></pre>
-<p>Installing from a source distribution requires the package to be
-built on the user’s machine. This provides maximum flexibility but may
-require additional build tools or compilers.</p>
-</div>
-<div class="section level3">
-<h3 id="wheel">Wheel<a class="anchor" aria-label="anchor" href="#wheel"></a></h3>
-<p>A wheel is a built distribution format designed for fast
-installation. Wheel files typically have names such as:</p>
-<pre class="text"><code>my_package-1.0.0-py3-none-any.whl</code></pre>
-<p>Unlike source distributions, wheels can usually be installed directly
-without rebuilding the package. This makes installation faster and more
-reliable.</p>
-<p>Most users install wheel packages without realising it because
-package managers automatically select a compatible wheel when one is
-available.</p>
-</div>
-</section><section><h2 class="section-heading" id="package-repositories">Package repositories<a class="anchor" aria-label="anchor" href="#package-repositories"></a></h2>
-<hr class="half-width"><p>Once packages have been built, they are typically published to a
-package repository. The most widely used repository for Python packages
-is the Python Package Index (PyPI), which hosts hundreds of thousands of
-open-source packages. Package repositories provide a central location
-where users can discover, download and install software.</p>
-</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
-<hr class="half-width"><p>Software packaging is a fundamental practice that helps make software
-easier to share, install, reuse and maintain.</p>
-<p>We introduced the concepts behind software packaging, package
-structure, dependency management, packaging tools and distribution
-formats. We also covered why packaging and dependency management is
-important for sustainable research software and reproducible research,
-and provided an overview of the complex Python packaging and dependency
-management ecosystem - a summary of which is shown in tables below.</p>
-<table class="table"><colgroup><col width="7%"><col width="6%"><col width="40%"><col width="45%"></colgroup><thead><tr><th>Feature</th>
+<div class="section level4">
+<h4 id="comparison-of-modern-packaging-tools">Comparison of modern packaging tools<a class="anchor" aria-label="anchor" href="#comparison-of-modern-packaging-tools"></a></h4>
+<p>The above modern packaging tools are not competing packaging
+standards — they all work with the same underlying Python packaging
+standards. They mainly differ in the workflow and user experience they
+provide. A summary of their main characteristics is shown below.</p>
+<table class="table"><colgroup><col width="4%"><col width="24%"><col width="21%"><col width="49%"></colgroup><thead><tr><th>Feature</th>
 <th><code>uv</code></th>
 <th><code>poetry</code></th>
 <th><code>hatch</code></th>
@@ -733,7 +698,8 @@ management ecosystem - a summary of which is shown in tables below.</p>
 </td>
 <td>✅ <code>poetry.lock</code>
 </td>
-<td>✅</td>
+<td>✅ It does not have a single, universally adopted default lock
+file</td>
 </tr><tr><td><strong>Build Python packages</strong></td>
 <td>✅</td>
 <td>✅</td>
@@ -743,9 +709,9 @@ management ecosystem - a summary of which is shown in tables below.</p>
 <td>✅</td>
 <td>✅</td>
 </tr><tr><td><strong>Performance</strong></td>
-<td>Very fast (Rust implementation)</td>
-<td>Good</td>
-<td>Good</td>
+<td>⭐⭐⭐⭐⭐ Excellent - very fast (Rust implementation)</td>
+<td>⭐⭐⭐ Good</td>
+<td>⭐⭐⭐⭐ Very good</td>
 </tr><tr><td><strong>Learning curve</strong></td>
 <td>Low</td>
 <td>Low–Moderate</td>
@@ -763,7 +729,91 @@ management ecosystem - a summary of which is shown in tables below.</p>
 <td>Existing projects and teams already using Poetry</td>
 <td>Developers who need flexible build configurations, multiple
 environments and advanced release workflows</td>
-</tr></tbody></table><p>Next we will exploring modern Python packaging workflows using
+</tr></tbody></table></div>
+</div>
+</section><section><h2 class="section-heading" id="packaging-and-distribution-formats">Packaging and distribution formats<a class="anchor" aria-label="anchor" href="#packaging-and-distribution-formats"></a></h2>
+<hr class="half-width"><p>When discussing Python packaging, it is important to distinguish
+between source code, distributions and packages.</p>
+<div class="section level3">
+<h3 id="source-code">Source code<a class="anchor" aria-label="anchor" href="#source-code"></a></h3>
+<p>Source code contains the original project files created by the
+developer.</p>
+</div>
+<div class="section level3">
+<h3 id="source-distribution-sdist">Source distribution (sdist)<a class="anchor" aria-label="anchor" href="#source-distribution-sdist"></a></h3>
+<p>A source distribution contains the original source code and all the
+files needed to build the package. Source distributions are typically
+distributed as compressed archives such as:</p>
+<pre class="text"><code>my_package-1.0.0.tar.gz</code></pre>
+<p>Installing from a source distribution requires the package to be
+built on the user’s machine. This provides maximum flexibility but may
+require additional build tools or compilers.</p>
+</div>
+<div class="section level3">
+<h3 id="wheel">Wheel<a class="anchor" aria-label="anchor" href="#wheel"></a></h3>
+<p>A wheel is a built distribution format designed for fast
+installation. Wheel files typically have names such as:</p>
+<pre class="text"><code>my_package-1.0.0-py3-none-any.whl</code></pre>
+<p>Unlike source distributions, wheels can usually be installed directly
+without rebuilding the package. This makes installation faster and more
+reliable.</p>
+<p>Most users install wheel packages without realising it because
+package managers automatically select a compatible wheel when one is
+available.</p>
+<table class="table"><colgroup><col width="3%"><col width="35%"><col width="6%"><col width="5%"><col width="48%"></colgroup><thead><tr><th>Concept</th>
+<th>What it is</th>
+<th>Typical contents</th>
+<th>Typical format</th>
+<th>When it’s used</th>
+</tr></thead><tbody><tr><td><strong>Source code</strong></td>
+<td>The original project files created by the developer.</td>
+<td>Python modules, <code>pyproject.toml</code>, README, tests, licence,
+documentation and configuration files.</td>
+<td>Project directory</td>
+<td>By developers during software development and maintenance.</td>
+</tr><tr><td><strong>Source distribution (sdist)</strong></td>
+<td>A distributable archive containing the source code and everything
+needed to build the package.</td>
+<td>Source code, metadata, build configuration, documentation and other
+project files.</td>
+<td><code>.tar.gz</code></td>
+<td>Used by packaging tool (e.g. <code>uv build</code>) when the package
+needs to be built on the user’s machine or when distributing source
+code.</td>
+</tr><tr><td><strong>Wheel</strong></td>
+<td>A pre-built distribution that is ready to install.</td>
+<td>Built package files and package metadata.</td>
+<td><code>.whl</code></td>
+<td>Used by package installers (e.g. <code>uv</code>, <code>pip</code>)
+for fast, reliable installation without rebuilding the package.</td>
+</tr></tbody></table></div>
+</section><section><h2 class="section-heading" id="package-repositories">Package repositories<a class="anchor" aria-label="anchor" href="#package-repositories"></a></h2>
+<hr class="half-width"><p>Once packages have been built, they are typically published to a
+package repository. Package repositories provide a central location
+where users can discover, download and install software.</p>
+<p>The most widely used repository for publishing Python packages is the
+Python Package Index (PyPI), which hosts hundreds of thousands of
+open-source packages. While PyPI remains the standard and primary public
+package repository, it is not the only option. For example, GitHub can
+also be used to distribute packages, especially useful for private or
+organisation-managed software. Developers can attach source
+distributions and wheel files to <strong>GitHub Releases</strong>,
+allowing users to download and install specific versions directly. In
+addition, <strong>GitHub Packages</strong> provides a package hosting
+service that enables individuals and organisations to publish and manage
+Python packages alongside their source code repositories. This can be
+particularly useful for private projects or software intended for use
+within a specific organisation or research group.</p>
+</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
+<hr class="half-width"><p>Software packaging is a fundamental practice that helps make software
+easier to share, install, reuse and maintain.</p>
+<p>We introduced the concepts behind software packaging, package
+structure, dependency management, packaging tools and distribution
+formats. We also covered why packaging and dependency management is
+important for sustainable research software and reproducible research,
+and provided an overview of the complex Python packaging and dependency
+management ecosystem.</p>
+<p>Next we will exploring modern Python packaging workflows using
 <code>uv</code> in a practical session. It provides a single, modern
 interface for creating projects, managing dependencies, creating virtual
 environments and building packages. Its speed, simplicity and standards
