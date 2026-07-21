@@ -235,9 +235,36 @@ It introduced many of the ideas that influenced modern Python project management
 [Hatch][hatch] provides a flexible framework for managing Python projects, environments and package builds. 
 It is particularly popular among developers who require more advanced build and release workflows.
 
+#### Comparison of modern packaging tools
+
+The above modern packaging tools are not competing packaging standards — they all work with the same underlying Python packaging standards. 
+They mainly differ in the workflow and user experience they provide.
+A summary of their main characteristics is shown below.
+
+| Feature | `uv`                                               | `poetry`                                   | `hatch`                                                                                                 |
+|---------|----------------------------------------------------|----------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **Primary focus** | Fast package, dependency and project management    | Dependency management and package publishing | Flexible project, environment and build management                                                      |
+| **Uses `pyproject.toml`** | ✅                                                  | ✅                                            | ✅                                                                                                       |
+| **Package installation** | ✅                                                  | ✅                                            | ✅                                                                                                       |
+| **Dependency management** | ✅                                                  | ✅                                            | ✅                                                                                                       |
+| **Virtual environment management** | ✅ Built in                                         | ✅ Built in                                   | ✅ Built in                                                                                              |
+| **Lock file support** | ✅ `uv.lock`                                        | ✅ `poetry.lock`                              | ✅  It does not have a single, universally adopted default lock file                                    |
+| **Build Python packages** | ✅                                                  | ✅                                            | ✅                                                                                                       |
+| **Publish packages** | ✅                                                  | ✅                                            | ✅                                                                                                       |
+| **Performance** | ⭐⭐⭐⭐⭐ Excellent - very fast (Rust implementation) | ⭐⭐⭐ Good | ⭐⭐⭐⭐ Very good                                                                                          |
+| **Learning curve** | Low                                                | Low–Moderate                                 | Moderate                                                                                                |
+| **Typical use** | General-purpose modern Python development          | Research and application development         | Advanced projects and library development                                                               |
+| **Adoption** | Rapidly growing                                    | Mature and widely adopted | Mature, especially for library development                                                              |
+| **Best suited for** | Most new Python projects                           | Existing projects and teams already using Poetry | Developers who need flexible build configurations, multiple environments and advanced release workflows |
+
+
 ## Packaging and distribution formats
 
-When discussing Python packaging, it is important to distinguish between source code, packages and distributions.
+When discussing Python packaging, it is important to distinguish between source code, distributions and packages.
+
+### Source code
+
+Source code contains the original project files created by the developer.
 
 ### Source distribution (sdist)
 
@@ -248,7 +275,7 @@ Source distributions are typically distributed as compressed archives such as:
 my_package-1.0.0.tar.gz
 ```
 
-Installing from a source distribution requires the package to be built on the user's machine. 
+Installing from a source distribution requires the package to be built on the user's machine.
 This provides maximum flexibility but may require additional build tools or compilers.
 
 ### Wheel
@@ -260,39 +287,35 @@ Wheel files typically have names such as:
 my_package-1.0.0-py3-none-any.whl
 ```
 
-Unlike source distributions, wheels can usually be installed directly without rebuilding the package. 
+Unlike source distributions, wheels can usually be installed directly without rebuilding the package.
 This makes installation faster and more reliable.
 
 Most users install wheel packages without realising it because package managers automatically select a compatible wheel when one is available.
 
+| Concept | What it is                                                                                     | Typical contents | Typical format | When it's used                                                                                                                      |
+|---------|------------------------------------------------------------------------------------------------|------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Source code** | The original project files created by the developer.                                           | Python modules, `pyproject.toml`, README, tests, licence, documentation and configuration files. | Project directory | By developers during software development and maintenance.                                                                          |
+| **Source distribution (sdist)** | A distributable archive containing the source code and everything needed to build the package. | Source code, metadata, build configuration, documentation and other project files. | `.tar.gz` | Used by packaging tool (e.g. `uv build`) when the package needs to be built on the user's machine or when distributing source code. |
+| **Wheel** | A pre-built distribution that is ready to install.                                             | Built package files and package metadata. | `.whl` | Used by package installers (e.g. `uv`, `pip`) for fast, reliable installation without rebuilding the package.                      |
+
 ## Package repositories
 
 Once packages have been built, they are typically published to a package repository.
-The most widely used repository for Python packages is the Python Package Index (PyPI), which hosts hundreds of thousands of open-source packages.
 Package repositories provide a central location where users can discover, download and install software.
+
+The most widely used repository for publishing Python packages is the Python Package Index (PyPI), which hosts hundreds of thousands of open-source packages.
+While PyPI remains the standard and primary public package repository, it is not the only option. 
+For example, GitHub can also be used to distribute packages, especially useful for private or organisation-managed software. 
+Developers can attach source distributions and wheel files to **GitHub Releases**, allowing users to download and install specific versions directly. 
+In addition, **GitHub Packages** provides a package hosting service that enables individuals and organisations to publish and manage Python packages alongside their source code repositories. 
+This can be particularly useful for private projects or software intended for use within a specific organisation or research group.
 
 ## Summary
 
 Software packaging is a fundamental practice that helps make software easier to share, install, reuse and maintain.
 
 We introduced the concepts behind software packaging, package structure, dependency management, packaging tools and distribution formats.
-We also covered why packaging and dependency management is important for sustainable research software and reproducible research, and provided an overview of the complex Python packaging and dependency management ecosystem - a summary of which is shown in tables below.
-
-| Feature | `uv` | `poetry`                                   | `hatch`                                          |
-|---------|--------|----------------------------------------------|----------------------------------------------------|
-| **Primary focus** | Fast package, dependency and project management | Dependency management and package publishing | Flexible project, environment and build management |
-| **Uses `pyproject.toml`** | ✅ | ✅                                            | ✅                                                  |
-| **Package installation** | ✅ | ✅                                            | ✅                                                  |
-| **Dependency management** | ✅ | ✅                                            | ✅                                                  |
-| **Virtual environment management** | ✅ Built in | ✅ Built in                                   | ✅ Built in                                         |
-| **Lock file support** | ✅ `uv.lock` | ✅ `poetry.lock`                              | ✅                                                  |
-| **Build Python packages** | ✅ | ✅                                            | ✅                                                  |
-| **Publish packages** | ✅ | ✅                                            | ✅                                                  |
-| **Performance** | Very fast (Rust implementation) | Good                                         | Good                                               |
-| **Learning curve** | Low | Low–Moderate                                 | Moderate                                           |
-| **Typical use** | General-purpose modern Python development | Research and application development         | Advanced projects and library development          |
-| **Adoption** | Rapidly growing | Mature and widely adopted | Mature, especially for library development |
-| **Best suited for** | Most new Python projects | Existing projects and teams already using Poetry |  Developers who need flexible build configurations, multiple environments and advanced release workflows |
+We also covered why packaging and dependency management is important for sustainable research software and reproducible research, and provided an overview of the complex Python packaging and dependency management ecosystem.
 
 Next we will exploring modern Python packaging workflows using `uv` in a practical session.
 It provides a single, modern interface for creating projects, managing dependencies, creating virtual environments and building packages. 
