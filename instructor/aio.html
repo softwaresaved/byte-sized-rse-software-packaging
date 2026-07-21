@@ -327,7 +327,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2026-06-16 |
+<p>Last updated on 2026-07-21 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -397,15 +397,42 @@ community.</p>
 </section><section><h2 class="section-heading" id="what-is-a-software-package">What is a software package?<a class="anchor" aria-label="anchor" href="#what-is-a-software-package"></a>
 </h2>
 <hr class="half-width">
-<p>A package is more than just code - in usually contains:</p>
+<p>A package is more than just code - in may contain a number of
+components:</p>
 <ul>
-<li>Source code</li>
-<li>Project metadata</li>
-<li>Dependency information</li>
-<li>Licensing information</li>
-<li>Documentation</li>
-<li>Tests</li>
-<li>Build instructions</li>
+<li>
+<strong>Source code</strong> – modules, functions and classes that
+implement the software’s functionality.</li>
+<li>
+<strong>Project/software metadata</strong> – information that
+describes the software project, such as its name, version, authors,
+description, homepage and supported Python versions. This information
+helps users and package repositories identify and manage the
+package.</li>
+<li>
+<strong>Dependency information</strong> – a list of the external
+libraries and packages required for the software to run correctly, along
+with any version constraints.</li>
+<li>
+<strong>Licensing information</strong> – the software licence that
+defines how others can use, modify and redistribute the software (for
+example, MIT, BSD or GPL).</li>
+<li>
+<strong>Documentation</strong> – information that helps users
+understand how to install, use and contribute to the software. This
+often includes a README, user guides, API documentation and
+examples.</li>
+<li>
+<strong>Tests</strong> – special code that verifies the software
+behaves as expected and helps developers identify bugs when making
+changes.</li>
+<li>
+<strong>Build instructions</strong> – configuration information
+(often part of documentation) that tells packaging tools how to build or
+install the software.</li>
+<li>Optional <strong>assets</strong> such as <strong>data
+files</strong>, <strong>images</strong> or <strong>compiled
+extensions</strong>.</li>
 </ul>
 <p>Packages provide a way of bundling these components into an easy to
 transport form (“archive”) that can be more easily distributed and
@@ -413,6 +440,30 @@ installed.</p>
 <p>Packages are used in almost all programming languages, operating
 systems and computing environments to simplify the process of installing
 and managing software.</p>
+</section><section><h2 class="section-heading" id="software-packaging-and-dependency-management">Software packaging and dependency management<a class="anchor" aria-label="anchor" href="#software-packaging-and-dependency-management"></a>
+</h2>
+<hr class="half-width">
+<p>Software packaging and dependency management are closely related but
+serve different purposes.</p>
+<p>Dependency management focuses on identifying, installing and
+maintaining the external libraries that the software relies on - making
+sure that all the external libraries required by the software are
+available and compatible. Dependency management is useful even if the
+software is never distributed as a package. Many research projects
+manage their dependencies to create reproducible software environments
+for reuse without packaging their code.</p>
+<p>Packaging goes a step further by preparing the software for
+distribution (e.g. via PyPI or other software registries), bundling the
+code, metadata and other supporting files into into a distributable and
+installable artefact (“archive”).</p>
+<p>Modern tools such as <code>uv</code> combine these capabilities for
+Python, making it easy to manage dependencies while also building and
+distributing packages. By contrast, more traditional tools such as
+<code>pip</code> and <code>venv</code> each address a specific part of
+the workflow: <code>pip</code> installs and manages Python packages,
+while <code>venv</code> creates isolated Python environments, requiring
+multiple tools to accomplish what <code>uv</code> provides through a
+single interface.</p>
 </section><section><h2 class="section-heading" id="why-packaging-software-matters">Why packaging software matters?<a class="anchor" aria-label="anchor" href="#why-packaging-software-matters"></a>
 </h2>
 <hr class="half-width">
@@ -423,22 +474,16 @@ send them the code and they immediately encounter problems:</p>
 <li>Which version of Python should they use?</li>
 <li>Which libraries need to be installed?</li>
 <li>Which versions of those libraries are compatible?</li>
-<li>How can they reproduce your environment?</li>
+<li>How can they reproduce your software environment?</li>
 </ul>
 <p>This is where packaging becomes important. It provides a standard way
-to describe:</p>
-<ul>
-<li>What software is being distributed</li>
-<li>What dependencies it requires</li>
-<li>How it should be installed</li>
-<li>Which versions are supported</li>
-</ul>
+to provide answers to the above questions.</p>
 <p>Packaging provides a number of important benefits.</p>
 <p>Packaging makes software distribution more efficient as it promotes a
 modular approach to software development and code reuse - reducing
 duplication. Applications and libraries typically include only the code
-that is specific to them, while shared external dependencies (package)
-can be installed separately and reused across multiple projects. By not
+that is specific to them, while shared external dependencies can be
+installed separately and reused across multiple projects. By not
 including copies of all the external code it uses - software
 distribution becomes more efficient.</p>
 <p>Packaging helps ensure that software can be shared, reused and
@@ -447,22 +492,6 @@ dependencies, versions and installation requirements, making it easier
 for collaborators to run your software and obtain consistent results.
 Good packaging practices also support software sustainability by making
 projects easier to maintain, distribute and build upon over time.</p>
-</section><section><h2 class="section-heading" id="whats-inside-a-python-package">What’s inside a Python package?<a class="anchor" aria-label="anchor" href="#whats-inside-a-python-package"></a>
-</h2>
-<hr class="half-width">
-<p>A Python package contains much more than code.</p>
-<p>Typical contents include:</p>
-<ul>
-<li>The application or library code.</li>
-<li>Metadata describing the package.</li>
-<li>Dependency information.</li>
-<li>A licence.</li>
-<li>Documentation such as a README.</li>
-<li>Optional assets such as data files, images, or compiled
-extensions.</li>
-</ul>
-<p>Packaging helps bring all of these components together into a
-shareable and installable unit.</p>
 </section><section><h2 class="section-heading" id="python-packaging-ecosystem">Python Packaging Ecosystem<a class="anchor" aria-label="anchor" href="#python-packaging-ecosystem"></a>
 </h2>
 <hr class="half-width">
