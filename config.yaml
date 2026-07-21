@@ -18,13 +18,13 @@ carpentry: 'incubator'
 carpentry_description: 'Byte-sized RSE'
 
 # Overall title for pages.
-title: 'Byte-sized RSE: Software Documentation with Mkdocs'
+title: 'Byte-sized RSE: Software Packaging'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: 2026-04-21
 
 # Comma-separated list of keywords for the lesson
-keywords: 'software, RSE, research software, software documentation, mkdocs'
+keywords: 'software, RSE, research software, software packaging, uv'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -51,7 +51,7 @@ disable_sidebar_numbering: true
 episodes:
   - introduction.md
   - example-code.md
-  - generating-documentation-mkdocs.md
+  - software-packaging-uv.md
 
 # Information for Learners
 learners:

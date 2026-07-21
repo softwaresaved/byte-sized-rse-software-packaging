@@ -64,6 +64,9 @@
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/reference.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/software-packaging-uv.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor-notes.html</loc>
   </url>
   <url>
@@ -77,5 +80,8 @@
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/software-packaging-uv.html</loc>
   </url>
 </urlset>
