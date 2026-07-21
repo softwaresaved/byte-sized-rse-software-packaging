@@ -26,11 +26,11 @@ At the end of this lesson, learners should be able to:
 
 ### Slides
 
-N/A.
+N/A
 
 ### Recordings
 
-N/A.
+N/A
 
 
 ## Acknowledgements
