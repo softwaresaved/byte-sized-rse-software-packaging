@@ -213,7 +213,7 @@
 <li><a href="#what-is-a-software-package">What is a software package?</a></li>
 <li><a href="#software-packaging-and-dependency-management">Software packaging and dependency management</a></li>
 <li><a href="#why-packaging-software-matters">Why packaging software matters?</a></li>
-<li><a href="#python-packaging-ecosystem">Python Packaging Ecosystem</a></li>
+<li><a href="#python-packaging-and-dependency-management-tooling-ecosystem">Python packaging and dependency management tooling ecosystem</a></li>
 <li><a href="#managing-dependencies">Managing dependencies</a></li>
 <li><a href="#packaging-and-distribution-formats">Packaging and distribution formats</a></li>
 <li><a href="#package-repositories">Package repositories</a></li>
@@ -409,27 +409,56 @@ installed.</p>
 systems and computing environments to simplify the process of installing
 and managing software.</p>
 </section><section><h2 class="section-heading" id="software-packaging-and-dependency-management">Software packaging and dependency management<a class="anchor" aria-label="anchor" href="#software-packaging-and-dependency-management"></a></h2>
-<hr class="half-width"><p>Software packaging and dependency management are closely related but
-serve different purposes.</p>
-<p>Dependency management focuses on identifying, installing and
-maintaining the external libraries that the software relies on - making
-sure that all the external libraries required by the software are
-available and compatible. Dependency management is useful even if the
-software is never distributed as a package. Many research projects
-manage their dependencies to create reproducible software environments
-for reuse without packaging their code.</p>
-<p>Packaging goes a step further by preparing the software for
-distribution (e.g. via PyPI or other software registries), bundling the
-code, metadata and other supporting files into into a distributable and
-installable artefact (“archive”).</p>
+<hr class="half-width"><p><strong>Software packaging</strong> and <strong>dependency
+management</strong> are closely related but serve different
+purposes.</p>
+<p><strong>Dependency management</strong> focuses on identifying,
+installing and maintaining the external libraries that the software
+relies on - making sure that all the external libraries required by the
+software are available and compatible. Dependency management is useful
+even if the software is never distributed as a package. Many research
+projects manage their dependencies to create <strong>virtual
+reproducible software environments</strong> for reuse without packaging
+their code.</p>
+<p><strong>Packaging</strong> goes a step further by preparing the
+software for distribution (e.g. via PyPI or other software registries),
+bundling the code, metadata and other supporting files into into a
+distributable and installable artefact (“archive”).</p>
 <p>Modern tools such as <code>uv</code> combine these capabilities for
 Python, making it easy to manage dependencies while also building and
-distributing packages. By contrast, more traditional tools such as
-<code>pip</code> and <code>venv</code> each address a specific part of
-the workflow: <code>pip</code> installs and manages Python packages,
-while <code>venv</code> creates isolated Python environments, requiring
+distributing packages (and uploading them to a package repository).</p>
+<p>By contrast, more traditional tools such as <code>pip</code> and
+<code>venv</code> each address a specific part of the workflow:
+<code>pip</code> manages installation of Python packages, while
+<code>venv</code> creates isolated Python environments, requiring
 multiple tools to accomplish what <code>uv</code> provides through a
 single interface.</p>
+<div id="dependencies-and-virtual-reproducible-environments" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="dependencies-and-virtual-reproducible-environments" class="callout-inner">
+<h3 class="callout-title">Dependencies and virtual reproducible
+environments</h3>
+<div class="callout-content">
+<p>Software often relies on dozens or hundreds of external packages
+(dependencies). Managing these manually (while possible) quickly becomes
+difficult - dependencies are one of the biggest challenges in software
+development.</p>
+<p>We need a mechanism of isolating the environment for developing and
+running a software project from the host machine and other projects on
+the same machine. You could use a separate machine per project but it is
+not practical; other approaches include virtual machines or development
+containers. These options are not always convenient, so many developers
+opt for a more lightweight form of isolation: <strong>virtual
+reproducible environments</strong>.</p>
+<p>Modern package managers help with virtual reproducible environments
+by tracking dependencies and recording exact package versions, and
+resolving version conflicts.</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="why-packaging-software-matters">Why packaging software matters?<a class="anchor" aria-label="anchor" href="#why-packaging-software-matters"></a></h2>
 <hr class="half-width"><p>Let’s start with a familiar situation. Imagine you have written a
 useful analysis script in Python and a colleague wants to use it. You
@@ -454,11 +483,14 @@ dependencies, versions and installation requirements, making it easier
 for collaborators to run your software and obtain consistent results.
 Good packaging practices also support software sustainability by making
 projects easier to maintain, distribute and build upon over time.</p>
-</section><section><h2 class="section-heading" id="python-packaging-ecosystem">Python Packaging Ecosystem<a class="anchor" aria-label="anchor" href="#python-packaging-ecosystem"></a></h2>
-<hr class="half-width"><p>Packaging tools help with preparing metadata files, building packages
-and uploading them to a package repository.</p>
+</section><section><h2 class="section-heading" id="python-packaging-and-dependency-management-tooling-ecosystem">Python packaging and dependency management tooling ecosystem<a class="anchor" aria-label="anchor" href="#python-packaging-and-dependency-management-tooling-ecosystem"></a></h2>
+<hr class="half-width"><p>Python packaging and dependency management tooling ecosystem is
+complicated and often confusing. There are tools that install packages
+only, then install and create and dependency management tools and
+environment isolation. Check out this <a href="https://nielscautaerts.xyz/python-dependency-management-is-a-dumpster-fire.html" class="external-link">very
+good and complete-ish guide to dependency management in Python</a>.</p>
 <div class="section level3">
-<h3 id="traditional-packaging-tools">Traditional packaging tools<a class="anchor" aria-label="anchor" href="#traditional-packaging-tools"></a></h3>
+<h3 id="traditional-tools">Traditional tools<a class="anchor" aria-label="anchor" href="#traditional-tools"></a></h3>
 <p>Historically, many researchers created Python packages using a
 combination of the following tools.</p>
 <div class="section level4">
@@ -502,7 +534,7 @@ files.</p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="modern-packaging-tools">Modern packaging tools<a class="anchor" aria-label="anchor" href="#modern-packaging-tools"></a></h3>
+<h3 id="modern-tools">Modern tools<a class="anchor" aria-label="anchor" href="#modern-tools"></a></h3>
 <p>Python packaging has evolved significantly over time.</p>
 </div>
 <div class="section level3">
