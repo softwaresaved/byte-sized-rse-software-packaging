@@ -109,6 +109,13 @@ We are mostly going to focus on packaging tools but will unavoidably mention dep
 
 Historically, many researchers created Python packages using a combination of the following tools.
 
+#### `pip`
+
+`pip` is Python's traditional package installer.
+It allows users to install packages from package repositories such as [PyPI][pypi], as well as from local directories, archives or source code repositories such as GitHub.
+
+While `pip` remains the standard installer included with standard Python distribution, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
+
 #### `setup.py`
 
 For many years, `setup.py` file (which exists at the root of a software project directory) was the primary mechanism for defining how a Python package (contained in that directory) should be built and installed. 
@@ -123,7 +130,7 @@ While still supported by many projects, modern Python packaging has moved away f
 #### `setuptools`
 
 `setuptools` is one of the oldest and most widely used Python packaging tools. 
-It extends Python's original package management system called `distutils` and provides functionality for building, packaging and distributing software.
+It extends Python's original package management tool called `distutils` and provides functionality for building, packaging and distributing software.
 
 One of the main advantages of `setuptools` over `distutils` is that it allows you to specify dependencies for your package, so that other packages that your package depends on will be automatically installed when your package is installed. 
 This makes it easier to distribute your package, because users don't have to manually install the dependencies before installing your package.
@@ -132,17 +139,10 @@ This is useful for development and testing, because you can test your package in
 
 Many modern packaging tools still rely on `setuptools` behind the scenes, even when developers no longer interact with it directly.
 
-#### `pip`
-
-`pip` is Python's traditional package installer.
-It allows users to install packages from package repositories such as [PyPI][pypi], as well as from local directories, archives or source code repositories such as GitHub.
-
-While `pip` remains the standard installer included with standard Python distribution, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
-
 #### `requirements.txt`
 
 A `requirements.txt` file provides a simple way to record project's dependencies information. 
-It is commonly used to specify the packages and versions needed to recreate a virtual software environment.
+It is commonly used to specify the packages and versions needed to recreate a virtual software environment (e.g. using `pip`).
 
 Although still widely used, many modern projects now manage dependencies directly through `pyproject.toml` and lock files.
 
