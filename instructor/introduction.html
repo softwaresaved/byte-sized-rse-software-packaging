@@ -492,6 +492,16 @@ mention dependency management tools too.</p>
 <p>Historically, many researchers created Python packages using a
 combination of the following tools.</p>
 <div class="section level4">
+<h4 id="pip"><code>pip</code><a class="anchor" aria-label="anchor" href="#pip"></a></h4>
+<p><code>pip</code> is Python’s traditional package installer. It allows
+users to install packages from package repositories such as <a href="https://pypi.org/" class="external-link">PyPI</a>, as well as from local directories,
+archives or source code repositories such as GitHub.</p>
+<p>While <code>pip</code> remains the standard installer included with
+standard Python distribution, newer tools are increasingly combining
+package installation, environment management and dependency resolution
+into a single workflow.</p>
+</div>
+<div class="section level4">
 <h4 id="setup-py"><code>setup.py</code><a class="anchor" aria-label="anchor" href="#setup-py"></a></h4>
 <p>For many years, <code>setup.py</code> file (which exists at the root
 of a software project directory) was the primary mechanism for defining
@@ -515,7 +525,7 @@ other standardised configuration files.</p>
 <h4 id="setuptools"><code>setuptools</code><a class="anchor" aria-label="anchor" href="#setuptools"></a></h4>
 <p><code>setuptools</code> is one of the oldest and most widely used
 Python packaging tools. It extends Python’s original package management
-system called <code>distutils</code> and provides functionality for
+tool called <code>distutils</code> and provides functionality for
 building, packaging and distributing software.</p>
 <p>One of the main advantages of <code>setuptools</code> over
 <code>distutils</code> is that it allows you to specify dependencies for
@@ -534,21 +544,11 @@ behind the scenes, even when developers no longer interact with it
 directly.</p>
 </div>
 <div class="section level4">
-<h4 id="pip"><code>pip</code><a class="anchor" aria-label="anchor" href="#pip"></a></h4>
-<p><code>pip</code> is Python’s traditional package installer. It allows
-users to install packages from package repositories such as <a href="https://pypi.org/" class="external-link">PyPI</a>, as well as from local directories,
-archives or source code repositories such as GitHub.</p>
-<p>While <code>pip</code> remains the standard installer included with
-standard Python distribution, newer tools are increasingly combining
-package installation, environment management and dependency resolution
-into a single workflow.</p>
-</div>
-<div class="section level4">
 <h4 id="requirements-txt"><code>requirements.txt</code><a class="anchor" aria-label="anchor" href="#requirements-txt"></a></h4>
 <p>A <code>requirements.txt</code> file provides a simple way to record
 project’s dependencies information. It is commonly used to specify the
-packages and versions needed to recreate a virtual software
-environment.</p>
+packages and versions needed to recreate a virtual software environment
+(e.g. using <code>pip</code>).</p>
 <p>Although still widely used, many modern projects now manage
 dependencies directly through <code>pyproject.toml</code> and lock
 files.</p>
