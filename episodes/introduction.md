@@ -48,51 +48,22 @@ A package is more than just code - in may contain a number of components:
 * **Build instructions** – configuration information (often part of documentation) that tells packaging tools how to build or install the software.
 * Optional **assets** such as **data files**, **images** or **compiled extensions**.
 
-Packages provide a way of bundling these components into an easy to transport form ("archive") that can be more easily distributed and installed.
+Packages provide a way of bundling these components into an easy to transport artefact ("archive") - that can be more easily distributed and installed.
 
 Packages are used in almost all programming languages, operating systems and computing environments to simplify the process of installing and managing software.
 
-## Software packaging and dependency management
-
-**Software packaging** and **dependency management** are closely related but serve different purposes. 
-
-**Dependency management** focuses on identifying, installing and maintaining the external libraries that the software relies on - making sure that all the external libraries required by the software are available and compatible.
-Dependency management is useful even if the software is never distributed as a package. 
-Many research projects manage their dependencies to create **virtual reproducible software environments** for reuse without packaging their code.
-
-**Packaging** goes a step further by preparing the software for distribution (e.g. via PyPI or other software registries), bundling the code, metadata and other supporting files into into a distributable and installable artefact ("archive"). 
-
-Modern tools such as `uv` combine these capabilities for Python, making it easy to manage dependencies while also building and distributing packages (and uploading them to a package repository).
-
-By contrast, more traditional tools such as `pip` and `venv` each address a specific part of the workflow: `pip` manages installation of Python packages, while `venv` creates isolated Python environments, requiring multiple tools to accomplish what `uv` provides through a single interface.
-
-::: callout
-
-### Dependencies and virtual reproducible environments 
-
-Software often relies on dozens or hundreds of external packages (dependencies).
-Managing these manually (while possible) quickly becomes difficult - dependencies are one of the biggest challenges in software development.
-
-We need a mechanism of isolating the environment for developing and running a software project from the host machine and other projects on the same machine.
-You could use a separate machine per project but it is not practical; other approaches include virtual machines or development containers.
-These options are not always convenient, so many developers opt for a more lightweight form of isolation: **virtual reproducible environments**.
-
-Modern package managers help with virtual reproducible environments by tracking dependencies and recording exact package versions, and resolving version conflicts.
-:::
-
 ## Why packaging software matters?
 
-Let's start with a familiar situation. 
+Let's start with a familiar situation.
 Imagine you have written a useful analysis script in Python and a colleague wants to use it.
 You send them the code and they immediately encounter problems:
 
 * Which version of Python should they use?
 * Which libraries need to be installed?
-* Which versions of those libraries are compatible?
+* Which versions of those libraries are compatible with one another?
 * How can they reproduce your software environment?
 
-This is where packaging becomes important.
-It provides a standard way to provide answers to the above questions.
+This is where packaging becomes important - it provides one standard way distribute and install your code on other people's machines.
 
 Packaging provides a number of important benefits.
 
@@ -100,31 +71,64 @@ Packaging makes software distribution more efficient as it promotes a modular ap
 Applications and libraries typically include only the code that is specific to them, while shared external dependencies can be installed separately and reused across multiple projects.
 By not including copies of all the external code it uses - software distribution becomes more efficient.
 
-Packaging helps ensure that software can be shared, reused and reproduced by others. 
-Packaging captures important information about dependencies, versions and installation requirements, making it easier for collaborators to run your software and obtain consistent results. 
+Packaging helps ensure that software can be shared, reused and reproduced by others.
+Packaging captures important information about dependencies, versions and installation requirements, making it easier for collaborators to run your software and obtain consistent results.
 Good packaging practices also support software sustainability by making projects easier to maintain, distribute and build upon over time.
 
-## Python packaging and dependency management tooling ecosystem
+## Software packaging and dependency management
 
-Python packaging and dependency management tooling ecosystem is complicated and often confusing.
-There are tools that install packages only, then install and create and dependency management tools and environment isolation.
-Check out this [very good and complete-ish guide to dependency management in Python](https://nielscautaerts.xyz/python-dependency-management-is-a-dumpster-fire.html).
+**Software packaging** and **dependency management** are closely related but serve different purposes. 
 
-### Traditional tools
+**Dependency management** focuses on identifying, installing and maintaining the external packages that the software relies on - making sure that all the external libraries required by the software are available and compatible.
+Dependency management is useful even if your software is never distributed as a package (because it will almost always rely on a number of external dependencies that you will have to manage on your system).
+
+Next step is to capture this **dependency information** for your software project somehow so others (or yourself on another machine) can replicate that.
+Dependencies and their versions can be recorded manually (e.g. just describing them as a list) but it is not very practical as software often relies on dozens or hundreds of external packages.
+Such lists, if not managed by special tools, quickly become out of date.
+
+Dependency information for your software can then used to create a **virtual reproducible software environment** for your code on any machine (in theory).
+This is a mechanism of isolating the environment for developing and running a software project (containing the specified dependencies) from other projects on the same machine.
+
+**Packaging** goes a step further by preparing the software for distribution (e.g. via PyPI or other software registries), bundling the code, software metadata, dependency information and other supporting files into into a distributable and installable artefact ("archive"). 
+
+Modern tools such as `uv` combine these capabilities for Python, making it easy to manage dependencies while also building and distributing packages (and uploading them to a shared package repository).
+
+By contrast, more traditional tools such as `pip` and `venv` each address a specific part of the workflow: `pip` manages installation of Python packages, while `venv` creates isolated Python environments, requiring multiple tools to accomplish what `uv` provides through a single interface.
+
+## Python packaging and dependency management tool ecosystem
+
+The Python packaging and dependency management ecosystem is rich but can also be complicated and, at times, confusing. 
+Different tools address different aspects of the software development workflow. 
+Some tools focus solely on installing packages (such as `pip`), others create isolated Python environments (such as `venv`), while modern tools like `uv`, `poetry` and `hatch` combine package installation, dependency management, environment management and packaging into a single workflow.
+
+If you'd like to explore the ecosystem in more detail, ["Python dependency management is a dumpster fire" guide](https://nielscautaerts.xyz/python-dependency-management-is-a-dumpster-fire.html) provides a comprehensive overview of dependency management in Python.
+
+We are mostly going to focus on packaging tools but will unavoidably mention dependency management tools too.
+
+### Traditional packaging tools
 
 Historically, many researchers created Python packages using a combination of the following tools.
 
 #### `setup.py`
 
-For many years, `setup.py` file was the primary mechanism for defining how a Python package should be built and installed. 
+For many years, `setup.py` file (which exists at the root of a software project directory) was the primary mechanism for defining how a Python package (contained in that directory) should be built and installed. 
 It contains information about the package, including its name, version, dependencies and build instructions.
 
-While still supported by many projects, modern Python packaging has moved away from relying directly on `setup.py` in favour of standardised configuration files.
+`setup.py` is a Python file, the presence of which is an indication that the module/package you are about to install has likely been packaged and distributed with `setuptools`, which is the traditional standard for distributing Python modules.
+Invoking Python `setup.py` script directly is now deprecated, but `setup.py` is still a valid `setuptools` configuration file.
+Or if you run `$ pip install .` from the software project directory root, `pip` will use `setup.py` to install the software package.
+
+While still supported by many projects, modern Python packaging has moved away from relying directly on `setup.py` in favour of other standardised configuration files.
 
 #### `setuptools`
 
-`setuptools` is one of the oldest and most widely used Python packaging libraries. 
-It extends Python's original packaging capabilities and provides functionality for building, packaging and distributing software.
+`setuptools` is one of the oldest and most widely used Python packaging tools. 
+It extends Python's original package management system called `distutils` and provides functionality for building, packaging and distributing software.
+
+One of the main advantages of `setuptools` over `distutils` is that it allows you to specify dependencies for your package, so that other packages that your package depends on will be automatically installed when your package is installed. 
+This makes it easier to distribute your package, because users don't have to manually install the dependencies before installing your package.
+`setuptools` also provides tools for creating and managing Python virtual environments, which are isolated Python environments that allow you to have multiple versions of the same package installed on the same machine. 
+This is useful for development and testing, because you can test your package in different environments without affecting other projects.
 
 Many modern packaging tools still rely on `setuptools` behind the scenes, even when developers no longer interact with it directly.
 
@@ -133,12 +137,12 @@ Many modern packaging tools still rely on `setuptools` behind the scenes, even w
 `pip` is Python's traditional package installer.
 It allows users to install packages from package repositories such as [PyPI][pypi], as well as from local directories, archives or source code repositories such as GitHub.
 
-While `pip` remains the standard installer included with Python, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
+While `pip` remains the standard installer included with standard Python distribution, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
 
 #### `requirements.txt`
 
-A `requirements.txt` file provides a simple way to record project dependencies. 
-It is commonly used to specify the packages and versions needed to recreate a software environment.
+A `requirements.txt` file provides a simple way to record project's dependencies information. 
+It is commonly used to specify the packages and versions needed to recreate a virtual software environment.
 
 Although still widely used, many modern projects now manage dependencies directly through `pyproject.toml` and lock files.
 
