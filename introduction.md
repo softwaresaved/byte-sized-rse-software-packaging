@@ -105,52 +105,65 @@ If you'd like to explore the ecosystem in more detail, ["Python dependency manag
 
 We are mostly going to focus on packaging tools but will unavoidably mention dependency management tools too.
 
-### Traditional packaging tools
+### Traditional tools & methods
 
 Historically, many researchers created Python packages using a combination of the following tools.
 
-#### `pip`
+#### Pip
 
 `pip` is Python's traditional package installer.
 It allows users to install packages from package repositories such as [PyPI][pypi], as well as from local directories, archives or source code repositories such as GitHub.
 
 While `pip` remains the standard installer included with standard Python distribution, newer tools are increasingly combining package installation, environment management and dependency resolution into a single workflow.
 
-#### `setup.py`
+#### Setup.py
 
 For many years, `setup.py` file (which exists at the root of a software project directory) was the primary mechanism for defining how a Python package (contained in that directory) should be built and installed. 
 It contains information about the package, including its name, version, dependencies and build instructions.
 
 `setup.py` is a Python file, the presence of which is an indication that the module/package you are about to install has likely been packaged and distributed with `setuptools`, which is the traditional standard for distributing Python modules.
 Invoking Python `setup.py` script directly is now deprecated, but `setup.py` is still a valid `setuptools` configuration file.
-Or if you run `$ pip install .` from the software project directory root, `pip` will use `setup.py` to install the software package.
+Alternatively, if you run 
 
-While still supported by many projects, modern Python packaging has moved away from relying directly on `setup.py` in favour of other standardised configuration files.
+```bash
+$ pip install .
+``` 
 
-#### `setuptools`
+from the software project directory root, `pip` will use information in `setup.py` to install the software package.
+
+While still supported by many projects, modern Python packaging has moved away from relying directly on `setup.py` in favour of other standardised configuration files, such as `pyproject.toml`.
+
+#### Setuptools
 
 `setuptools` is one of the oldest and most widely used Python packaging tools. 
 It extends Python's original package management tool called `distutils` and provides functionality for building, packaging and distributing software.
 
 One of the main advantages of `setuptools` over `distutils` is that it allows you to specify dependencies for your package, so that other packages that your package depends on will be automatically installed when your package is installed. 
 This makes it easier to distribute your package, because users don't have to manually install the dependencies before installing your package.
+
 `setuptools` also provides tools for creating and managing Python virtual environments, which are isolated Python environments that allow you to have multiple versions of the same package installed on the same machine. 
 This is useful for development and testing, because you can test your package in different environments without affecting other projects.
 
 Many modern packaging tools still rely on `setuptools` behind the scenes, even when developers no longer interact with it directly.
 
-#### `requirements.txt`
+#### Requirements.txt
 
-A `requirements.txt` file provides a simple way to record project's dependencies information. 
+A `requirements.txt` file provides a simple way to record project's dependency information. 
 It is commonly used to specify the packages and versions needed to recreate a virtual software environment (e.g. using `pip`).
 
-Although still widely used, many modern projects now manage dependencies directly through `pyproject.toml` and lock files.
+Although still used, many modern Python projects now manage dependencies and development environment through `pyproject.toml` and lock files.
 
-### Modern tools
+### Modern tools & methods
 
 Python packaging has evolved significantly over time.
+Modern package managers help by:
 
-### `pyproject.toml`
+* Tracking dependencies
+* Resolving version conflicts
+* Creating reproducible environments
+* Recording exact package versions
+
+#### Pyproject.toml
 
 The introduction of `pyproject.toml` file (written in [TOML format][toml]) has been one of the most significant developments in Python packaging.
 It provides a standard location for:
@@ -165,56 +178,62 @@ This standardisation has simplified Python packaging considerably.
 
 Modern Python projects increasingly adopt the following tools that manage packages described with `pyproject.toml`.
 
-### `uv`
+#### Lock files
+
+A lock file records the exact versions of all dependencies used in a software environment.
+While a project's `pyproject.toml` file specifies the packages that a project depends on, it often allows a range of compatible versions to be installed.
+As a result, two people installing the same project at different times may receive slightly different versions of the underlying dependencies.
+
+A lock file removes this uncertainty by recording the precise version of every package that was resolved during installation, including indirect/transitive dependencies (dependencies of dependencies) that have not been explicitly declared anywhere in your project.
+This allows the same software environment to be recreated consistently across different machines and at different points in time.
+
+For example, a project may specify a dependency on `pandas >=2.0`.
+Without a lock file, one user might install version 2.1 while another installs version 2.3.
+With a lock file, both users install exactly the same version that was originally tested with the project.
+
+Modern package managers such as `uv` automatically generate and maintain lock files (e.g. `uv.lock`).
+These files play an important role in reproducible research by helping collaborators recreate the same software environment and reducing the risk of unexpected behaviour caused by dependency updates.
+
+::: callout 
+
+### Fully reproducible environments
+
+Remember, if two people create environments from a dependency definition file at different points in time, they could end up with different environments.
+One could work fine, while the other could be broken. 
+And this could be caused by a broken release from some transitive dependency we did not even know we needed.
+
+The lock file represents a fully reproducible environment (as long as packages and versions remain available in package repositories). 
+
+Thus, good dependency management boils down to a few steps:
+
+* Creating a dependency definition file (listing all direct dependencies)
+* Generating a lock file (explicit step of "locking" our direct and indirect dependencies)
+* Tracking both the definition file and the lock file in version control
+* Syncing our environment with the lock file
+:::
+ 
+#### Uv
 
 [Uv][uv] is a modern package and project management tool developed by Astral. 
 It combines dependency management, virtual environment management and package installation into a single, high-performance tool.
 
+With `uv`, dependencies are declared in `pyproject.toml`.
+`uv` automatically resolves compatible versions and records them in a "lock" file called `uv.lock`.
+The lock file ensures that collaborators can recreate the same software environment later.
+This is an important contribution to reproducibility.
+
 Many common tasks that previously required several separate tools can now be performed through a single command-line interface.
 We will use `uv` tool in the practical part of this session.
 
-### Poetry
+#### Poetry
 
 [Poetry][poetry] focuses on dependency management, reproducible environments and simplified package publishing. 
 It introduced many of the ideas that influenced modern Python project management and remains popular in both industry and research.
 
-### Hatch
+#### Hatch
 
 [Hatch][hatch] provides a flexible framework for managing Python projects, environments and package builds. 
 It is particularly popular among developers who require more advanced build and release workflows.
-
-## Managing dependencies
-
-Dependencies are one of the biggest challenges in software development.
-Research software often relies on dozens or hundreds of packages.
-Managing these manually quickly becomes difficult.
-Modern package managers help by:
-
-* Tracking dependencies
-* Resolving version conflicts
-* Creating reproducible environments
-* Recording exact package versions
-
-With `uv`, dependencies are declared in `pyproject.toml`.
-`uv` automatically resolves compatible versions and records them in a "lock" file.
-The lock file ensures that collaborators can recreate the same software environment later.
-This is an important contribution to reproducibility.
-
-### Lock files
-
-A lock file records the exact versions of all packages and dependencies used in a software environment. 
-While a project's `pyproject.toml` file specifies the packages that a project depends on, it often allows a range of compatible versions to be installed. 
-As a result, two people installing the same project at different times may receive slightly different versions of the underlying dependencies.
-
-A lock file removes this uncertainty by recording the precise version of every package that was resolved during installation, including indirect dependencies (dependencies of dependencies). 
-This allows the same software environment to be recreated consistently across different machines and at different points in time.
-
-For example, a project may specify a dependency on `pandas >=2.0`. 
-Without a lock file, one user might install version 2.1 while another installs version 2.3. 
-With a lock file, both users install exactly the same version that was originally tested with the project.
-
-Modern package managers such as `uv` automatically generate and maintain lock files (e.g. `uv.lock`). 
-These files play an important role in reproducible research by helping collaborators recreate the same software environment and reducing the risk of unexpected behaviour caused by dependency updates.
 
 ## Packaging and distribution formats
 
@@ -254,9 +273,30 @@ Package repositories provide a central location where users can discover, downlo
 
 ## Summary
 
-Software packaging is a fundamental practice that helps make software easier to share, install, reuse and maintain. 
-This session introduces the concepts behind software packaging, explains why packaging is important for reproducible and sustainable research software, and provides an overview of the modern Python packaging ecosystem. 
-Participants will learn about package structure, dependency management, packaging tools and distribution formats before exploring modern Python packaging workflows using `uv` in a practical session.
+Software packaging is a fundamental practice that helps make software easier to share, install, reuse and maintain.
+
+We introduced the concepts behind software packaging, package structure, dependency management, packaging tools and distribution formats.
+We also covered why packaging and dependency management is important for sustainable research software and reproducible research, and provided an overview of the complex Python packaging and dependency management ecosystem - a summary of which is shown in tables below.
+
+| Feature | `uv` | `poetry`                                   | `hatch`                                          |
+|---------|--------|----------------------------------------------|----------------------------------------------------|
+| **Primary focus** | Fast package, dependency and project management | Dependency management and package publishing | Flexible project, environment and build management |
+| **Uses `pyproject.toml`** | ✅ | ✅                                            | ✅                                                  |
+| **Package installation** | ✅ | ✅                                            | ✅                                                  |
+| **Dependency management** | ✅ | ✅                                            | ✅                                                  |
+| **Virtual environment management** | ✅ Built in | ✅ Built in                                   | ✅ Built in                                         |
+| **Lock file support** | ✅ `uv.lock` | ✅ `poetry.lock`                              | ✅                                                  |
+| **Build Python packages** | ✅ | ✅                                            | ✅                                                  |
+| **Publish packages** | ✅ | ✅                                            | ✅                                                  |
+| **Performance** | Very fast (Rust implementation) | Good                                         | Good                                               |
+| **Learning curve** | Low | Low–Moderate                                 | Moderate                                           |
+| **Typical use** | General-purpose modern Python development | Research and application development         | Advanced projects and library development          |
+| **Adoption** | Rapidly growing | Mature and widely adopted | Mature, especially for library development |
+| **Best suited for** | Most new Python projects | Existing projects and teams already using Poetry |  Developers who need flexible build configurations, multiple environments and advanced release workflows |
+
+Next we will exploring modern Python packaging workflows using `uv` in a practical session.
+It provides a single, modern interface for creating projects, managing dependencies, creating virtual environments and building packages. 
+Its speed, simplicity and standards compliance make it an excellent choice for new Python projects, while still supporting the same packaging standards (`pyproject.toml`, wheels and source distributions) used by other modern tools.
 
 ::: keypoints
 
