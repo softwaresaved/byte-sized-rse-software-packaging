@@ -299,7 +299,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction</h1>
-        <p>Last updated on 2026-07-21 |
+        <p>Last updated on 2026-07-22 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -511,7 +511,8 @@ been packaged and distributed with <code>setuptools</code>, which is the
 traditional standard for distributing Python modules. Invoking Python
 <code>setup.py</code> script directly is now deprecated, but
 <code>setup.py</code> is still a valid <code>setuptools</code>
-configuration file. Alternatively, if you run</p>
+configuration file.</p>
+<p>Alternatively, if you run:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -520,6 +521,42 @@ configuration file. Alternatively, if you run</p>
 <p>from the software project directory root, <code>pip</code> will use
 information in <code>setup.py</code> to install the software
 package.</p>
+<p>Below is an <a href="https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py" class="external-link">example
+<code>setup.py</code></a> from <a href="https://pythonhosted.org/an_example_pypi_project/setuptools.html" class="external-link">Pythonhosted’s
+“Getting Started With setuptools and setup.py” guide</a>. Recall that
+the content of <code>setup.py</code> is just Python code.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="im">from</span> setuptools <span class="im">import</span> setup</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="co"># Utility function to read the README file.</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co"># Used for the long_description.  It's nice, because now 1) we have a top level</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="co"># README file and 2) it's easier to type in the README file than to put a raw</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1" aria-label="code-block-2-7"></a><span class="co"># string in below ...</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1" aria-label="code-block-2-8"></a><span class="kw">def</span> read(fname):</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a>    <span class="cf">return</span> <span class="bu">open</span>(os.path.join(os.path.dirname(<span class="va">__file__</span>), fname)).read()</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a>setup(</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a>    name <span class="op">=</span> <span class="st">"an_example_pypi_project"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a>    version <span class="op">=</span> <span class="st">"0.0.4"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a>    author <span class="op">=</span> <span class="st">"Andrew Carter"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a>    author_email <span class="op">=</span> <span class="st">"andrewjcarter@gmail.com"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a>    description <span class="op">=</span> (<span class="st">"An demonstration of how to create, document, and publish "</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1" aria-label="code-block-2-17"></a>                                   <span class="st">"to the cheese shop a5 pypi.org."</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1" aria-label="code-block-2-18"></a>    license <span class="op">=</span> <span class="st">"BSD"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a>    keywords <span class="op">=</span> <span class="st">"example documentation tutorial"</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1" aria-label="code-block-2-20"></a>    url <span class="op">=</span> <span class="st">"http://packages.python.org/an_example_pypi_project"</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1" aria-label="code-block-2-21"></a>    packages<span class="op">=</span>[<span class="st">'an_example_pypi_project'</span>, <span class="st">'tests'</span>],</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1" aria-label="code-block-2-22"></a>    long_description<span class="op">=</span>read(<span class="st">'README'</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1" aria-label="code-block-2-23"></a>    classifiers<span class="op">=</span>[</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1" aria-label="code-block-2-24"></a>        <span class="st">"Development Status :: 3 - Alpha"</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a>        <span class="st">"Topic :: Utilities"</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a>        <span class="st">"License :: OSI Approved :: BSD License"</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1" aria-label="code-block-2-27"></a>    ],</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1" aria-label="code-block-2-28"></a>)</span></code></pre>
+</div>
 <p>While still supported by many projects, modern Python packaging has
 moved away from relying directly on <code>setup.py</code> in favour of
 other standardised configuration files, such as
@@ -530,7 +567,9 @@ other standardised configuration files, such as
 <p><code>setuptools</code> is one of the oldest and most widely used
 Python packaging tools. It extends Python’s original package management
 tool called <code>distutils</code> and provides functionality for
-building, packaging and distributing software.</p>
+building, packaging and distributing software. <code>distutils</code> is
+now officially abandoned and has been removed entirely from the Python
+standard library as of Python 3.12.</p>
 <p>One of the main advantages of <code>setuptools</code> over
 <code>distutils</code> is that it allows you to specify dependencies for
 your package, so that other packages that your package depends on will
@@ -556,6 +595,32 @@ packages and versions needed to recreate a virtual software environment
 <p>Although still used, many modern Python projects now manage
 dependencies and development environment through
 <code>pyproject.toml</code> and lock files.</p>
+<p>Below is an example <code>requirements.txt</code> for the software
+project we will use in examples in this lesson.
+<code>requirements.txt</code> is a plain text file which records
+dependencies (one per line) and locks their versions installed in the
+current virtual development environment (it acts as a basic lock
+file).</p>
+<pre class="text"><code>contourpy==1.3.3
+coverage==7.12.0
+cycler==0.12.1
+fonttools==4.60.1
+iniconfig==2.3.0
+kiwisolver==1.4.9
+matplotlib==3.10.7
+numpy==2.3.5
+packaging==25.0
+pandas==2.3.3
+pillow==12.0.0
+pluggy==1.6.0
+Pygments==2.19.2
+pyparsing==3.2.5
+pytest==9.0.1
+pytest-cov==7.0.0
+python-dateutil==2.9.0.post0
+pytz==2025.2
+six==1.17.0
+tzdata==2025.2</code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -792,18 +857,19 @@ for fast, reliable installation without rebuilding the package.</td>
 package repository. Package repositories provide a central location
 where users can discover, download and install software.</p>
 <p>The most widely used repository for publishing Python packages is the
-Python Package Index (PyPI), which hosts hundreds of thousands of
-open-source packages. While PyPI remains the standard and primary public
-package repository, it is not the only option. For example, GitHub can
-also be used to distribute packages, especially useful for private or
-organisation-managed software. Developers can attach source
-distributions and wheel files to <strong>GitHub Releases</strong>,
-allowing users to download and install specific versions directly. In
-addition, <strong>GitHub Packages</strong> provides a package hosting
-service that enables individuals and organisations to publish and manage
-Python packages alongside their source code repositories. This can be
-particularly useful for private projects or software intended for use
-within a specific organisation or research group.</p>
+<strong>Python Package Index (PyPI)</strong>, which hosts hundreds of
+thousands of open-source packages. While PyPI remains the standard and
+primary public package repository, it is not the only option. For
+example, GitHub can also be used to distribute packages, especially
+useful for private or organisation-managed software. Developers can
+attach source distributions and wheel files to <strong>GitHub
+Releases</strong>, allowing users to download and install specific
+versions directly. In addition, <strong>GitHub Packages</strong>
+provides a package hosting service that enables individuals and
+organisations to publish and manage Python packages alongside their
+source code repositories. This can be particularly useful for private
+projects or software intended for use within a specific organisation or
+research group.</p>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
 <hr class="half-width"><p>Software packaging is a fundamental practice that helps make software
 easier to share, install, reuse and maintain.</p>
@@ -909,8 +975,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/introduction.html",
   "identifier": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/introduction.html",
   "dateCreated": "2026-04-21",
-  "dateModified": "2026-07-21",
-  "datePublished": "2026-07-21"
+  "dateModified": "2026-07-22",
+  "datePublished": "2026-07-22"
 }
 
   </script><script>
