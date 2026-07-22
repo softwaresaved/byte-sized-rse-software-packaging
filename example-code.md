@@ -18,9 +18,7 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 For this lesson we'll be using some [example code that does spacewalks analysis](https://github.com/softwaresaved/spacewalks) available on GitHub, which we'll clone onto our machines using the Bash shell.
-The spacewalks code is available from:
-
-`https://github.com/softwaresaved/spacewalks`.
+The spacewalks code is available from: https://github.com/softwaresaved/spacewalks.
 
 ## Obtaining Example Code
 

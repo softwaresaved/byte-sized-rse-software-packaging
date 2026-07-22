@@ -123,7 +123,8 @@ It contains information about the package, including its name, version, dependen
 
 `setup.py` is a Python file, the presence of which is an indication that the module/package you are about to install has likely been packaged and distributed with `setuptools`, which is the traditional standard for distributing Python modules.
 Invoking Python `setup.py` script directly is now deprecated, but `setup.py` is still a valid `setuptools` configuration file.
-Alternatively, if you run 
+
+Alternatively, if you run:
 
 ```bash
 $ pip install .
@@ -131,12 +132,47 @@ $ pip install .
 
 from the software project directory root, `pip` will use information in `setup.py` to install the software package.
 
+Below is an [example `setup.py`](https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py) from [Pythonhosted's "Getting Started With setuptools and setup.py" guide](https://pythonhosted.org/an_example_pypi_project/setuptools.html).
+Recall that the content of `setup.py` is just Python code.
+
+```python
+import os
+from setuptools import setup
+
+# Utility function to read the README file.
+# Used for the long_description.  It's nice, because now 1) we have a top level
+# README file and 2) it's easier to type in the README file than to put a raw
+# string in below ...
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+setup(
+    name = "an_example_pypi_project",
+    version = "0.0.4",
+    author = "Andrew Carter",
+    author_email = "andrewjcarter@gmail.com",
+    description = ("An demonstration of how to create, document, and publish "
+                                   "to the cheese shop a5 pypi.org."),
+    license = "BSD",
+    keywords = "example documentation tutorial",
+    url = "http://packages.python.org/an_example_pypi_project",
+    packages=['an_example_pypi_project', 'tests'],
+    long_description=read('README'),
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Topic :: Utilities",
+        "License :: OSI Approved :: BSD License",
+    ],
+)
+```
+
 While still supported by many projects, modern Python packaging has moved away from relying directly on `setup.py` in favour of other standardised configuration files, such as `pyproject.toml`.
 
 #### Setuptools
 
 `setuptools` is one of the oldest and most widely used Python packaging tools. 
 It extends Python's original package management tool called `distutils` and provides functionality for building, packaging and distributing software.
+`distutils` is now officially abandoned and has been removed entirely from the Python standard library as of Python 3.12.
 
 One of the main advantages of `setuptools` over `distutils` is that it allows you to specify dependencies for your package, so that other packages that your package depends on will be automatically installed when your package is installed. 
 This makes it easier to distribute your package, because users don't have to manually install the dependencies before installing your package.
@@ -152,6 +188,32 @@ A `requirements.txt` file provides a simple way to record project's dependency i
 It is commonly used to specify the packages and versions needed to recreate a virtual software environment (e.g. using `pip`).
 
 Although still used, many modern Python projects now manage dependencies and development environment through `pyproject.toml` and lock files.
+
+Below is an example `requirements.txt` for the software project we will use in examples in this lesson.
+`requirements.txt` is a plain text file which records dependencies (one per line) and locks their versions installed in the current virtual development environment (it acts as a basic lock file).
+
+```text
+contourpy==1.3.3
+coverage==7.12.0
+cycler==0.12.1
+fonttools==4.60.1
+iniconfig==2.3.0
+kiwisolver==1.4.9
+matplotlib==3.10.7
+numpy==2.3.5
+packaging==25.0
+pandas==2.3.3
+pillow==12.0.0
+pluggy==1.6.0
+Pygments==2.19.2
+pyparsing==3.2.5
+pytest==9.0.1
+pytest-cov==7.0.0
+python-dateutil==2.9.0.post0
+pytz==2025.2
+six==1.17.0
+tzdata==2025.2
+```
 
 ### Modern tools & methods
 
@@ -303,7 +365,7 @@ Most users install wheel packages without realising it because package managers 
 Once packages have been built, they are typically published to a package repository.
 Package repositories provide a central location where users can discover, download and install software.
 
-The most widely used repository for publishing Python packages is the Python Package Index (PyPI), which hosts hundreds of thousands of open-source packages.
+The most widely used repository for publishing Python packages is the **Python Package Index (PyPI)**, which hosts hundreds of thousands of open-source packages.
 While PyPI remains the standard and primary public package repository, it is not the only option. 
 For example, GitHub can also be used to distribute packages, especially useful for private or organisation-managed software. 
 Developers can attach source distributions and wheel files to **GitHub Releases**, allowing users to download and install specific versions directly. 
