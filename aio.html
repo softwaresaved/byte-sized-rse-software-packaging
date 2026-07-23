@@ -260,7 +260,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="software-packaging-uv.html">Generating documentation with MkDocs</a>
+        <a href="software-packaging-uv.html">Software packaging with uv</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -325,7 +325,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2026-07-22 |
+<p>Last updated on 2026-07-23 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -466,12 +466,11 @@ dependencies, versions and installation requirements, making it easier
 for collaborators to run your software and obtain consistent results.
 Good packaging practices also support software sustainability by making
 projects easier to maintain, distribute and build upon over time.</p>
-</section><section><h2 class="section-heading" id="software-packaging-and-dependency-management">Software packaging and dependency management<a class="anchor" aria-label="anchor" href="#software-packaging-and-dependency-management"></a>
+</section><section><h2 class="section-heading" id="dependencies-virtual-development-environments-and-packages">Dependencies, virtual development environments and packages<a class="anchor" aria-label="anchor" href="#dependencies-virtual-development-environments-and-packages"></a>
 </h2>
 <hr class="half-width">
-<p><strong>Software packaging</strong> and <strong>dependency
-management</strong> are closely related but serve different
-purposes.</p>
+<p><strong>Dependency management</strong> and <strong>software
+packaging</strong> are closely related but serve different purposes.</p>
 <p><strong>Dependency management</strong> focuses on identifying,
 installing and maintaining the external packages that the software
 relies on - making sure that all the external libraries required by the
@@ -480,15 +479,15 @@ even if your software is never distributed as a package (because it will
 almost always rely on a number of external dependencies that you will
 have to manage on your system).</p>
 <p>Next step is to capture this <strong>dependency information</strong>
-for your software project somehow so others (or yourself on another
-machine) can replicate that. Dependencies and their versions can be
-recorded manually (e.g. just describing them as a list) but it is not
-very practical as software often relies on dozens or hundreds of
-external packages. Such lists, if not managed by special tools, quickly
-become out of date.</p>
-<p>Dependency information for your software can then used to create a
-<strong>virtual reproducible software environment</strong> for your code
-on any machine (in theory). This is a mechanism of isolating the
+(dependencies and their versions) for your software project’s
+environment somehow so others (or yourself on another machine) can
+replicate that. Dependency information can be recorded manually
+(e.g. just describing them as a list) but it is not very practical as
+software often relies on dozens or hundreds of external packages. Such
+lists, if not managed by special tools, quickly become out of date.</p>
+<p>Dependency information for your software can then used to recreate a
+<strong>virtual (reproducible) software environment</strong> for your
+code on any machine (in theory). This is a mechanism of isolating the
 environment for developing and running a software project (containing
 the specified dependencies) from other projects on the same machine.</p>
 <p><strong>Packaging</strong> goes a step further by preparing the
@@ -521,7 +520,7 @@ environment management and packaging into a single workflow.</p>
 dependency management is a dumpster fire” guide</a> provides a
 comprehensive overview of dependency management in Python.</p>
 <p>We are mostly going to focus on packaging tools but will unavoidably
-mention dependency management tools too.</p>
+mention dependency and environment management tools too.</p>
 <div class="section level3">
 <h3 id="traditional-tools-methods">Traditional tools &amp; methods<a class="anchor" aria-label="anchor" href="#traditional-tools-methods"></a>
 </h3>
@@ -637,7 +636,7 @@ packages and versions needed to recreate a virtual software environment
 (e.g. using <code>pip</code>).</p>
 <p>Although still used, many modern Python projects now manage
 dependencies and development environment through
-<code>pyproject.toml</code> and lock files.</p>
+<code>pyproject.toml</code> and lock files (to be covered soon).</p>
 <p>Below is an example <code>requirements.txt</code> for the software
 project we will use in examples in this lesson.
 <code>requirements.txt</code> is a plain text file which records
@@ -678,7 +677,7 @@ managers help by:</p>
 <li>Recording exact package versions</li>
 </ul>
 <div class="section level4">
-<h4 id="pyproject-toml">Pyproject.toml<a class="anchor" aria-label="anchor" href="#pyproject-toml"></a>
+<h4 id="pyproject-toml">pyproject.toml<a class="anchor" aria-label="anchor" href="#pyproject-toml"></a>
 </h4>
 <p>The introduction of <code>pyproject.toml</code> file (written in <a href="https://toml.io/en/" class="external-link">TOML format</a>) has been one of the most
 significant developments in Python packaging. It provides a standard
@@ -751,7 +750,7 @@ control</li>
 </div>
 </div>
 <div class="section level4">
-<h4 id="uv">Uv<a class="anchor" aria-label="anchor" href="#uv"></a>
+<h4 id="uv">uv<a class="anchor" aria-label="anchor" href="#uv"></a>
 </h4>
 <p><a href="https://docs.astral.sh/uv/" class="external-link">Uv</a> is a modern package and
 project management tool developed by Astral. It combines dependency
@@ -1217,9 +1216,9 @@ to cite the code (this list is not exhaustive).</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-software-packaging-uv"><p>Content from <a href="software-packaging-uv.html">Generating documentation with MkDocs</a></p>
+</section></section><section id="aio-software-packaging-uv"><p>Content from <a href="software-packaging-uv.html">Software packaging with uv</a></p>
 <hr>
-<p>Last updated on 2026-07-21 |
+<p>Last updated on 2026-07-23 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/software-packaging-uv.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1233,8 +1232,7 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How can we use tools like MkDocs to create documentation websites
-for our software?</li>
+<li>TODO</li>
 </ul>
 </div>
 </div>
@@ -1244,431 +1242,99 @@ for our software?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Generate and manage comprehensive software documentation using
-MkDocs</li>
+<li>TODO</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="mkdocs-documentation-tool">MkDocs documentation tool<a class="anchor" aria-label="anchor" href="#mkdocs-documentation-tool"></a>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
-<p>MkDocs is a static site generator specifically designed for creating
-documentation websites. MkDocs can build other websites (i.e. not just
-documentation sites). It takes Markdown files as input and
-builds/outputs HTML files which you host anywhere, for example on GitHub
-Pages or any other website hosting platform.</p>
-<p><code>mkdocs</code> is a Python package that can be installed, for
-example, with <code>pip</code> and requires Python to run the
-<code>mkdocs</code> command. You do not need any further knowledge of
-Python to build your website with MkDocs after that.</p>
-<p>By using the MkDocs tool alone, you get a relatively vanilla and
-straightforward website. There are additional plugins that build on top
-of MkDocs that provide additional functionalities to the built
-websites.</p>
-<div class="section level3">
-<h3 id="mkdocs-material-plugin-for-mkdocs">mkdocs-material plugin for MkDocs<a class="anchor" aria-label="anchor" href="#mkdocs-material-plugin-for-mkdocs"></a>
-</h3>
-<p>“Material for MkDocs” (<code>mkdocs-material</code>) is a theme
-plugin for MkDocs that creates documentations site using a modern,
-responsive design. In addition to changing the look of the website,
-“Material for MkDocs” also enhances the functionality of websites with
-features like blog posts, social cards, advanced search capabilities,
-etc. MkDocs provides the core functionality of building a static site,
-while “Material for MkDocs” elevates the visual and interactive
-experience of your documentation.</p>
-</div>
-<div class="section level3">
-<h3 id="mkdocstrings-plugin-for-mkdocs">mkdocstrings plugin for MkDocs<a class="anchor" aria-label="anchor" href="#mkdocstrings-plugin-for-mkdocs"></a>
-</h3>
-<p>If you also want to automatically generate documentation from your
-code’s docstrings, you will need the <code>mkdocstrings</code> plugin.
-This plugin can be used with MkDocs to create documentation for software
-projects written in a number of programming language - as long as there
-is a <code>mkdocstrings</code> “handler” for it. Currently, there are
-<code>mkdocstrings</code> handlers for the C, Crystal, GitHub Actions,
-Python, MATLAB, TypeScript, and VBA languages, as well as for shell
-scripts. Without this plugin, core MkDocs tool only “understands”
-Markdown files.</p>
-</div>
-</section><section><h2 class="section-heading" id="installing-mkdocs-relevant-plugins">Installing MkDocs &amp; relevant plugins<a class="anchor" aria-label="anchor" href="#installing-mkdocs-relevant-plugins"></a>
+<p>Let’s have a more detailed look into <code>uv</code>.</p>
+<p><code>uv</code> is a multi-functional tool, which:</p>
+<ul>
+<li>provides comprehensive Python project and dependency management
+capabilities and handles virtual environments with a universal
+lockfile,</li>
+<li>runs Python scripts,</li>
+<li>installs and manages Python versions,</li>
+<li>runs and installs tools published as Python packages
+(e.g. <code>pip</code>, etc.),</li>
+<li>includes a pip-compatible interface for users with existing
+pip-based development workflows,</li>
+<li>is really performant and much faster than <code>pip</code>.</li>
+</ul></section><section><h2 class="section-heading" id="using-uv-for-new-projects">Using <code>uv</code> for new projects<a class="anchor" aria-label="anchor" href="#using-uv-for-new-projects"></a>
 </h2>
 <hr class="half-width">
-<p>Let’s install the <code>mkdocs</code> tool, and
-<code>mkdocs-material</code> and <code>mkdocstrings</code> (for Python)
-plugins.</p>
-<p>Within an active virtual environment of your software project,
-do:</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install mkdocs</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="ex">python3</span> <span class="at">-m</span> pip install <span class="st">"mkdocstrings[python]"</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="ex">python3</span> <span class="at">-m</span> pip install mkdocs-material</span></code></pre>
+<p>If you are starting a new project then you can use <code>uv</code>
+straight away to replace all the other tools you may have used in the
+past in your development workflow.</p>
+<p>The core <code>uv</code> project development workflow looks like as
+follows:</p>
+<ol style="list-style-type: decimal">
+<li>project creation and setup - <code>uv</code> can create a new
+project layout for you so you start with a clean structure instead of a
+blank folder</li>
+<li>virtual environments - <code>uv</code> manages virtual environments
+directly, which means you do not need to switch between different tools
+to create and activate environments</li>
+<li>dependency installation - <code>uv</code> installs packages quickly
+and consistently while still supporting the same dependency ecosystem
+you may already be familiar with</li>
+<li>running commands inside the environment - <code>uv</code> can run
+Python commands or scripts inside the environment without you having to
+manually activate it</li>
+<li>(optionally) package and publish your code.</li>
+</ol>
+<div id="uv-commands-summary" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
 </div>
-</section><section><h2 class="section-heading" id="generating-a-documentation-website">Generating a documentation website<a class="anchor" aria-label="anchor" href="#generating-a-documentation-website"></a>
-</h2>
-<hr class="half-width">
-<p>Let’s create a new MkDocs site in the root of the spacewalks
-directory by running the <code>mkdocs new</code> command:</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">mkdocs</span> new .    </span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>INFO    -  Writing config file: ./mkdocs.yml
-INFO    -  Writing initial docs: ./docs/index.md</code></pre>
-</div>
-<p>This command creates a bunch of files:</p>
+<span class="callout-header">Callout</span>
+<div id="uv-commands-summary" class="callout-inner">
+<h3 class="callout-title">
+<code>uv</code> commands summary</h3>
+<div class="callout-content">
+<p>A summary of <code>uv</code> commands for creating and working on
+Python projects, i.e., with a <code>pyproject.toml</code> file.</p>
 <ul>
 <li>
-<code>docs</code> folder in the current directory for our new MkDocs
-site (containing <code>index.md</code> file)</li>
+<code>uv init</code>: create a new Python project.</li>
 <li>
-<code>mkdocs.yml</code> configuration file in the root of our
-project.</li>
+<code>uv add</code>: add a dependency to the project.</li>
+<li>
+<code>uv remove</code>: remove a dependency from the project.</li>
+<li>
+<code>uv sync</code>: sync the project’s dependencies with the
+environment.</li>
+<li>
+<code>uv lock</code>: create a lockfile for the project’s
+dependencies (locking the virtual environment).</li>
+<li>
+<code>uv run</code>: run a Python command in the project
+environment.</li>
+<li>
+<code>uv tree</code>: view the dependency tree for the project.</li>
+<li>
+<code>uv build</code>: build the project into distribution
+archives.</li>
+<li>
+<code>uv publish</code>: publish the project to a package
+index.</li>
 </ul>
-<p>Now, let’s fill in the <code>mkdocs.yml</code> file with the basic
-configuration information for our project and
-<code>mkdocs-material</code> theme.</p>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Spacewalks Documentation</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="fu">use_directory_urls</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="fu">theme</span><span class="kw">:</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"material"</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="at">  </span><span class="fu">font</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre>
+<p>The full list of all <code>uv</code> commands is available from the
+<a href="https://docs.astral.sh/uv/getting-started/features/" class="external-link"><code>uv</code>
+features documentation</a>.</p>
 </div>
-<p>Note <code>font: false</code> variable is for GDPR compliance;
-<code>use_directory_url: false</code> variable tells MKDocs tools how to
-handle URLs for documentation that is served as a website (we will cover
-this in a moment).</p>
-<p>We can run the <code>mkdocs serve</code> command to see what website
-looks like now.</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">mkdocs</span> serve</span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>INFO    -  Building documentation...
-INFO    -  Cleaning site directory
-INFO    -  Documentation built in 0.24 seconds
-INFO    -  [13:59:18] Watching paths for changes: 'docs', 'mkdocs.yml'
-INFO    -  [13:59:18] Serving on http://127.0.0.1:8000/
-INFO    -  [13:59:32] Browser connected: http://127.0.0.1:8000/</code></pre>
 </div>
-<p>This command first builds the website from the files in
-<code>docs</code> folder and then serves it locally at <a href="http://127.0.0.1:8000" class="external-link">http://127.0.0.1:8000</a>. TIf you go to
-that URL in your browser, you can see your basic “Material for MkDocs”
-website.</p>
-<p>The “built” version of our documentation site is located in the new
-<code>site</code> folder in the root of our project. This is where
-MkDocs tool saves the HTML files compiled from Markdown documentation
-files. This directory serves as your documentation website and can be
-distributed together with your code. Users of your code can then read
-these pages locally using a Web browser. Alternatively, you can host
-them as a website that users can navigate to.</p>
-<p>Note that we used the setting <code>use_directory_urls: false</code>
-in the <code>mkdocs.yml</code> file. This setting ensures that the
-documentation site is generated with URLs that are easy to navigate
-locally on a user’s device.</p>
-<p>An alternative to using the <code>mkdocs serve</code> command is the
-<code>mkdocs build</code> command - it will only build the webpages in
-<code>site</code> folder but not serve them as a website at <a href="http://127.0.0.1:8000" class="external-link">http://127.0.0.1:8000</a>. You will need to
-re-run this command each time you make a change. To see your
-documentation webpages, you have to navigate directly to the
-<code>site</code> folder and open files in a Web browser.</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">mkdocs</span> build</span></code></pre>
-</div>
-<p>Let’s add more documentation elements to our site - for example a
-setup guide to help users install and run the software, how to guides
-for common tasks and a reference manual for developers.</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Spacewalks Documentation</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a><span class="fu">use_directory_urls</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a><span class="fu">theme</span><span class="kw">:</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"material"</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1" aria-label="code-block-8-5"></a><span class="at">  </span><span class="fu">font</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1" aria-label="code-block-8-6"></a><span class="fu">nav</span><span class="kw">:</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1" aria-label="code-block-8-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Home</span><span class="kw">:</span><span class="at"> index.md</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1" aria-label="code-block-8-8"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Setup Guide</span><span class="kw">:</span><span class="at"> setup-guide.md</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1" aria-label="code-block-8-9"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">How-To Guides</span><span class="kw">:</span><span class="at"> how-to-guides.md</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1" aria-label="code-block-8-10"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Reference</span><span class="kw">:</span><span class="at"> reference.md</span></span></code></pre>
-</div>
-<p>Let’s create Markdown files <code>setup-guide.md</code>,
-<code>how-to-guides.md</code> and <code>reference.md</code> in
-<code>docs/</code> folder to match our configuration.</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="fu">touch</span> docs/setup-guide.md</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="fu">touch</span> docs/how-to-guides.md</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a><span class="fu">touch</span> docs/reference.md</span></code></pre>
-</div>
-<p>We can add the following Markdown text to our “Setup guide”:</p>
-<pre class="text"><code>## Pre-requisites
-
-Spacewalks was developed using Python version 3.12.
-
-To install and run Spacewalks you will need have Python3 installed.
-You will also need the following libraries (minimum versions in brackets):
-
-- [NumPy](https://www.numpy.org/) &gt;=2.0.0 - Spacewalk's test suite uses NumPy's statistical functions
-- [Matplotlib](https://matplotlib.org/stable/index.html) &gt;=3.0.0  - Spacewalks uses Matplotlib to make plots
-- [pytest](https://docs.pytest.org/en/8.2.x/#) &gt;=8.2.0  - Spacewalks uses Pytest for testing
-- [pandas](https://pandas.pydata.org/) &gt;= 2.2.0 - Spacewalks uses Pandas for data frame manipulation
-
-## Installation instructions
-
-Clone the Spacewalks repository to your local machine using Git.
-If you don't have Git installed, you can download it from the official Git website.
-
-`
-git clone https://github.com/your-repository-url/spacewalks.git
-cd spacewalks
-`
-
-Install the necessary dependencies:
-`
-python3 -m pip install -r requirements.txt
-`
-
-- To ensure everything is working correctly, run the tests using Pytest.
-
-`
-python3 -m pytest
-`
-
-## Usage Example
-
-To run an analysis using the `eva_data_analysis.py` script from the command line terminal, do:
-
-`
-# Usage Examples
-python3 eva_data_analysis.py data/eva-data.json results/eva-data.csv
-`
-
-The first argument is path to the JSON data file.
-The second argument is the path the CSV output file.
-
-If the code runs successfully, you should get the resulting plot in `results/cumulative_eva_graph.png`</code></pre>
-<p>Next, we can add the following Markdown text to our “How to
-guides”:</p>
-<pre class="text"><code>## How to change the file path of Spacewalk's output dataset
-
-This guide shows you how to set the file path for Spacewalk's output data set to a location of your choice.
-
-By default, the cleaned data set in CSV format generated by the Spacewalk software is saved to the `results/` folder within the working directory with file name `eva-data.csv`.
-
-If you would like to modify the name or location of the output dataset, set the second command line argument to your chosen file path.
-For example, if you want to save the output data set to the subfolder `data/clean/` you can invoke the script as:
-
-`python3 eva_data_analysis.py eva-data.json data/clean/eva-data-clean.csv`
-
-The specified destination folder `data/clean/` must exist before running spacewalks analysis script.</code></pre>
-<p>Finally, let’s replace the default Markdown content of the homepage
-of our site in <code>index.md</code> (which was generated by MkDocs) to
-include some introduction to our software and point to other
-documentation parts:</p>
-<pre class="text"><code># Welcome to Spacewalks Documentation Site
-
-## Overview
-Spacewalks is a Python analysis tool for researchers to generate visualisations and statistical summaries of NASA's extravehicular activity datasets.
-
-## Features
-Key features of Spacewalks:
-
-- Generates a CSV table of summary statistics of extravehicular activity crew sizes
-- Generates a line plot to show the cumulative duration of space walks over time
-
-## Documentation
-
-You can find the following documentation:
-
-- [Setup guide](./setup-guide.html) to help you install the software and learn how to run it
-- [How to guides](./how-to-guides.html) to help you perform common tasks
-- [Reference manual](./reference.html) - a full API reference</code></pre>
-<p>Let’s regenerate our documentation website and see what it looks like
-in a Web browser after these changes.</p>
+</section><section><h2 class="section-heading" id="switching-to-uv-for-existing-projects">Switching to uv for existing projects<a class="anchor" aria-label="anchor" href="#switching-to-uv-for-existing-projects"></a>
+</h2>
+<hr class="half-width">
 <div class="section level3">
-<h3 id="generating-a-reference-manual-from-dosctrings">Generating a reference manual from dosctrings<a class="anchor" aria-label="anchor" href="#generating-a-reference-manual-from-dosctrings"></a>
-</h3>
-<p>Let’s now add support for <code>mkdocstrings</code> - this will allow
-us to automatically add docstrings from our code into our documentation
-using a simple tag.</p>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Spacewalks Documentation</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="fu">use_directory_urls</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a><span class="fu">theme</span><span class="kw">:</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"material"</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1" aria-label="code-block-13-5"></a><span class="at">  </span><span class="fu">font</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1" aria-label="code-block-13-6"></a><span class="fu">nav</span><span class="kw">:</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1" aria-label="code-block-13-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Home</span><span class="kw">:</span><span class="at"> index.md</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1" aria-label="code-block-13-8"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Setup Guide</span><span class="kw">:</span><span class="at"> setup-guide.md</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1" aria-label="code-block-13-9"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">How-To Guides</span><span class="kw">:</span><span class="at"> how-to-guides.md</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1" aria-label="code-block-13-10"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Reference</span><span class="kw">:</span><span class="at"> reference.md</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1" aria-label="code-block-13-11"></a></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1" aria-label="code-block-13-12"></a><span class="fu">plugins</span><span class="kw">:</span></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1" aria-label="code-block-13-13"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mkdocstrings</span></span></code></pre>
-</div>
-<p>Let’s populate our reference file <code>reference.md</code> with some
-preamble to include before the reference manual that will be generated
-from the docstrings we created.</p>
-<div class="codewrapper sourceCode" id="cb14">
-<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a>This file documents the key functions in the Spacewalks tool.</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a>It is provided as a reference manual.</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a>::: eva_data_analysis</span></code></pre>
-</div>
-<p>Let’s regenerate our documentation website and see what it looks line
-now.</p>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a><span class="ex">mkdocs</span> build</span></code></pre>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="hosting-documentation">Hosting documentation<a class="anchor" aria-label="anchor" href="#hosting-documentation"></a>
-</h2>
-<hr class="half-width">
-<p>We saw how MkDocs documentation can be distributed with our
-repository and viewed “offline”. We can also make our documentation
-available as a live website by deploying our documentation to a website
-hosting service.</p>
-<p>As our repository is hosted in GitHub, we can use GitHub Pages - a
-free service built into GitHub that allows GitHub users to host websites
-directly from their GitHub repositories.</p>
-<p>GitHub Pages deploys and serves site files from a branch - by default
-this is the <code>gh-pages</code> branch. GitHub Pages can also be
-configured to serve webpages from any other branch within the project
-repository.</p>
-<p>Let us commit our documentation to the main branch of our Git
-repository and push the changes to GitHub.</p>
-<div class="codewrapper sourceCode" id="cb16">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="fu">git</span> add mkdocs.yml </span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a><span class="fu">git</span> add docs/</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1" aria-label="code-block-16-3"></a><span class="fu">git</span> add site/</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1" aria-label="code-block-16-4"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add project-level documentation"</span>   </span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1" aria-label="code-block-16-5"></a><span class="ex">python3</span> <span class="at">-m</span> pip freeze <span class="op">&gt;</span> requirements.txt</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1" aria-label="code-block-16-6"></a><span class="fu">git</span> add requirements.txt </span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1" aria-label="code-block-16-7"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Added MkDocs tool and plugins"</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1" aria-label="code-block-16-8"></a><span class="fu">git</span> push origin main</span></code></pre>
-</div>
-<div id="warning" class="callout caution">
-<div class="callout-square">
-<i class="callout-icon" data-feather="alert-triangle"></i>
-</div>
-<span class="callout-header">Caution</span>
-<div id="warning" class="callout-inner">
-<h3 class="callout-title">Warning</h3>
-<div class="callout-content">
-<p>Before we proceed to the next step, we <strong>must</strong> ensure
-that there are no uncommitted changes or untracked files in our
-repository.</p>
-<p>If there are, the commands used in the upcoming steps will include
-them in our documentation.</p>
-</div>
-</div>
-</div>
-<div class="codewrapper sourceCode" id="cb17">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="fu">git</span> status</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1" aria-label="code-block-17-2"></a><span class="co"># Add any files you want to ignore to .gitignore</span></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1" aria-label="code-block-17-3"></a><span class="co"># Commit .gitignore</span></span></code></pre>
-</div>
-<p>To deploy your documentation, run the following command from the
-command line to deploy your documentation to GitHub.</p>
-<div class="codewrapper sourceCode" id="cb18">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a><span class="ex">mkdocs</span> gh-deploy</span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>INFO    -  Cleaning site directory
-INFO    -  Building documentation to directory: /Users/AnnResearch/spacewalks/site
-WARNING -  griffe: eva_data_analysis.py:105: No type or annotation for returned value 'int'
-WARNING -  griffe: eva_data_analysis.py:84: No type or annotation for returned value 1
-WARNING -  griffe: eva_data_analysis.py:33: No type or annotation for returned value 1
-INFO    -  Documentation built in 0.37 seconds
-WARNING -  Version check skipped: No version specified in previous deployment.
-INFO    -  Copying '/Users/AnnResearcher/spacewalks/site' to 'gh-pages' branch and pushing to
-           GitHub.
-Enumerating objects: 63, done.
-Counting objects: 100% (63/63), done.
-Delta compression using up to 11 threads
-Compressing objects: 100% (60/60), done.
-Writing objects: 100% (63/63), 578.91 KiB | 7.93 MiB/s, done.
-Total 63 (delta 7), reused 0 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (7/7), done.
-remote:
-remote: Create a pull request for 'gh-pages' on GitHub by visiting:
-remote:      https://github.com/kkh451/spacewalks/pull/new/gh-pages
-remote:
-To https://github.com/kkh451/spacewalks-dev.git
- * [new branch]      gh-pages -&gt; gh-pages
-INFO    -  Your documentation should shortly be available at: https://kkh451.github.io/spacewalks/</code></pre>
-</div>
-<p>This command will build our documentation with MkDocs, then commit
-and push the files to the <code>gh-pages</code> branch using the
-<code>ghp-import</code> tool, which is installed together with
-MkDocs.</p>
-<p>For more options, use:</p>
-<div class="codewrapper sourceCode" id="cb20">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="ex">mkdocs</span> gh-deploy <span class="at">--help</span></span></code></pre>
-</div>
-<p>Notice that the deploy command did not allow us to preview the site
-before it was pushed to GitHub. So, it is a good idea to build site and
-check it locally with the build/serve commands before deploying.</p>
-<p>If you navigate to your software repository on GitHub, you may notice
-the new branch called <code>gh-pages</code> had been created by the
-<code>mkdocs gh-deploy</code> command and populated with the contents of
-your <code>site</code> folder.</p>
-<p>If you navigate to “Settings/Pages” portion of your software
-repository, you may notice that GitHub Pages has already been configured
-to serve a website from your <code>gh-pages</code> branch. You can visit
-the live site by following the URL that GitHub Pages creates for your
-repository.</p>
-<p>If it has not worked as described, on the “Settings/Pages” page under
-“Build and deployment” section you can configure the repository branch
-(should be <code>gh-pages</code>) that the GitHub Pages site is built
-from.</p>
-</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<hr class="half-width">
-<p>We have explored the static website generator tool MkDocs for
-generating documentation website for our software project.
-<code>mkdocs-material</code> plugin for MkDocs creates richer and more
-responsive websites, while <code>mkdocstrings</code> plugin creates
-reference manuals from docstrings in our code.</p>
-<p>Generated documentation pages can be shared with our software - they
-can reside in our software repository and be used by end users offline
-or we can use website hosting platforms such as GitHub to host
-documentation websites.</p>
+<h3 id="section"></h3>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1677,10 +1343,7 @@ documentation websites.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>Static site generators (such as MkDocs) can help use generate
-documentation websites from Markdown files or docstrings.</li>
-<li>GitHub Pages provide a free webpage hosting service for your
-documentation website.</li>
+<li>TODO</li>
 </ul>
 </div>
 </div>
@@ -1689,6 +1352,7 @@ documentation website.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></section>
 </div>
     </main>
@@ -1739,8 +1403,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/aio.html",
   "identifier": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/aio.html",
   "dateCreated": "2026-04-21",
-  "dateModified": "2026-07-22",
-  "datePublished": "2026-07-22"
+  "dateModified": "2026-07-23",
+  "datePublished": "2026-07-23"
 }
 
   </script><script>

@@ -212,7 +212,7 @@
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#what-is-a-software-package">What is a software package?</a></li>
 <li><a href="#why-packaging-software-matters">Why packaging software matters?</a></li>
-<li><a href="#software-packaging-and-dependency-management">Software packaging and dependency management</a></li>
+<li><a href="#dependencies-virtual-development-environments-and-packages">Dependencies, virtual development environments and packages</a></li>
 <li><a href="#python-packaging-and-dependency-management-tool-ecosystem">Python packaging and dependency management tool ecosystem</a></li>
 <li><a href="#packaging-and-distribution-formats">Packaging and distribution formats</a></li>
 <li><a href="#package-repositories">Package repositories</a></li>
@@ -235,7 +235,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="software-packaging-uv.html">Generating documentation with MkDocs</a>
+        <a href="software-packaging-uv.html">Software packaging with uv</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -299,7 +299,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction</h1>
-        <p>Last updated on 2026-07-22 |
+        <p>Last updated on 2026-07-23 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -434,10 +434,9 @@ dependencies, versions and installation requirements, making it easier
 for collaborators to run your software and obtain consistent results.
 Good packaging practices also support software sustainability by making
 projects easier to maintain, distribute and build upon over time.</p>
-</section><section><h2 class="section-heading" id="software-packaging-and-dependency-management">Software packaging and dependency management<a class="anchor" aria-label="anchor" href="#software-packaging-and-dependency-management"></a></h2>
-<hr class="half-width"><p><strong>Software packaging</strong> and <strong>dependency
-management</strong> are closely related but serve different
-purposes.</p>
+</section><section><h2 class="section-heading" id="dependencies-virtual-development-environments-and-packages">Dependencies, virtual development environments and packages<a class="anchor" aria-label="anchor" href="#dependencies-virtual-development-environments-and-packages"></a></h2>
+<hr class="half-width"><p><strong>Dependency management</strong> and <strong>software
+packaging</strong> are closely related but serve different purposes.</p>
 <p><strong>Dependency management</strong> focuses on identifying,
 installing and maintaining the external packages that the software
 relies on - making sure that all the external libraries required by the
@@ -446,15 +445,15 @@ even if your software is never distributed as a package (because it will
 almost always rely on a number of external dependencies that you will
 have to manage on your system).</p>
 <p>Next step is to capture this <strong>dependency information</strong>
-for your software project somehow so others (or yourself on another
-machine) can replicate that. Dependencies and their versions can be
-recorded manually (e.g. just describing them as a list) but it is not
-very practical as software often relies on dozens or hundreds of
-external packages. Such lists, if not managed by special tools, quickly
-become out of date.</p>
-<p>Dependency information for your software can then used to create a
-<strong>virtual reproducible software environment</strong> for your code
-on any machine (in theory). This is a mechanism of isolating the
+(dependencies and their versions) for your software project’s
+environment somehow so others (or yourself on another machine) can
+replicate that. Dependency information can be recorded manually
+(e.g. just describing them as a list) but it is not very practical as
+software often relies on dozens or hundreds of external packages. Such
+lists, if not managed by special tools, quickly become out of date.</p>
+<p>Dependency information for your software can then used to recreate a
+<strong>virtual (reproducible) software environment</strong> for your
+code on any machine (in theory). This is a mechanism of isolating the
 environment for developing and running a software project (containing
 the specified dependencies) from other projects on the same machine.</p>
 <p><strong>Packaging</strong> goes a step further by preparing the
@@ -485,7 +484,7 @@ environment management and packaging into a single workflow.</p>
 dependency management is a dumpster fire” guide</a> provides a
 comprehensive overview of dependency management in Python.</p>
 <p>We are mostly going to focus on packaging tools but will unavoidably
-mention dependency management tools too.</p>
+mention dependency and environment management tools too.</p>
 <div class="section level3">
 <h3 id="traditional-tools-methods">Traditional tools &amp; methods<a class="anchor" aria-label="anchor" href="#traditional-tools-methods"></a></h3>
 <p>Historically, many researchers created Python packages using a
@@ -596,7 +595,7 @@ packages and versions needed to recreate a virtual software environment
 (e.g. using <code>pip</code>).</p>
 <p>Although still used, many modern Python projects now manage
 dependencies and development environment through
-<code>pyproject.toml</code> and lock files.</p>
+<code>pyproject.toml</code> and lock files (to be covered soon).</p>
 <p>Below is an example <code>requirements.txt</code> for the software
 project we will use in examples in this lesson.
 <code>requirements.txt</code> is a plain text file which records
@@ -634,7 +633,7 @@ managers help by:</p>
 <li>Creating reproducible environments</li>
 <li>Recording exact package versions</li>
 </ul><div class="section level4">
-<h4 id="pyproject-toml">Pyproject.toml<a class="anchor" aria-label="anchor" href="#pyproject-toml"></a></h4>
+<h4 id="pyproject-toml">pyproject.toml<a class="anchor" aria-label="anchor" href="#pyproject-toml"></a></h4>
 <p>The introduction of <code>pyproject.toml</code> file (written in <a href="https://toml.io/en/" class="external-link">TOML format</a>) has been one of the most
 significant developments in Python packaging. It provides a standard
 location for:</p>
@@ -701,7 +700,7 @@ control</li>
 </div>
 </div>
 <div class="section level4">
-<h4 id="uv">Uv<a class="anchor" aria-label="anchor" href="#uv"></a></h4>
+<h4 id="uv">uv<a class="anchor" aria-label="anchor" href="#uv"></a></h4>
 <p><a href="https://docs.astral.sh/uv/" class="external-link">Uv</a> is a modern package and
 project management tool developed by Astral. It combines dependency
 management, virtual environment management and package installation into
@@ -977,8 +976,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/introduction.html",
   "identifier": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/introduction.html",
   "dateCreated": "2026-04-21",
-  "dateModified": "2026-07-22",
-  "datePublished": "2026-07-22"
+  "dateModified": "2026-07-23",
+  "datePublished": "2026-07-23"
 }
 
   </script><script>
