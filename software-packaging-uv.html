@@ -695,28 +695,89 @@ directory.</p>
 </div>
 <p>Let’s assume this project uses <code>venv</code>, <code>pip</code>
 and <code>requirements.txt</code> to manage and record dependencies and
-virtual environment.</p>
+the virtual environment.</p>
 <p>To migrate from the existing development workflow to use
 <code>uv</code>, you need to use <code>uv init</code> first to initiate
-the project and get the basic <code>pyptoject.toml</code> file created.
-Next, you can can <code>uv add</code> with the <code>-r</code> flag to
-add all dependencies from the <code>requirements.txt</code> file.</p>
+the project and get the basic <code>pyptoject.toml</code> file
+created.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="ex">uv</span> init</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1" aria-label="code-block-19-2"></a><span class="ex">uv</span> add <span class="at">-r</span> requirements.txt</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="ex">uv</span> init</span></code></pre>
 </div>
-<p>If your existing environment is located in <code>.venv</code>
-directory, <code>uv</code> will continue to use that by default to
-record changes to it. If you do not have an existing environment, you
-can create it with the <code>uv venv</code> command - by default it will
-end up in <code>.venv</code> directory in the project room along with
-the <code>uv.lock</code> file. Recall that <code>uv</code> creates a
-virtual environment and <code>uv.lock</code> file the first time you run
-any project command, i.e., <code>uv add</code>, <code>uv run</code>,
-<code>uv sync</code>, or <code>uv lock</code> (so you do not have to do
-it explicitly).</p>
+<div class="section level3">
+<h3 id="managing-dependencies-1">Managing dependencies<a class="anchor" aria-label="anchor" href="#managing-dependencies-1"></a></h3>
+<p>Next, we need to install dependencies for our project, which are
+recorded in <code>requirements.txt</code> file. By looking at the code
+in <code>eva_data_analysis.py</code> Python script, we can tell we
+require <code>matplotlib</code> and <code>pandas</code> packages.</p>
+<p>We can use the <code>uv add</code> command to install them one by
+one:</p>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="ex">uv</span> add matplotlib</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1" aria-label="code-block-20-2"></a><span class="ex">uv</span> add pandas</span></code></pre>
+</div>
+<p>Alternatively, we can use the <code>uv add</code> command with the
+<code>-r</code> flag to add all dependencies from the
+<code>requirements.txt</code> file.</p>
+<div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="ex">uv</span> add <span class="at">-r</span> requirements.txt</span></code></pre>
+</div>
+<p>You may notice that after running the <code>uv add</code> command -
+we now have a virtual environment in <code>.venv</code> directory (as
+well as the <code>uv.lock</code> file). Note that if you have an
+existing virtual environment in <code>.venv</code> directory,
+<code>uv</code> will continue to use that by default to record changes
+to it. If you do not have an existing environment, you can create it
+with the <code>uv venv</code> command - by default it will end up in
+<code>.venv</code> directory in the project root along with the
+<code>uv.lock</code> file.</p>
+<p>Recall that <code>uv</code> creates a virtual environment and the
+<code>uv.lock</code> file the first time you run any project command,
+i.e., <code>uv add</code>, <code>uv run</code>, <code>uv sync</code>, or
+<code>uv lock</code> (so you do not have to do it explicitly with
+<code>uv venv</code>).</p>
+<div class="section level4">
+<h4 id="runtime-and-development-dependencies">Runtime and development dependencies<a class="anchor" aria-label="anchor" href="#runtime-and-development-dependencies"></a></h4>
+<p>Tools like <code>uv</code> understand that there are two different
+types of dependencies: runtime dependencies and development
+dependencies. Runtime dependencies need to be installed for our code to
+run, like <code>matplotlib</code> for our code. Development dependencies
+are an essential part of the development process for a project, but are
+not required to run it. For example - <code>mkdocs</code> used to build
+the documentation for our software project or <code>pytest</code> to run
+tests.</p>
+<p>With <code>uv add matplotlib</code> and
+<code>uv add -r requirements.txt</code> commands, <code>uv</code> will
+add all packages to the list of runtime dependencies in
+<code>pyproject.toml</code> (regardless if they are runtime or
+development dependencies - there is not way to tell the difference with
+<code>requirements.txt</code>).</p>
+<p>To add <code>mkdocs</code> and <code>pytest</code> as development
+dependencies, the –group option can be used:</p>
+<div class="codewrapper sourceCode" id="cb22">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="ex">$</span> uv add <span class="at">--group</span> dev mkdocs pytest</span></code></pre>
+</div>
+<p>This will add a new section to the <code>pyproject.toml</code> file
+for development dependencies:</p>
+<pre class="text"><code>[dependency-groups]
+dev = [
+"mkdocs&gt;=1.6.1",
+"pytest&gt;=TODO"
+]</code></pre>
+<p>Now when someone installs our package on their machine, only the
+runtime dependencies will be installed since development dependencies
+are not needed to run the code.</p>
+<p>To install the development dependencies, one needs to clone our
+repository from GitHub and then specify the dev extra when
+installing:</p>
+<pre><code>$ pip install .[dev]</code></pre>
 <p>At this point, you can delete <code>requirements.txt</code> and carry
 on running your Python scripts or Python tools with <code>uv</code>.
 Recall that if you are using <code>uv</code> to run Python commands -
@@ -724,16 +785,20 @@ you do not have to activate the environment explicitly. If you prefer to
 use Python directly, you will have to activate your environment first
 but switch to <code>uv</code> for managing it from whatever tools you
 used before.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="building-distributions-1">Building distributions<a class="anchor" aria-label="anchor" href="#building-distributions-1"></a></h3>
 <p>Once we have made sure our project is in the right structure, we can
 go ahead and build a distributable version of our software as
 before:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="ex">uv</span> build</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1" aria-label="code-block-20-2"></a><span class="fu">ls</span> dist/</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1" aria-label="code-block-20-3"></a><span class="ex">spacewalks_example-0.1.0-py3-none-any.whl</span>	</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1" aria-label="code-block-20-4"></a><span class="ex">spacewalks_example-0.1.0.tar.gz</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1" aria-label="code-block-25-1"></a><span class="ex">uv</span> build</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1" aria-label="code-block-25-2"></a><span class="fu">ls</span> dist/</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1" aria-label="code-block-25-3"></a><span class="ex">spacewalks_example-0.1.0-py3-none-any.whl</span>	</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1" aria-label="code-block-25-4"></a><span class="ex">spacewalks_example-0.1.0.tar.gz</span></span></code></pre>
 </div>
 <p>The one we care most about is the <code>.whl</code> or wheel file.
 This is the file that package managers use to distribute and install
@@ -747,17 +812,17 @@ when we try to import them.</p>
 <p>Now if we gave this wheel file to someone else, they could install it
 using <code>uv</code> (or <code>pip</code> or another package
 installer).</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="ex">pip</span> install spacewalks_example-0.1.0-py3-none-any.whl</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1" aria-label="code-block-26-1"></a><span class="ex">pip</span> install spacewalks_example-0.1.0-py3-none-any.whl</span></code></pre>
 </div>
 <p>And then they could import our package in their own Python
 environment:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="im">import</span> spacewalks_example</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a><span class="im">import</span> spacewalks_example</span></code></pre>
 </div>
 <p>After we have been working on our code for a while and want to
 publish an update, we just need to update the version number in the
@@ -766,13 +831,14 @@ build and publish the new version.</p>
 <p>uv can help easily increment the version number following Semantic
 Versioning conventions. For example, to increment the minor version
 number, we can do:</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="ex">uv</span> version <span class="at">--bump</span> minor</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1" aria-label="code-block-28-1"></a><span class="ex">uv</span> version <span class="at">--bump</span> minor</span></code></pre>
 </div>
 <p>Then the version number in <code>pyproject.toml</code> will be
 updated from 0.1.0 to 0.2.0.</p>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
 <hr class="half-width"><p><code>uv</code> provides a modern, standards-based workflow that
 simplifies Python project management by bringing dependency management,
