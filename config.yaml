@@ -50,7 +50,6 @@ disable_sidebar_numbering: true
 # Order of episodes in your lesson
 episodes:
   - introduction.md
-  - example-code.md
   - software-packaging-uv.md
 
 # Information for Learners
