@@ -10,6 +10,8 @@ exercises: 0
 - How does packaging make software easier to share, install and maintain?
 - What information is typically included in a software package?
 - How are software dependencies managed in modern Python projects?
+- What is `uv` and how does it fit into the modern Python packaging ecosystem?
+- What is `pyproject.toml` and why has it become the standard project configuration file?
 - What is the difference between a source distribution and a wheel?
 - How are Python packages published and distributed?
 
@@ -19,7 +21,7 @@ exercises: 0
 
 - Explain what software packaging is and why it is important for software reuse, reproducibility and sustainability.
 - Describe the key components of a Python package and the role of package metadata, dependencies and documentation.
-- Distinguish between traditional and modern Python packaging tools and standards, including `setup.py`, `pip`, `pyproject.toml` and `uv`.
+- Distinguish between traditional and modern Python packaging tools and standards, including `setup.py`, `pip`, `pyproject.toml`, lock files and `uv`.
 - Explain how package managers help manage dependencies and create reproducible software environments.
 - Describe the difference between source distributions (sdists) and wheels.
 
