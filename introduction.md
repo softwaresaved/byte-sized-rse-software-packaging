@@ -75,18 +75,18 @@ Packaging helps ensure that software can be shared, reused and reproduced by oth
 Packaging captures important information about dependencies, versions and installation requirements, making it easier for collaborators to run your software and obtain consistent results.
 Good packaging practices also support software sustainability by making projects easier to maintain, distribute and build upon over time.
 
-## Software packaging and dependency management
+## Dependencies, virtual development environments and packages
 
-**Software packaging** and **dependency management** are closely related but serve different purposes. 
+**Dependency management** and **software packaging** are closely related but serve different purposes. 
 
 **Dependency management** focuses on identifying, installing and maintaining the external packages that the software relies on - making sure that all the external libraries required by the software are available and compatible.
 Dependency management is useful even if your software is never distributed as a package (because it will almost always rely on a number of external dependencies that you will have to manage on your system).
 
-Next step is to capture this **dependency information** for your software project somehow so others (or yourself on another machine) can replicate that.
-Dependencies and their versions can be recorded manually (e.g. just describing them as a list) but it is not very practical as software often relies on dozens or hundreds of external packages.
+Next step is to capture this **dependency information** (dependencies and their versions) for your software project's environment somehow so others (or yourself on another machine) can replicate that.
+Dependency information can be recorded manually (e.g. just describing them as a list) but it is not very practical as software often relies on dozens or hundreds of external packages.
 Such lists, if not managed by special tools, quickly become out of date.
 
-Dependency information for your software can then used to create a **virtual reproducible software environment** for your code on any machine (in theory).
+Dependency information for your software can then used to recreate a **virtual (reproducible) software environment** for your code on any machine (in theory).
 This is a mechanism of isolating the environment for developing and running a software project (containing the specified dependencies) from other projects on the same machine.
 
 **Packaging** goes a step further by preparing the software for distribution (e.g. via PyPI or other software registries), bundling the code, software metadata, dependency information and other supporting files into into a distributable and installable artefact ("archive"). 
@@ -103,7 +103,7 @@ Some tools focus solely on installing packages (such as `pip`), others create is
 
 If you'd like to explore the ecosystem in more detail, ["Python dependency management is a dumpster fire" guide](https://nielscautaerts.xyz/python-dependency-management-is-a-dumpster-fire.html) provides a comprehensive overview of dependency management in Python.
 
-We are mostly going to focus on packaging tools but will unavoidably mention dependency management tools too.
+We are mostly going to focus on packaging tools but will unavoidably mention dependency and environment management tools too.
 
 ### Traditional tools & methods
 
@@ -187,7 +187,7 @@ Many modern packaging tools still rely on `setuptools` behind the scenes, even w
 A `requirements.txt` file provides a simple way to record project's dependency information. 
 It is commonly used to specify the packages and versions needed to recreate a virtual software environment (e.g. using `pip`).
 
-Although still used, many modern Python projects now manage dependencies and development environment through `pyproject.toml` and lock files.
+Although still used, many modern Python projects now manage dependencies and development environment through `pyproject.toml` and lock files (to be covered soon).
 
 Below is an example `requirements.txt` for the software project we will use in examples in this lesson.
 `requirements.txt` is a plain text file which records dependencies (one per line) and locks their versions installed in the current virtual development environment (it acts as a basic lock file).
@@ -225,7 +225,7 @@ Modern package managers help by:
 * Creating reproducible environments
 * Recording exact package versions
 
-#### Pyproject.toml
+#### pyproject.toml
 
 The introduction of `pyproject.toml` file (written in [TOML format][toml]) has been one of the most significant developments in Python packaging.
 It provides a standard location for:
@@ -274,7 +274,7 @@ Thus, good dependency management boils down to a few steps:
 * Syncing our environment with the lock file
 :::
  
-#### Uv
+#### uv
 
 [Uv][uv] is a modern package and project management tool developed by Astral. 
 It combines dependency management, virtual environment management and package installation into a single, high-performance tool.
