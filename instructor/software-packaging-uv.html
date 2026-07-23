@@ -660,8 +660,55 @@ you do not have to activate the environment explicitly. If you prefer to
 use Python directly, you will have to activate your environment first
 but switch to <code>uv</code> for managing it from whatever tools you
 used before.</p>
-<div class="section level3">
-<h3 id="section"></h3>
+<p>Once we have made sure our project is in the right structure, we can
+go ahead and build a distributable version of our software as
+before:</p>
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="ex">uv</span> build</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1" aria-label="code-block-19-2"></a><span class="fu">ls</span> dist/</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1" aria-label="code-block-19-3"></a><span class="ex">hello_world-0.1.0-py3-none-any.whl</span>	</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1" aria-label="code-block-19-4"></a><span class="ex">hello_world-0.1.0.tar.gz</span></span></code></pre>
+</div>
+<p>The one we care most about is the <code>.whl</code> or wheel file.
+This is the file that package managers use to distribute and install
+Python packages, so this is the file we would need to share with other
+people who want to install our software.</p>
+<p>By convention distributable package names use hyphens, whereas module
+package names use underscores. While we could choose to use underscores
+in a distributable package name, we cannot use hyphens in a module
+package name, as Python will interpret them as a minus sign in our code
+when we try to import them.</p>
+<p>Now if we gave this wheel file to someone else, they could install it
+using <code>uv</code> (or <code>pip</code> or another package
+installer).</p>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="ex">pip</span> install hello_world-0.1.0-py3-none-any.whl</span></code></pre>
+</div>
+<p>And then they could import our package in their own Python
+environment:</p>
+<div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="im">import</span> hello_world</span></code></pre>
+</div>
+<p>After we have been working on our code for a while and want to
+publish an update, we just need to update the version number in the
+pyproject.toml file (using SemVer perhaps), then use <code>uv</code> to
+build and publish the new version.</p>
+<p>uv can help easily increment the version number following Semantic
+Versioning conventions. For example, to increment the minor version
+number, we can do:</p>
+<div class="codewrapper sourceCode" id="cb22">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1" aria-label="code-block-22-1"></a><span class="ex">uv</span> version <span class="at">--bump</span> minor</span></code></pre>
+</div>
+<p>Then the version number in <code>pyproject.toml</code> will be
+updated from 0.1.0 to 0.2.0.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -677,7 +724,6 @@ used before.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/example-code.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
