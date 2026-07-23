@@ -6,13 +6,27 @@ exercises: 45
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- TODO
+- How do I create a new Python project with `uv`?
+- What project files does `uv` create/maintain and what are they used for?
+- What is `pyproject.toml` and why has it become the standard project configuration file?
+- How does `uv` manage dependencies and virtual environments?
+- What is a lock file and why is it important for reproducible software?
+- How do I add, remove and update project dependencies?
+- How can I run Python scripts using `uv`?
+- How do I build a source distribution and a wheel using `uv`?
+- How can I migrate an existing project from `pip` and `venv` to `uv`?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- TODO
+- Explain the role of `uv` in modern Python project development.
+- Create and initialise a new Python project using `uv`.
+- Manage project dependencies and understand the purpose of lock files.
+- Describe the structure and role of `pyproject.toml` as the central project configuration file.
+- Run Python commands and scripts using `uv` without manually managing virtual environments.
+- Build Python source distributions and wheel packages for distribution.
+- Migrate an existing pip/venv-based projects to a `uv` development workflow.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -316,5 +330,12 @@ Then the version number in `pyproject.toml` will be updated from 0.1.0 to 0.2.0.
 
 ::: keypoints
 
-- TODO
+- `uv` combines Python installation, dependency management, virtual environments, packaging and publishing into a single, high-performance tool.
+- `pyproject.toml` is the standard configuration file for modern Python projects and stores project metadata, dependencies and tool configuration.
+- Dependencies are declared in `pyproject.toml`, while `uv.lock` records the exact package versions needed to reproduce the project environment with `uv`.
+- `uv` automatically keeps the project environment and lock file synchronised, reducing manual environment management.
+- `uv` run executes commands in the correct project environment without requiring manual activation of a virtual environment.
+- Python packages are typically distributed as source distributions (.tar.gz) and wheels (.whl), which can be built using `uv` build.
+- Existing `pip` and `venv` development workflows can be migrated to `uv` with only a few commands for most projects.
+
 :::
