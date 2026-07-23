@@ -81,9 +81,10 @@ cd hello-world
 uv init
 ```
 
-`uv` will create the following files and directories as a scaffolding for the new Python project:
+`uv` will create the following files and directories as a basic scaffolding for the new Python project:
 
 ```text
+.
 ├── .git/
 ├── .gitignore
 ├── .python-version
@@ -92,11 +93,32 @@ uv init
 └── pyproject.toml
 ```
 
+The `.python-version` file contains the project's default Python version (based on what is installed on your machine). 
+This file tells `uv` which Python version to use when creating the project's virtual environment.
+
 The `main.py` Python file contains a simple "Hello world" program. 
 We can try it out with `uv run`:
 
 ```text
 uv run main.py
+```
+
+In addition to the project files created by `uv init` we saw earlier, `uv` will create a virtual environment (in directory `.venv/`) and `uv.lock` file in the root of your project the first time you run a project command, i.e., `uv run`, `uv add`, `uv sync`, or `uv lock`.
+All these parts work together and allow `uv` to manage your project.
+
+```text
+.
+├── .git/
+├── .venv/
+│   ├── bin
+│   ├── lib
+│   └── pyvenv.cfg
+├── .gitignore
+├── .python-version
+├── README.md
+├── main.py
+├── pyproject.toml
+└── uv.lock
 ```
 
 ### `pyptoject.toml` structure
@@ -152,8 +174,6 @@ The [tool] table has tool-specific subtables, e.g., [tool.uv], [tool.hatch], con
 You would need to consult the particular tool’s documentation to know what it can contain.
 
 A minimal `pyproject.toml` just requires the [project] table (as shown above).
-
-https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
 ### Managing dependencies
 
@@ -226,9 +246,38 @@ By default, `uv build` will build the project from the current directory, and pl
 ```bash
 uv build
 ls dist/
+hello_world-0.1.0-py3-none-any.whl	
+hello_world-0.1.0.tar.gz
 ```
 
 ## Switching to `uv` in existing projects
+
+If you already have an existing project that uses `venv` and `pip`, you might be wondering how to migrate to using `uv` for your development workflow. 
+It is rather straightforward.
+Let's have a look at the example project we downloaded as part of the setup.
+
+```bash
+git clone ...
+cd ...
+ls -la
+```
+
+To migrate from an existing `requirements.txt` file, you need to use `uv init` first to initiate the project and get the basic `pyptoject.toml` file created.
+Next, you can can `uv add` with the `-r` flag to add all dependencies from the `requirements.txt` file.
+
+```bash
+uv init
+uv add -r requirements.txt
+```
+
+If your existing environment is located in `.venv` directory, `uv` will continue to use that by default to record changes to it.
+If you do not have an existing environment, you can create it with the `uv venv` command - by default it will end up in `.venv` directory in the project room along with the `uv.lock` file.
+Recall that `uv` creates a virtual environment and `uv.lock` file the first time you run any project command, i.e., `uv add`, `uv run`, `uv sync`, or `uv lock` (so you do not have to do it explicitly).
+
+At this point, you can delete `requirements.txt` and carry on running your Python scripts or Python tools with `uv`.
+Recall that if you are using `uv` to run Python commands - you do not have to activate the environment explicitly.
+If you prefer to use Python directly, you will have to activate your environment first but switch to `uv` for managing it from whatever tools you used before.
+
 
 ### 
 
