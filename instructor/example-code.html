@@ -219,8 +219,6 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#obtaining-example-code">Obtaining Example Code</a></li>
-<li><a href="#examining-the-code">Examining the Code</a></li>
-<li><a href="#running-the-example-code">Running the Example Code</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -294,7 +292,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Example Code</h1>
-        <p>Last updated on 2026-07-22 |
+        <p>Last updated on 2026-07-23 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/example-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -342,51 +340,41 @@ from: <a href="https://github.com/softwaresaved/spacewalks" class="external-link
 on Linux or Terminal on a Mac) and navigate to where you would like the
 example code to reside (e.g. to your home directory).</p>
 <p>Use Git to clone your copy of the spacewalks repository.</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="bu">cd</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="fu">git</span> clone https://github.com/your-repository/spacewalks.git</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="bu">cd</span> spacewalks</span></code></pre>
-</div>
-</section><section><h2 class="section-heading" id="examining-the-code">Examining the Code<a class="anchor" aria-label="anchor" href="#examining-the-code"></a></h2>
-<hr class="half-width"><p>Let’s take a look at the spacewalk analysis code, which is in the
-file called <code>eva_data_analysis.py</code>. Feel free to use your
-preferred editor of choice, such as Notepad, Nano or Visual Studio
-Code.</p>
-<p>The code is designed to:</p>
-<ul><li>Read in the data from the JSON file</li>
-<li>Change the data from one data format to another and saves to a file
-in the new format (CSV)</li>
-<li>Perform some calculations to generate summary statistics about the
-data</li>
-<li>Make a plot to visualise the data</li>
-</ul><p>A few things to note about the software project:</p>
-<ul><li>
-<code>eva_data_analysis.py</code> Python script already contains
-comprehensive docstrings comments</li>
-<li>
-<code>requirements.txt</code> file in the project root lists the
-software dependencies - such as Pandas, Pytest, Matplotlib</li>
-<li>
-<code>data</code> folder contains input data</li>
-<li>
-<code>results</code> folder contains cleaned dataset converted to
-CSV format and the resulting plot</li>
-<li>
-<code>tests</code> folder contains test code</li>
-</ul></section><section><h2 class="section-heading" id="running-the-example-code">Running the Example Code<a class="anchor" aria-label="anchor" href="#running-the-example-code"></a></h2>
-<hr class="half-width"><p>Let’s run the code.</p>
-<p>First, we will create and activate a virtual environment called
-“venv” from the root of the software project directory:</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> venv/bin/activate <span class="co"># Mac or Linux</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="bu">source</span> venv_spacewalks/Scripts/activate <span class="co"># Windows</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
-</div>
+<p>shell cd git clone <a href="https://github.com/your-repository/spacewalks.git" class="external-link uri">https://github.com/your-repository/spacewalks.git</a> cd
+spacewalks</p>
+<pre><code>
+## Examining the Code
+
+Let's take a look at the spacewalk analysis code, which is in the file called `eva_data_analysis.py`.
+Feel free to use your preferred editor of choice, such as Notepad, Nano or Visual Studio Code.
+
+The code is designed to:
+
+- Read in the data from the JSON file
+- Change the data from one data format to another and saves to a file in the new format (CSV)
+- Perform some calculations to generate summary statistics about the data
+- Make a plot to visualise the data
+
+A few things to note about the software project:
+
+- `eva_data_analysis.py` Python script already contains comprehensive docstrings comments
+- `requirements.txt` file in the project root lists the software dependencies - such as Pandas, Pytest, Matplotlib
+- `data` folder contains input data
+- `results` folder contains cleaned dataset converted to CSV format and the resulting plot
+- `tests` folder contains test code
+
+
+## Running the Example Code
+
+Let's run the code.
+
+First, we will create and activate a virtual environment called "venv" from the root of the software project directory:
+
+shell
+python3 -m venv venv
+source venv/bin/activate # Mac or Linux
+source venv_spacewalks/Scripts/activate # Windows
+(venv) $</code></pre>
 <p>The active virtual environment is indicated in the command line
 prompt between the round brackets: “(venv)”.</p>
 <p>Next, we will install the necessary dependencies from the
@@ -420,7 +408,7 @@ missing?</h3>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>What documentation would you need to be able to run the code?</p>
 </div>
@@ -521,7 +509,7 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/example-code.html",
   "identifier": "https://carpentries-incubator.github.io/byte-sized-rse-software-documentation-mkdocs/instructor/example-code.html",
   "dateCreated": "2026-04-21",
-  "dateModified": "2026-07-22",
+  "dateModified": "2026-07-23",
   "datePublished": "2026-07-23"
 }
 

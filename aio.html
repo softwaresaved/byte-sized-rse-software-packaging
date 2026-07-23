@@ -553,50 +553,42 @@ traditional standard for distributing Python modules. Invoking Python
 <code>setup.py</code> is still a valid <code>setuptools</code>
 configuration file.</p>
 <p>Alternatively, if you run:</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="ex">$</span> pip install .</span></code></pre>
-</div>
-<p>from the software project directory root, <code>pip</code> will use
-information in <code>setup.py</code> to install the software
-package.</p>
-<p>Below is an <a href="https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py" class="external-link">example
-<code>setup.py</code></a> from <a href="https://pythonhosted.org/an_example_pypi_project/setuptools.html" class="external-link">Pythonhosted’s
-“Getting Started With setuptools and setup.py” guide</a>. Recall that
-the content of <code>setup.py</code> is just Python code.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> os</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="im">from</span> setuptools <span class="im">import</span> setup</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="co"># Utility function to read the README file.</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co"># Used for the long_description.  It's nice, because now 1) we have a top level</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="co"># README file and 2) it's easier to type in the README file than to put a raw</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1" aria-label="code-block-2-7"></a><span class="co"># string in below ...</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1" aria-label="code-block-2-8"></a><span class="kw">def</span> read(fname):</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a>    <span class="cf">return</span> <span class="bu">open</span>(os.path.join(os.path.dirname(<span class="va">__file__</span>), fname)).read()</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a>setup(</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a>    name <span class="op">=</span> <span class="st">"an_example_pypi_project"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a>    version <span class="op">=</span> <span class="st">"0.0.4"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a>    author <span class="op">=</span> <span class="st">"Andrew Carter"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a>    author_email <span class="op">=</span> <span class="st">"andrewjcarter@gmail.com"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a>    description <span class="op">=</span> (<span class="st">"An demonstration of how to create, document, and publish "</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1" aria-label="code-block-2-17"></a>                                   <span class="st">"to the cheese shop a5 pypi.org."</span>),</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1" aria-label="code-block-2-18"></a>    license <span class="op">=</span> <span class="st">"BSD"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a>    keywords <span class="op">=</span> <span class="st">"example documentation tutorial"</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1" aria-label="code-block-2-20"></a>    url <span class="op">=</span> <span class="st">"http://packages.python.org/an_example_pypi_project"</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1" aria-label="code-block-2-21"></a>    packages<span class="op">=</span>[<span class="st">'an_example_pypi_project'</span>, <span class="st">'tests'</span>],</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1" aria-label="code-block-2-22"></a>    long_description<span class="op">=</span>read(<span class="st">'README'</span>),</span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1" aria-label="code-block-2-23"></a>    classifiers<span class="op">=</span>[</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1" aria-label="code-block-2-24"></a>        <span class="st">"Development Status :: 3 - Alpha"</span>,</span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a>        <span class="st">"Topic :: Utilities"</span>,</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a>        <span class="st">"License :: OSI Approved :: BSD License"</span>,</span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1" aria-label="code-block-2-27"></a>    ],</span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1" aria-label="code-block-2-28"></a>)</span></code></pre>
-</div>
+<p>shell $ pip install .</p>
+<pre><code>
+from the software project directory root, `pip` will use information in `setup.py` to install the software package.
+
+Below is an [example `setup.py`](https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py) from [Pythonhosted's "Getting Started With setuptools and setup.py" guide](https://pythonhosted.org/an_example_pypi_project/setuptools.html).
+Recall that the content of `setup.py` is just Python code.
+
+```python
+import os
+from setuptools import setup
+
+# Utility function to read the README file.
+# Used for the long_description.  It's nice, because now 1) we have a top level
+# README file and 2) it's easier to type in the README file than to put a raw
+# string in below ...
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+setup(
+    name = "an_example_pypi_project",
+    version = "0.0.4",
+    author = "Andrew Carter",
+    author_email = "andrewjcarter@gmail.com",
+    description = ("An demonstration of how to create, document, and publish "
+                                   "to the cheese shop a5 pypi.org."),
+    license = "BSD",
+    keywords = "example documentation tutorial",
+    url = "http://packages.python.org/an_example_pypi_project",
+    packages=['an_example_pypi_project', 'tests'],
+    long_description=read('README'),
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Topic :: Utilities",
+        "License :: OSI Approved :: BSD License",
+    ],
+)</code></pre>
 <p>While still supported by many projects, modern Python packaging has
 moved away from relying directly on <code>setup.py</code> in favour of
 other standardised configuration files, such as
@@ -1040,7 +1032,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-example-code"><p>Content from <a href="example-code.html">Example Code</a></p>
 <hr>
-<p>Last updated on 2026-07-22 |
+<p>Last updated on 2026-07-23 |
 
         <a href="https://github.com/carpentries-incubator/byte-sized-rse-software-documentation-mkdocs/edit/main/episodes/example-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1086,58 +1078,41 @@ from: <a href="https://github.com/softwaresaved/spacewalks" class="external-link
 on Linux or Terminal on a Mac) and navigate to where you would like the
 example code to reside (e.g. to your home directory).</p>
 <p>Use Git to clone your copy of the spacewalks repository.</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="bu">cd</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="fu">git</span> clone https://github.com/your-repository/spacewalks.git</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="bu">cd</span> spacewalks</span></code></pre>
-</div>
-</section><section><h2 class="section-heading" id="examining-the-code">Examining the Code<a class="anchor" aria-label="anchor" href="#examining-the-code"></a>
-</h2>
-<hr class="half-width">
-<p>Let’s take a look at the spacewalk analysis code, which is in the
-file called <code>eva_data_analysis.py</code>. Feel free to use your
-preferred editor of choice, such as Notepad, Nano or Visual Studio
-Code.</p>
-<p>The code is designed to:</p>
-<ul>
-<li>Read in the data from the JSON file</li>
-<li>Change the data from one data format to another and saves to a file
-in the new format (CSV)</li>
-<li>Perform some calculations to generate summary statistics about the
-data</li>
-<li>Make a plot to visualise the data</li>
-</ul>
-<p>A few things to note about the software project:</p>
-<ul>
-<li>
-<code>eva_data_analysis.py</code> Python script already contains
-comprehensive docstrings comments</li>
-<li>
-<code>requirements.txt</code> file in the project root lists the
-software dependencies - such as Pandas, Pytest, Matplotlib</li>
-<li>
-<code>data</code> folder contains input data</li>
-<li>
-<code>results</code> folder contains cleaned dataset converted to
-CSV format and the resulting plot</li>
-<li>
-<code>tests</code> folder contains test code</li>
-</ul></section><section><h2 class="section-heading" id="running-the-example-code">Running the Example Code<a class="anchor" aria-label="anchor" href="#running-the-example-code"></a>
-</h2>
-<hr class="half-width">
-<p>Let’s run the code.</p>
-<p>First, we will create and activate a virtual environment called
-“venv” from the root of the software project directory:</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">source</span> venv/bin/activate <span class="co"># Mac or Linux</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="bu">source</span> venv_spacewalks/Scripts/activate <span class="co"># Windows</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="kw">(</span><span class="ex">venv</span><span class="kw">)</span> <span class="ex">$</span></span></code></pre>
-</div>
+<p>shell cd git clone <a href="https://github.com/your-repository/spacewalks.git" class="external-link uri">https://github.com/your-repository/spacewalks.git</a> cd
+spacewalks</p>
+<pre><code>
+## Examining the Code
+
+Let's take a look at the spacewalk analysis code, which is in the file called `eva_data_analysis.py`.
+Feel free to use your preferred editor of choice, such as Notepad, Nano or Visual Studio Code.
+
+The code is designed to:
+
+- Read in the data from the JSON file
+- Change the data from one data format to another and saves to a file in the new format (CSV)
+- Perform some calculations to generate summary statistics about the data
+- Make a plot to visualise the data
+
+A few things to note about the software project:
+
+- `eva_data_analysis.py` Python script already contains comprehensive docstrings comments
+- `requirements.txt` file in the project root lists the software dependencies - such as Pandas, Pytest, Matplotlib
+- `data` folder contains input data
+- `results` folder contains cleaned dataset converted to CSV format and the resulting plot
+- `tests` folder contains test code
+
+
+## Running the Example Code
+
+Let's run the code.
+
+First, we will create and activate a virtual environment called "venv" from the root of the software project directory:
+
+shell
+python3 -m venv venv
+source venv/bin/activate # Mac or Linux
+source venv_spacewalks/Scripts/activate # Windows
+(venv) $</code></pre>
 <p>The active virtual environment is indicated in the command line
 prompt between the round brackets: “(venv)”.</p>
 <p>Next, we will install the necessary dependencies from the
@@ -1171,7 +1146,7 @@ missing?</h3>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>What documentation would you need to be able to run the code?</p>
 </div>
@@ -1255,13 +1230,13 @@ any links that you are not going to use.
 <p>Let’s have a more detailed look into <code>uv</code>.</p>
 <p><code>uv</code> is a multi-functional tool, which:</p>
 <ul>
+<li>installs and manages Python versions,</li>
 <li>provides comprehensive Python project and dependency management
 capabilities and handles virtual environments with a universal
 lockfile,</li>
 <li>runs Python scripts,</li>
-<li>installs and manages Python versions,</li>
-<li>runs and installs tools published as Python packages
-(e.g. <code>pip</code>, etc.),</li>
+<li>runs and installs tools (Python modules) published as Python
+packages (e.g. <code>pip</code>, etc.),</li>
 <li>includes a pip-compatible interface for users with existing
 pip-based development workflows,</li>
 <li>is really performant and much faster than <code>pip</code>.</li>
@@ -1288,15 +1263,89 @@ Python commands or scripts inside the environment without you having to
 manually activate it</li>
 <li>(optionally) package and publish your code.</li>
 </ol>
-<div id="uv-commands-summary" class="callout">
+<div class="section level3">
+<h3 id="creating-a-new-project">Creating a new project<a class="anchor" aria-label="anchor" href="#creating-a-new-project"></a>
+</h3>
+<p>You can create a new Python project called “hello-world” using the
+<code>uv init</code> command:</p>
+<pre class="shell"><code>uv init hello-world
+cd hello-world</code></pre>
+<p>Alternatively, you can initialise a project in the working
+directory:</p>
+<pre class="shell"><code>mkdir hello-world
+cd hello-world
+uv init</code></pre>
+<p><code>uv</code> will create the following files and directories as a
+scaffolding for the new Python project:</p>
+<pre class="text"><code>├── .git/
+├── .gitignore
+├── .python-version
+├── README.md
+├── main.py
+└── pyproject.toml</code></pre>
+<p>The <code>main.py</code> Python file contains a simple “Hello world”
+program. We can try it out with <code>uv run</code>:</p>
+<pre class="text"><code>uv run main.py</code></pre>
+</div>
+<div class="section level3">
+<h3 id="pyptoject-toml-structure">
+<code>pyptoject.toml</code> structure<a class="anchor" aria-label="anchor" href="#pyptoject-toml-structure"></a>
+</h3>
+<p><code>uv</code> has also created a starter
+<code>pyproject.toml</code> file to store the metadata about your
+project.</p>
+<pre class="text"><code>[project]
+name = "hello-world"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+dependencies = []</code></pre>
+<p><code>pyproject.toml</code> is a configuration file introduced by PEP
+518 to standardise Python project setup. Written in TOML (Tom’s Obvious,
+Minimal Language), it serves as a single source of truth for your
+project’s build system, metadata, and tool configurations. It tells
+tools like <code>uv</code>, <code>pip</code>,
+’poetry<code>, or</code>hatch` how to construct your project.</p>
+<p>Unlike the older <code>setup.py</code> approach, which relied on
+executable Python code, <code>pyproject.toml</code> brings a
+declarative, static format.</p>
+<p><code>pyptoject.toml</code> structure contains three main components
+(tables):</p>
+<ul>
+<li>
+<strong>[build-system]</strong>: defines the tools and other
+dependencies are needed to build your project’s source or built
+distribution.</li>
+<li>
+<strong>[project]</strong>: stores metadata like your project’s
+name, version, and dependencies.</li>
+<li>
+<strong>[tool]</strong>: configures settings for development tools
+like linters or formatters.</li>
+</ul>
+<p>The [build-system] table is not compulsory - you can use
+<code>pyproject.toml</code> just to store metadata and configuration. If
+your project is an application (not designed to be published as a
+package), you do not need a [build-system] table. <code>uv</code> will
+install and manage your dependencies, but it will not attempt to build
+the project itself. If you are building a package or library to be
+published, the [build-system] table is required so <code>uv</code> knows
+which build backend to use (e.g. <code>hatch</code>,
+<code>setuptools</code>).</p>
+<p>A minimal <code>pyproject.toml</code> just requires the [project]
+table (as shown above).</p>
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Callout</span>
-<div id="uv-commands-summary" class="callout-inner">
-<h3 class="callout-title">
-<code>uv</code> commands summary</h3>
+<div class="callout-inner">
 <div class="callout-content">
+<p><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" class="external-link uri">https://packaging.python.org/en/latest/guides/writing-pyproject-toml/</a></p>
+<div class="section level3">
+<h3 id="uv-project-commands">
+<code>uv</code> project commands<a class="anchor" aria-label="anchor" href="#uv-project-commands"></a>
+</h3>
 <p>A summary of <code>uv</code> commands for creating and working on
 Python projects, i.e., with a <code>pyproject.toml</code> file.</p>
 <ul>
@@ -1313,8 +1362,8 @@ environment.</li>
 <code>uv lock</code>: create a lockfile for the project’s
 dependencies (locking the virtual environment).</li>
 <li>
-<code>uv run</code>: run a Python command in the project
-environment.</li>
+<code>uv run</code>: run a Python command or a Python script in the
+project environment.</li>
 <li>
 <code>uv tree</code>: view the dependency tree for the project.</li>
 <li>
@@ -1330,7 +1379,9 @@ features documentation</a>.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="switching-to-uv-for-existing-projects">Switching to uv for existing projects<a class="anchor" aria-label="anchor" href="#switching-to-uv-for-existing-projects"></a>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="switching-to-uv-in-existing-projects">Switching to <code>uv</code> in existing projects<a class="anchor" aria-label="anchor" href="#switching-to-uv-in-existing-projects"></a>
 </h2>
 <hr class="half-width">
 <div class="section level3">

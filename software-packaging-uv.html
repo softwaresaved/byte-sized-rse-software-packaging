@@ -229,7 +229,7 @@
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
 <li><a href="#using-uv-for-new-projects">Using <code>uv</code> for new projects</a></li>
-<li><a href="#switching-to-uv-for-existing-projects">Switching to uv for existing projects</a></li>
+<li><a href="#switching-to-uv-in-existing-projects">Switching to <code>uv</code> in existing projects</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -330,13 +330,13 @@
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>Let’s have a more detailed look into <code>uv</code>.</p>
 <p><code>uv</code> is a multi-functional tool, which:</p>
-<ul><li>provides comprehensive Python project and dependency management
+<ul><li>installs and manages Python versions,</li>
+<li>provides comprehensive Python project and dependency management
 capabilities and handles virtual environments with a universal
 lockfile,</li>
 <li>runs Python scripts,</li>
-<li>installs and manages Python versions,</li>
-<li>runs and installs tools published as Python packages
-(e.g. <code>pip</code>, etc.),</li>
+<li>runs and installs tools (Python modules) published as Python
+packages (e.g. <code>pip</code>, etc.),</li>
 <li>includes a pip-compatible interface for users with existing
 pip-based development workflows,</li>
 <li>is really performant and much faster than <code>pip</code>.</li>
@@ -359,15 +359,84 @@ you may already be familiar with</li>
 Python commands or scripts inside the environment without you having to
 manually activate it</li>
 <li>(optionally) package and publish your code.</li>
-</ol><div id="uv-commands-summary" class="callout">
+</ol><div class="section level3">
+<h3 id="creating-a-new-project">Creating a new project<a class="anchor" aria-label="anchor" href="#creating-a-new-project"></a></h3>
+<p>You can create a new Python project called “hello-world” using the
+<code>uv init</code> command:</p>
+<pre class="shell"><code>uv init hello-world
+cd hello-world</code></pre>
+<p>Alternatively, you can initialise a project in the working
+directory:</p>
+<pre class="shell"><code>mkdir hello-world
+cd hello-world
+uv init</code></pre>
+<p><code>uv</code> will create the following files and directories as a
+scaffolding for the new Python project:</p>
+<pre class="text"><code>├── .git/
+├── .gitignore
+├── .python-version
+├── README.md
+├── main.py
+└── pyproject.toml</code></pre>
+<p>The <code>main.py</code> Python file contains a simple “Hello world”
+program. We can try it out with <code>uv run</code>:</p>
+<pre class="text"><code>uv run main.py</code></pre>
+</div>
+<div class="section level3">
+<h3 id="pyptoject-toml-structure">
+<code>pyptoject.toml</code> structure<a class="anchor" aria-label="anchor" href="#pyptoject-toml-structure"></a></h3>
+<p><code>uv</code> has also created a starter
+<code>pyproject.toml</code> file to store the metadata about your
+project.</p>
+<pre class="text"><code>[project]
+name = "hello-world"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+dependencies = []</code></pre>
+<p><code>pyproject.toml</code> is a configuration file introduced by PEP
+518 to standardise Python project setup. Written in TOML (Tom’s Obvious,
+Minimal Language), it serves as a single source of truth for your
+project’s build system, metadata, and tool configurations. It tells
+tools like <code>uv</code>, <code>pip</code>,
+’poetry<code>, or</code>hatch` how to construct your project.</p>
+<p>Unlike the older <code>setup.py</code> approach, which relied on
+executable Python code, <code>pyproject.toml</code> brings a
+declarative, static format.</p>
+<p><code>pyptoject.toml</code> structure contains three main components
+(tables):</p>
+<ul><li>
+<strong>[build-system]</strong>: defines the tools and other
+dependencies are needed to build your project’s source or built
+distribution.</li>
+<li>
+<strong>[project]</strong>: stores metadata like your project’s
+name, version, and dependencies.</li>
+<li>
+<strong>[tool]</strong>: configures settings for development tools
+like linters or formatters.</li>
+</ul><p>The [build-system] table is not compulsory - you can use
+<code>pyproject.toml</code> just to store metadata and configuration. If
+your project is an application (not designed to be published as a
+package), you do not need a [build-system] table. <code>uv</code> will
+install and manage your dependencies, but it will not attempt to build
+the project itself. If you are building a package or library to be
+published, the [build-system] table is required so <code>uv</code> knows
+which build backend to use (e.g. <code>hatch</code>,
+<code>setuptools</code>).</p>
+<p>A minimal <code>pyproject.toml</code> just requires the [project]
+table (as shown above).</p>
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Callout</span>
-<div id="uv-commands-summary" class="callout-inner">
-<h3 class="callout-title">
-<code>uv</code> commands summary</h3>
+<div class="callout-inner">
 <div class="callout-content">
+<p><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" class="external-link uri">https://packaging.python.org/en/latest/guides/writing-pyproject-toml/</a></p>
+<div class="section level3">
+<h3 id="uv-project-commands">
+<code>uv</code> project commands<a class="anchor" aria-label="anchor" href="#uv-project-commands"></a></h3>
 <p>A summary of <code>uv</code> commands for creating and working on
 Python projects, i.e., with a <code>pyproject.toml</code> file.</p>
 <ul><li>
@@ -383,8 +452,8 @@ environment.</li>
 <code>uv lock</code>: create a lockfile for the project’s
 dependencies (locking the virtual environment).</li>
 <li>
-<code>uv run</code>: run a Python command in the project
-environment.</li>
+<code>uv run</code>: run a Python command or a Python script in the
+project environment.</li>
 <li>
 <code>uv tree</code>: view the dependency tree for the project.</li>
 <li>
@@ -399,7 +468,9 @@ features documentation</a>.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="switching-to-uv-for-existing-projects">Switching to uv for existing projects<a class="anchor" aria-label="anchor" href="#switching-to-uv-for-existing-projects"></a></h2>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="switching-to-uv-in-existing-projects">Switching to <code>uv</code> in existing projects<a class="anchor" aria-label="anchor" href="#switching-to-uv-in-existing-projects"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="section"></h3>
 <div id="keypoints1" class="callout keypoints">
