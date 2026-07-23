@@ -10,8 +10,7 @@ title: Setup
 - Ability to navigate filesystem and run commands from within a shell
 - Python version 3.8 or above installed
 - Understanding of Python syntax to be able to read and follow code examples
-- Pip Python package installer
-- Venv Python package to handle virtual environments
+- `uv` Python package and dependency management tool
 - Code editor such as Visual Studio Code
 
 :::
@@ -29,17 +28,11 @@ Python version 3.8 or above is required. Type `python -v` at your shell prompt a
 If you do not have Python installed on your system and require assistance with the installation, you can take a look at [the instructions provided by Software Carpentry](https://swcarpentry.github.io/python-novice-inflammation/#install-python)
 for installing Python in preparation for undertaking their Python lesson.
 
-### Pip
+### uv
 
-Pip Python package should come together with your Python distribution.
-Try typing `pip` at the command line and you should see some usage instructions for the command appear if it is installed.
-
-### Venv
-
-Venv Python package should come together with your Python distribution.
-Try typing `venv` at the command line and you should see some usage instructions for the command appear if it is installed.
+`uv` Python package and dependency management tool can be obtained from [Astral](https://docs.astral.sh/uv/).
 
 ### Code Editor
 
 For the hands-on part of this topic you will need a code editor to navigate and edit software project files.
-You can use, for example [Visual Studio Code (VS Code) - a widely used IDE][vs-code], or any other IDE or code editor of your choice.
+You can use, for example [Visual Studio Code (VS Code) - a widely used IDE](https://code.visualstudio.com/), or any other IDE or code editor of your choice.
