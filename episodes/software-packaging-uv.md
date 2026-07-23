@@ -307,23 +307,76 @@ drwxr-xr-x   12 mbassan2  staff    384 23 Jul 17:21 site
 drwxr-xr-x    3 mbassan2  staff     96 23 Jul 17:21 tests
 ```
 
-Let's assume this project uses `venv`, `pip` and `requirements.txt` to manage and record dependencies and virtual environment. 
+Let's assume this project uses `venv`, `pip` and `requirements.txt` to manage and record dependencies and the virtual environment.
 
 To migrate from the existing development workflow to use `uv`, you need to use `uv init` first to initiate the project and get the basic `pyptoject.toml` file created.
-Next, you can can `uv add` with the `-r` flag to add all dependencies from the `requirements.txt` file.
 
 ```bash
 uv init
+```
+
+### Managing dependencies
+
+Next, we need to install dependencies for our project, which are recorded in `requirements.txt` file.
+By looking at the code in `eva_data_analysis.py` Python script, we can tell we require `matplotlib` and `pandas` packages. 
+
+We can use the `uv add` command to install them one by one:
+
+```bash
+uv add matplotlib
+uv add pandas
+```
+
+Alternatively, we can use the `uv add` command with the `-r` flag to add all dependencies from the `requirements.txt` file.
+
+```bash
 uv add -r requirements.txt
 ```
 
-If your existing environment is located in `.venv` directory, `uv` will continue to use that by default to record changes to it.
-If you do not have an existing environment, you can create it with the `uv venv` command - by default it will end up in `.venv` directory in the project room along with the `uv.lock` file.
-Recall that `uv` creates a virtual environment and `uv.lock` file the first time you run any project command, i.e., `uv add`, `uv run`, `uv sync`, or `uv lock` (so you do not have to do it explicitly).
+You may notice that after running the `uv add` command - we now have a virtual environment in `.venv` directory (as well as the `uv.lock` file).
+Note that if you have an existing virtual environment in `.venv` directory, `uv` will continue to use that by default to record changes to it.
+If you do not have an existing environment, you can create it with the `uv venv` command - by default it will end up in `.venv` directory in the project root along with the `uv.lock` file.
+
+Recall that `uv` creates a virtual environment and the `uv.lock` file the first time you run any project command, i.e., `uv add`, `uv run`, `uv sync`, or `uv lock` (so you do not have to do it explicitly with `uv venv`).
+
+#### Runtime and development dependencies
+
+Tools like `uv` understand that there are two different types of dependencies: runtime dependencies and development dependencies. 
+Runtime dependencies need to be installed for our code to run, like `matplotlib` for our code. 
+Development dependencies are an essential part of the development process for a project, but are not required to run it. 
+For example - `mkdocs` used to build the documentation for our software project or `pytest` to run tests.
+
+With `uv add matplotlib` and `uv add -r requirements.txt` commands, `uv` will add all packages to the list of runtime dependencies in `pyproject.toml` (regardless if they are runtime or development dependencies - there is not way to tell the difference with `requirements.txt`).
+
+To add `mkdocs` and `pytest` as development dependencies, the --group option can be used:
+
+```bash
+$ uv add --group dev mkdocs pytest
+```
+
+This will add a new section to the `pyproject.toml` file for development dependencies:
+
+```text
+[dependency-groups]
+dev = [
+"mkdocs>=1.6.1",
+"pytest>=TODO"
+]
+```
+
+Now when someone installs our package on their machine, only the runtime dependencies will be installed since development dependencies are not needed to run the code.
+
+To install the development dependencies, one needs to clone our repository from GitHub and then specify the dev extra when installing:
+
+```
+$ pip install .[dev]
+```
 
 At this point, you can delete `requirements.txt` and carry on running your Python scripts or Python tools with `uv`.
 Recall that if you are using `uv` to run Python commands - you do not have to activate the environment explicitly.
 If you prefer to use Python directly, you will have to activate your environment first but switch to `uv` for managing it from whatever tools you used before.
+
+### Building distributions
 
 Once we have made sure our project is in the right structure, we can go ahead and build a distributable version of our software as before:
 
