@@ -278,8 +278,41 @@ At this point, you can delete `requirements.txt` and carry on running your Pytho
 Recall that if you are using `uv` to run Python commands - you do not have to activate the environment explicitly.
 If you prefer to use Python directly, you will have to activate your environment first but switch to `uv` for managing it from whatever tools you used before.
 
+Once we have made sure our project is in the right structure, we can go ahead and build a distributable version of our software as before:
 
-### 
+```bash
+uv build
+ls dist/
+hello_world-0.1.0-py3-none-any.whl	
+hello_world-0.1.0.tar.gz
+```
+
+The one we care most about is the `.whl` or wheel file. 
+This is the file that package managers use to distribute and install Python packages, so this is the file we would need to share with other people who want to install our software.
+
+By convention distributable package names use hyphens, whereas module package names use underscores. 
+While we could choose to use underscores in a distributable package name, we cannot use hyphens in a module package name, as Python will interpret them as a minus sign in our code when we try to import them.
+
+Now if we gave this wheel file to someone else, they could install it using `uv` (or `pip` or another package installer).
+
+```bash
+pip install hello_world-0.1.0-py3-none-any.whl
+```
+
+And then they could import our package in their own Python environment:
+
+```python
+import hello_world
+```
+
+After we have been working on our code for a while and want to publish an update, we just need to update the version number in the pyproject.toml file (using SemVer perhaps), then use `uv` to build and publish the new version.
+
+uv can help easily increment the version number following Semantic Versioning conventions. For example, to increment the minor version number, we can do:
+
+```bash
+uv version --bump minor
+```
+Then the version number in `pyproject.toml` will be updated from 0.1.0 to 0.2.0.
 
 ::: keypoints
 
