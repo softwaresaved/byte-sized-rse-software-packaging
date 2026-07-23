@@ -76,6 +76,8 @@ A summary of `uv` commands for creating and working on Python projects, i.e., wi
 
 The full list of all `uv` commands is available from the [`uv` features documentation](https://docs.astral.sh/uv/getting-started/features/).
 
+A number of [`uv` guides](https://docs.astral.sh/uv/guides/) covering the full set of commands and features is also available - we only cover a small subset in this session.
+
 :::
 
 ### Creating a new project
@@ -269,15 +271,45 @@ hello_world-0.1.0.tar.gz
 
 If you already have an existing project that uses `venv` and `pip`, you might be wondering how to migrate to using `uv` for your development workflow. 
 It is rather straightforward.
-Let's have a look at the example project we downloaded as part of the setup.
+Let's have a look at the [example project we downloaded as part of the setup](./index.html#example-code).
+
+:::prereq
+If you have not done it already, make a copy of [example project repository](https://github.com/softwaresaved/spacewalks_example) into your GitHub account by using the `Use this template` button on GitHub.
+
+Next, clone your copy of the repository locally:
 
 ```bash
-git clone ...
-cd ...
+cd ~
+git clone https://github.com/YOUR-GITHUB/spacewalks_example
+```
+:::
+
+Let's navigate into the `spacewalks_example` project directory.
+
+```bash
+cd spacewalks_example
 ls -la
+total 56
+drwxr-xr-x   15 mbassan2  staff    480 23 Jul 17:21 .
+drwx------@ 897 mbassan2  staff  28704 23 Jul 17:21 ..
+drwxr-xr-x   12 mbassan2  staff    384 23 Jul 17:21 .git
+-rw-r--r--    1 mbassan2  staff     26 23 Jul 17:21 .gitignore
+-rw-r--r--    1 mbassan2  staff    721 23 Jul 17:21 CITATION.cff
+drwxr-xr-x    3 mbassan2  staff     96 23 Jul 17:21 data
+drwxr-xr-x    7 mbassan2  staff    224 23 Jul 17:21 docs
+-rw-r--r--    1 mbassan2  staff   3991 23 Jul 17:21 eva_data_analysis.py
+-rw-r--r--    1 mbassan2  staff   1090 23 Jul 17:21 LICENSE
+-rw-r--r--    1 mbassan2  staff    296 23 Jul 17:21 mkdocs.yml
+-rw-r--r--    1 mbassan2  staff   2009 23 Jul 17:21 README.md
+-rw-r--r--    1 mbassan2  staff    805 23 Jul 17:21 requirements.txt
+drwxr-xr-x    5 mbassan2  staff    160 23 Jul 17:21 results
+drwxr-xr-x   12 mbassan2  staff    384 23 Jul 17:21 site
+drwxr-xr-x    3 mbassan2  staff     96 23 Jul 17:21 tests
 ```
 
-To migrate from an existing `requirements.txt` file, you need to use `uv init` first to initiate the project and get the basic `pyptoject.toml` file created.
+Let's assume this project uses `venv`, `pip` and `requirements.txt` to manage and record dependencies and virtual environment. 
+
+To migrate from the existing development workflow to use `uv`, you need to use `uv init` first to initiate the project and get the basic `pyptoject.toml` file created.
 Next, you can can `uv add` with the `-r` flag to add all dependencies from the `requirements.txt` file.
 
 ```bash
@@ -298,8 +330,8 @@ Once we have made sure our project is in the right structure, we can go ahead an
 ```bash
 uv build
 ls dist/
-hello_world-0.1.0-py3-none-any.whl	
-hello_world-0.1.0.tar.gz
+spacewalks_example-0.1.0-py3-none-any.whl	
+spacewalks_example-0.1.0.tar.gz
 ```
 
 The one we care most about is the `.whl` or wheel file. 
@@ -311,13 +343,13 @@ While we could choose to use underscores in a distributable package name, we can
 Now if we gave this wheel file to someone else, they could install it using `uv` (or `pip` or another package installer).
 
 ```bash
-pip install hello_world-0.1.0-py3-none-any.whl
+pip install spacewalks_example-0.1.0-py3-none-any.whl
 ```
 
 And then they could import our package in their own Python environment:
 
 ```python
-import hello_world
+import spacewalks_example
 ```
 
 After we have been working on our code for a while and want to publish an update, we just need to update the version number in the pyproject.toml file (using SemVer perhaps), then use `uv` to build and publish the new version.
