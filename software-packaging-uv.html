@@ -359,17 +359,68 @@ you may already be familiar with</li>
 Python commands or scripts inside the environment without you having to
 manually activate it</li>
 <li>(optionally) package and publish your code.</li>
-</ol><div class="section level3">
+</ol><p>There is a number of <code>uv</code> commands to handle Python
+projects as part of the development workflow. We will see what all of
+them do shortly.</p>
+<div id="uv-project-commands" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="uv-project-commands" class="callout-inner">
+<h3 class="callout-title">
+<code>uv</code> project commands</h3>
+<div class="callout-content">
+<p>A summary of <code>uv</code> commands for creating and working on
+Python projects, i.e., with a <code>pyproject.toml</code> file.</p>
+<ul><li>
+<code>uv init</code>: create a new Python project.</li>
+<li>
+<code>uv add</code>: add a dependency to the project.</li>
+<li>
+<code>uv remove</code>: remove a dependency from the project.</li>
+<li>
+<code>uv sync</code>: sync the project’s dependencies with the
+environment.</li>
+<li>
+<code>uv lock</code>: create a lockfile for the project’s
+dependencies (locking the virtual environment).</li>
+<li>
+<code>uv run</code>: run a Python command or a Python script in the
+project environment.</li>
+<li>
+<code>uv tree</code>: view the dependency tree for the project.</li>
+<li>
+<code>uv build</code>: build the project into distribution
+archives.</li>
+<li>
+<code>uv publish</code>: publish the project to a package
+index.</li>
+</ul><p>The full list of all <code>uv</code> commands is available from the
+<a href="https://docs.astral.sh/uv/getting-started/features/" class="external-link"><code>uv</code>
+features documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="section level3">
 <h3 id="creating-a-new-project">Creating a new project<a class="anchor" aria-label="anchor" href="#creating-a-new-project"></a></h3>
 <p>You can create a new Python project called “hello-world” using the
 <code>uv init</code> command:</p>
-<pre class="shell"><code>uv init hello-world
-cd hello-world</code></pre>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="ex">uv</span> init hello-world</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="bu">cd</span> hello-world</span></code></pre>
+</div>
 <p>Alternatively, you can initialise a project in the working
 directory:</p>
-<pre class="shell"><code>mkdir hello-world
-cd hello-world
-uv init</code></pre>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="fu">mkdir</span> hello-world</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="bu">cd</span> hello-world</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="ex">uv</span> init</span></code></pre>
+</div>
 <p><code>uv</code> will create the following files and directories as a
 scaffolding for the new Python project:</p>
 <pre class="text"><code>├── .git/
@@ -448,48 +499,97 @@ to consult the particular tool’s documentation to know what it can
 contain.</p>
 <p>A minimal <code>pyproject.toml</code> just requires the [project]
 table (as shown above).</p>
-<div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div class="callout-inner">
-<div class="callout-content">
 <p><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" class="external-link uri">https://packaging.python.org/en/latest/guides/writing-pyproject-toml/</a></p>
+</div>
 <div class="section level3">
-<h3 id="uv-project-commands">
-<code>uv</code> project commands<a class="anchor" aria-label="anchor" href="#uv-project-commands"></a></h3>
-<p>A summary of <code>uv</code> commands for creating and working on
-Python projects, i.e., with a <code>pyproject.toml</code> file.</p>
-<ul><li>
-<code>uv init</code>: create a new Python project.</li>
-<li>
-<code>uv add</code>: add a dependency to the project.</li>
-<li>
-<code>uv remove</code>: remove a dependency from the project.</li>
-<li>
-<code>uv sync</code>: sync the project’s dependencies with the
-environment.</li>
-<li>
-<code>uv lock</code>: create a lockfile for the project’s
-dependencies (locking the virtual environment).</li>
-<li>
-<code>uv run</code>: run a Python command or a Python script in the
-project environment.</li>
-<li>
-<code>uv tree</code>: view the dependency tree for the project.</li>
-<li>
-<code>uv build</code>: build the project into distribution
-archives.</li>
-<li>
-<code>uv publish</code>: publish the project to a package
-index.</li>
-</ul><p>The full list of all <code>uv</code> commands is available from the
-<a href="https://docs.astral.sh/uv/getting-started/features/" class="external-link"><code>uv</code>
-features documentation</a>.</p>
+<h3 id="managing-dependencies">Managing dependencies<a class="anchor" aria-label="anchor" href="#managing-dependencies"></a></h3>
+<p>You can add dependencies to your project (and
+<code>pyproject.toml</code>) with the <code>uv add</code> command. This
+will also create/update the lock file and project environment.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="ex">uv</span> add requests</span></code></pre>
 </div>
+<p>You may notice the <code>.venv</code> virtual environment and
+<code>uv.lock</code> being added to your project. They will be updated
+each time you add a new dependency.</p>
+<p>You can also specify version constraints or alternative sources for
+packages.</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="ex">uv</span> add <span class="st">'requests==2.31.0'</span></span></code></pre>
 </div>
+<p>To add a dependency sourced from GitHub (as opposed to the default
+PyPI):</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="ex">uv</span> add git+https://github.com/psf/requests</span></code></pre>
 </div>
+<p>To remove a dependency, you can use <code>uv remove</code>:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="ex">uv</span> remove requests</span></code></pre>
+</div>
+<p>To upgrade a package, run <code>uv lock</code> with the
+<code>--upgrade-package</code> flag:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="ex">uv</span> lock <span class="at">--upgrade-package</span> requests</span></code></pre>
+</div>
+<p>The <code>--upgrade-package</code> flag will attempt to update the
+specified package to the latest compatible version, while keeping the
+rest of the lock file intact.</p>
+</div>
+<div class="section level3">
+<h3 id="running-commands">Running commands<a class="anchor" aria-label="anchor" href="#running-commands"></a></h3>
+<p><code>uv run</code> can be used to run arbitrary scripts or commands
+in your project environment.</p>
+<p>Prior to every <code>uv run</code> invocation, <code>uv</code> will
+verify that the lockfile is up-to-date with the
+<code>pyproject.toml</code>, and that the environment is up-to-date with
+the lock file, keeping your project in-sync without the need for manual
+intervention. <code>uv run</code> guarantees that your command is run in
+an environment with all required dependencies at their locked
+versions.</p>
+<p>Alternatively, you can use <code>uv sync</code> to manually update
+the environment (recorded in in <code>.venv/</code> folder) then
+activate it before executing a Python command or running your Python
+script:</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="bu">source</span> .venv/bin/activate <span class="co"># macOS or Linux</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a><span class="ex">python3</span> main.py</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="ex">.venv\Scripts\activate</span> <span class="co"># Windows</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a><span class="ex">python</span> main.py</span></code></pre>
+</div>
+<p>Note: the virtual environment must be active to run scripts and
+commands in the project without <code>uv run</code>. Virtual environment
+activation differs per shell and platform.</p>
+</div>
+<div class="section level3">
+<h3 id="building-distributions">Building distributions<a class="anchor" aria-label="anchor" href="#building-distributions"></a></h3>
+<p><code>uv build</code> command can be used to build source
+distributions and binary distributions (wheel) for your project.</p>
+<p>By default, <code>uv build</code> will build the project from the
+current directory, and place the built artifacts in a dist/
+subdirectory:</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a><span class="ex">uv</span> build</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1" aria-label="code-block-15-2"></a><span class="fu">ls</span> dist/</span></code></pre>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="switching-to-uv-in-existing-projects">Switching to <code>uv</code> in existing projects<a class="anchor" aria-label="anchor" href="#switching-to-uv-in-existing-projects"></a></h2>
