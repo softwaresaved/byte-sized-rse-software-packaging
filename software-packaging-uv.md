@@ -42,18 +42,40 @@ The core `uv` project development workflow looks like as follows:
 4. running commands inside the environment - `uv` can run Python commands or scripts inside the environment without you having to manually activate it
 5. (optionally) package and publish your code.
 
+There is a number of `uv` commands to handle Python projects as part of the development workflow. 
+We will see what all of them do shortly.
+
+::: callout
+### `uv` project commands
+
+A summary of `uv` commands for creating and working on Python projects, i.e., with a `pyproject.toml` file.
+
+- `uv init`: create a new Python project.
+- `uv add`: add a dependency to the project.
+- `uv remove`: remove a dependency from the project.
+- `uv sync`: sync the project's dependencies with the environment.
+- `uv lock`: create a lockfile for the project's dependencies (locking the virtual environment).
+- `uv run`: run a Python command or a Python script in the project environment.
+- `uv tree`: view the dependency tree for the project.
+- `uv build`: build the project into distribution archives.
+- `uv publish`: publish the project to a package index.
+
+The full list of all `uv` commands is available from the [`uv` features documentation](https://docs.astral.sh/uv/getting-started/features/).
+
+:::
+
 ### Creating a new project
 
 You can create a new Python project called "hello-world" using the `uv init` command:
 
-```shell
+```bash
 uv init hello-world
 cd hello-world
 ```
 
 Alternatively, you can initialise a project in the working directory:
 
-```shell
+```bash
 mkdir hello-world
 cd hello-world
 uv init
@@ -131,27 +153,80 @@ You would need to consult the particular tool’s documentation to know what it 
 
 A minimal `pyproject.toml` just requires the [project] table (as shown above).
 
-::: callout
-
 https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
-### `uv` project commands
+### Managing dependencies
 
-A summary of `uv` commands for creating and working on Python projects, i.e., with a `pyproject.toml` file.
+You can add dependencies to your project (and `pyproject.toml`) with the `uv add` command. 
+This will also create/update the lock file and project environment.
 
-- `uv init`: create a new Python project.
-- `uv add`: add a dependency to the project.
-- `uv remove`: remove a dependency from the project.
-- `uv sync`: sync the project's dependencies with the environment.
-- `uv lock`: create a lockfile for the project's dependencies (locking the virtual environment).
-- `uv run`: run a Python command or a Python script in the project environment.
-- `uv tree`: view the dependency tree for the project.
-- `uv build`: build the project into distribution archives.
-- `uv publish`: publish the project to a package index.
+```bash
+uv add requests
+```
 
-The full list of all `uv` commands is available from the [`uv` features documentation](https://docs.astral.sh/uv/getting-started/features/).
+You may notice the `.venv` virtual environment and `uv.lock` being added to your project.
+They will be updated each time you add a new dependency.
 
-:::
+You can also specify version constraints or alternative sources for packages.
+
+```bash
+uv add 'requests==2.31.0'
+```
+
+To add a dependency sourced from GitHub (as opposed to the default PyPI):
+
+```bash
+uv add git+https://github.com/psf/requests
+```
+
+To remove a dependency, you can use `uv remove`:
+
+```bash
+uv remove requests
+```
+
+To upgrade a package, run `uv lock` with the `--upgrade-package` flag:
+
+```bash
+uv lock --upgrade-package requests
+```
+
+The `--upgrade-package` flag will attempt to update the specified package to the latest compatible version, while keeping the rest of the lock file intact.
+
+### Running commands
+
+`uv run` can be used to run arbitrary scripts or commands in your project environment.
+
+Prior to every `uv run` invocation, `uv` will verify that the lockfile is up-to-date with the `pyproject.toml`, and that the environment is up-to-date with the lock file, keeping your project in-sync without the need for manual intervention. 
+`uv run` guarantees that your command is run in an environment with all required dependencies at their locked versions.
+
+Alternatively, you can use `uv sync` to manually update the environment (recorded in in `.venv/` folder) then activate it before executing a Python command or running your Python script:
+
+```bash
+uv sync
+source .venv/bin/activate # macOS or Linux
+python3 main.py
+```
+
+```bash
+uv sync
+.venv\Scripts\activate # Windows
+python main.py
+```
+
+Note: the virtual environment must be active to run scripts and commands in the project without `uv run`. 
+Virtual environment activation differs per shell and platform.
+
+### Building distributions
+
+`uv build` command can be used to build source distributions and binary distributions (wheel) for your project.
+
+By default, `uv build` will build the project from the current directory, and place the built artifacts in a dist/ subdirectory:
+
+```bash
+uv build
+ls dist/
+```
 
 ## Switching to `uv` in existing projects
 
