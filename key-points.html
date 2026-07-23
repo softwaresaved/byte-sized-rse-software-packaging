@@ -353,7 +353,30 @@ to cite the code (this list is not exhaustive).</li>
 </ul></section><section id="software-packaging-uv"><h2 class="section-heading"><a href="software-packaging-uv.html">Software packaging with uv</a></h2>
 <hr class="half-width">
 <ul>
-<li>TODO</li>
+<li>
+<code>uv</code> combines Python installation, dependency management,
+virtual environments, packaging and publishing into a single,
+high-performance tool.</li>
+<li>
+<code>pyproject.toml</code> is the standard configuration file for
+modern Python projects and stores project metadata, dependencies and
+tool configuration.</li>
+<li>Dependencies are declared in <code>pyproject.toml</code>, while
+<code>uv.lock</code> records the exact package versions needed to
+reproduce the project environment with <code>uv</code>.</li>
+<li>
+<code>uv</code> automatically keeps the project environment and lock
+file synchronised, reducing manual environment management.</li>
+<li>
+<code>uv</code> run executes commands in the correct project
+environment without requiring manual activation of a virtual
+environment.</li>
+<li>Python packages are typically distributed as source distributions
+(.tar.gz) and wheels (.whl), which can be built using <code>uv</code>
+build.</li>
+<li>Existing <code>pip</code> and <code>venv</code> development
+workflows can be migrated to <code>uv</code> with only a few commands
+for most projects.</li>
 </ul></section>
 </div>
     </main>
