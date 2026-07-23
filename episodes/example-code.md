@@ -28,7 +28,7 @@ Open a command-line shell (e.g. via Git Bash in Windows, bash shell on Linux or 
 
 Use Git to clone your copy of the spacewalks repository.
 
-```bash
+shell
 cd
 git clone https://github.com/your-repository/spacewalks.git
 cd spacewalks
@@ -61,7 +61,7 @@ Let's run the code.
 
 First, we will create and activate a virtual environment called "venv" from the root of the software project directory:
 
-```bash
+shell
 python3 -m venv venv
 source venv/bin/activate # Mac or Linux
 source venv_spacewalks/Scripts/activate # Windows
