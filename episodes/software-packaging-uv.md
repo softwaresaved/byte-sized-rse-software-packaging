@@ -328,6 +328,10 @@ uv version --bump minor
 ```
 Then the version number in `pyproject.toml` will be updated from 0.1.0 to 0.2.0.
 
+## Summary
+
+`uv` provides a modern, standards-based workflow that simplifies Python project management by bringing dependency management, virtual environments, packaging and publishing together in a single tool.
+
 ::: keypoints
 
 - `uv` combines Python installation, dependency management, virtual environments, packaging and publishing into a single, high-performance tool.
