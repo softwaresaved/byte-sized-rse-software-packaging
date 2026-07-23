@@ -6,12 +6,15 @@ title: Setup
 
 ::: prereq
 
-- Shell with Git version control tool installed
+- Shell with Git version control tool installed and set up
 - Ability to navigate filesystem and run commands from within a shell
+- Ability to use basic Git commands from a shell
 - Python version 3.8 or above installed
 - Understanding of Python syntax to be able to read and follow code examples
 - `uv` Python package and dependency management tool
 - Code editor such as Visual Studio Code
+- [GitHub](https://github.com) account
+- [Example code](https://github.com/softwaresaved/spacewalks_example) copied into your GitHub account
 
 :::
 
@@ -36,3 +39,22 @@ for installing Python in preparation for undertaking their Python lesson.
 
 For the hands-on part of this topic you will need a code editor to navigate and edit software project files.
 You can use, for example [Visual Studio Code (VS Code) - a widely used IDE](https://code.visualstudio.com/), or any other IDE or code editor of your choice.
+
+### GitHub
+
+We use [GitHub](https://github.com) to store code examples you will have to copy.
+If you do not already have a GitHub account - you can open one for free.
+
+### Example Code
+
+[Example code](https://github.com/softwaresaved/spacewalks_example) we will use for the session can be obtained from GitHub.
+Please make sure to copy this repository into your GitHub account by using the `Use this template` button on GitHub.
+
+After creating your copy of the example code repository, using Git from a shell make a clone on your machine:
+
+```bash
+cd ~
+git clone https://github.com/YOUR-GITHUB/spacewalks_example
+cd spacewalks_example
+```
+
