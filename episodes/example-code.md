@@ -33,6 +33,8 @@ $ git clone https://github.com/YOUR-GITHUB/spacewalks_example.git
 $ cd spacewalks_example
 ```
 
+The example code implements spacewalk data analysis - we will use this code to create a Python package using `uv`.
+
 ## Examining the Code
 
 Let's take a look at the spacewalk analysis code, which is in the file called `eva_data_analysis.py`.
@@ -61,9 +63,15 @@ Before we can run the code, we need to create and activate a virtual environment
 ```bash
 $ python3 -m venv .venv
 $ source .venv/bin/activate # Mac or Linux
-$ source .venv/Scripts/activate # Windows
 (.venv) $
 ```
+
+```bash
+$ python -m venv .venv
+$ source .venv\Scripts\activate # Windows
+(.venv) $
+```
+
 The active virtual environment is indicated in the command line prompt between the round brackets: "(.venv)".
 
 Next, we will install the necessary dependencies from the `requirements.txt` file using `pip`:
