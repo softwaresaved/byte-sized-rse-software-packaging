@@ -9,7 +9,7 @@ title: Setup
 - Shell with Git version control tool installed and set up
 - Ability to navigate filesystem and run commands from within a shell
 - Ability to use basic Git commands from a shell
-- Python version 3.8 or above installed
+- Python version 3.8 or above installed (with `pip`and `venv` tools)
 - Understanding of Python syntax to be able to read and follow code examples
 - `uv` Python package and dependency management tool
 - Code editor such as Visual Studio Code
@@ -54,7 +54,7 @@ After creating your copy of the example code repository, using Git from a shell 
 
 ```bash
 cd ~
-git clone https://github.com/YOUR-GITHUB/spacewalks_example
+git clone https://github.com/YOUR-GITHUB/spacewalks_example.git
 cd spacewalks_example
 ```
 
