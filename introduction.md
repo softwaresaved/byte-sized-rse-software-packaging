@@ -79,6 +79,8 @@ Good packaging practices also support software sustainability by making projects
 
 ## Dependencies, virtual development environments and packages
 
+We cannot talk about software packaging without covering dependency management and development environments.
+
 **Dependency management** and **software packaging** are closely related but serve different purposes. 
 
 **Dependency management** focuses on identifying, installing and maintaining the external packages that the software relies on - making sure that all the external libraries required by the software are available and compatible.
