@@ -80,16 +80,16 @@ If you are starting a new project then you can use `uv` straight away to replace
 To create a brand new Python project called "hello-world" using the `uv init` command, do:
 
 ```bash
-uv init hello-world
-cd hello-world
+$ uv init hello-world
+$ cd hello-world
 ```
 
 Alternatively, you can initialise a project in an existing, empty working directory:
 
 ```bash
-mkdir hello-world
-cd hello-world
-uv init
+$ mkdir hello-world
+$ cd hello-world
+$ uv init
 ```
 
 `uv` will create the following files and directories as a basic scaffolding for your new Python project:
@@ -135,7 +135,7 @@ Unlike the older `setup.py` approach, which relied on executable Python code, `p
 The [build-system] table is not compulsory - you can use `pyproject.toml` just to store metadata and configuration. 
 If your project is an application (not designed to be published as a package), you do not need a [build-system] table. 
 `uv` will install and manage your dependencies, but it will not attempt to build the project itself.
-If you are building a package or library to be published, the [build-system] table is required so `uv` knows which build backend to use (e.g. `uv_build`, `hatch`, `setuptools`).
+If you are building a package or library to be published, the [build-system] table is required so `uv` knows which build backend to use (e.g. `uv_build`, `setuptools`, `hatch`).
 
 For example:
 
@@ -168,7 +168,7 @@ You can add dependencies to your project (and `pyproject.toml`) with the `uv add
 For example, to add `requests` package, do:
 
 ```bash
-uv add requests
+$ uv add requests
 ```
 
 You may now notice the new `.venv` virtual environment and `uv.lock` file being added to your project after running the `uv add` command.
@@ -194,25 +194,25 @@ The project structure now looks like the following - all these parts work togeth
 You can also specify version constraints or alternative sources for packages with the `uv add` command.
 
 ```bash
-uv add 'requests==2.31.0'
+$ uv add 'requests==2.31.0'
 ```
 
 To add a dependency sourced from GitHub (as opposed to the default PyPI):
 
 ```bash
-uv add git+https://github.com/psf/requests
+$ uv add git+https://github.com/psf/requests
 ```
 
 To remove a dependency, you can use `uv remove`:
 
 ```bash
-uv remove requests
+$ uv remove requests
 ```
 
 To upgrade a package, run `uv lock` with the `--upgrade-package` flag:
 
 ```bash
-uv lock --upgrade-package requests
+$ uv lock --upgrade-package requests
 ```
 
 The `--upgrade-package` flag will attempt to update the specified package to the latest compatible version, while keeping the rest of the lock file intact.
@@ -222,7 +222,7 @@ The `--upgrade-package` flag will attempt to update the specified package to the
 `uv run` can be used to run Python scripts or Python commands in your project environment.
 
 ```text
-uv run main.py
+$ uv run main.py
 ```
 
 Prior to every `uv run` invocation, `uv` will verify that the lockfile is up-to-date with the `pyproject.toml`, and that the environment is up-to-date with the lock file, keeping your project in-sync without the need for manual intervention. 
@@ -231,15 +231,15 @@ Prior to every `uv run` invocation, `uv` will verify that the lockfile is up-to-
 Alternatively, you can use `uv sync` to manually update the environment (recorded in in `.venv/` folder) then activate it before executing a Python command or running your Python script:
 
 ```bash
-uv sync
-source .venv/bin/activate # macOS or Linux
-python3 main.py
+$ uv sync
+$ source .venv/bin/activate # macOS or Linux
+$ python3 main.py
 ```
 
 ```bash
-uv sync
-.venv\Scripts\activate # Windows
-python main.py
+$ uv sync
+$ source .venv\Scripts\activate # Windows
+$ python3 main.py
 ```
 
 Note: the virtual environment must be active to run scripts and commands in the project without `uv run`. 
@@ -252,8 +252,8 @@ Virtual environment activation differs per shell and platform.
 By default, `uv build` will build the project from the current directory, and place the built artifacts in a dist/ subdirectory:
 
 ```bash
-uv build
-ls dist/
+$ uv build
+$ ls dist/
 hello_world-0.1.0-py3-none-any.whl	
 hello_world-0.1.0.tar.gz
 ```
@@ -268,15 +268,15 @@ If you have not done it already, make a copy of [example project repository](htt
 Next, clone your copy of the repository locally:
 
 ```bash
-cd ~
-git clone https://github.com/YOUR-GITHUB/spacewalks_example
+$ cd ~
+$ git clone https://github.com/YOUR-GITHUB/spacewalks_example
 ```
 
 Let's navigate into the `spacewalks_example` project directory.
 
 ```bash
-cd spacewalks_example
-ls -la
+$ cd spacewalks_example
+$ ls -la
 total 56
 drwxr-xr-x   15 mbassan2  staff    480 23 Jul 17:21 .
 drwx------@ 897 mbassan2  staff  28704 23 Jul 17:21 ..
@@ -300,7 +300,7 @@ Let's assume this project uses `venv`, `pip` and `requirements.txt` to manage an
 To migrate from the existing development workflow to use `uv`, you need to use `uv init` first to initiate the project and get the basic `pyptoject.toml` file created.
 
 ```bash
-uv init
+$ uv init
 ```
 
 ### Managing dependencies
@@ -308,17 +308,17 @@ uv init
 Next, we need to install dependencies for our project, which are recorded in `requirements.txt` file.
 By looking at the code in `eva_data_analysis.py` Python script, we can tell we require `matplotlib` and `pandas` packages. 
 
-We can use the `uv add` command to install them one by one:
+We can use the `uv add` command to install them:
 
 ```bash
-uv add matplotlib
-uv add pandas
+$ uv add matplotlib
+$ uv add pandas
 ```
 
-Alternatively, we can use the `uv add` command with the `-r` flag to add all dependencies from the `requirements.txt` file.
+Alternatively, we can use the `uv add` command with the `-r` flag to add all dependencies from the `requirements.txt` file in a single go.
 
 ```bash
-uv add -r requirements.txt
+$ uv add -r requirements.txt
 ```
 
 You may notice that after running the `uv add` command - we now have a virtual environment in `.venv` directory (as well as the `uv.lock` file).
@@ -357,7 +357,7 @@ Now when someone installs our package on their machine, only the runtime depende
 To install the development dependencies, one needs to clone our repository from GitHub and then specify the dev extra when installing:
 
 ```
-$ pip install .[dev]
+$ python3 -m pip install .[dev]
 ```
 
 At this point, you can delete `requirements.txt` and carry on running your Python scripts or Python tools with `uv`.
@@ -369,8 +369,8 @@ If you prefer to use Python directly, you will have to activate your environment
 Once we have made sure our project is in the right structure, we can go ahead and build a distributable version of our software as before:
 
 ```bash
-uv build
-ls dist/
+$ uv build
+$ ls dist/
 spacewalks_example-0.1.0-py3-none-any.whl	
 spacewalks_example-0.1.0.tar.gz
 ```
@@ -384,7 +384,7 @@ While we could choose to use underscores in a distributable package name, we can
 Now if we gave this wheel file to someone else, they could install it using `uv` (or `pip` or another package installer).
 
 ```bash
-pip install spacewalks_example-0.1.0-py3-none-any.whl
+$ python3 -m pip install spacewalks_example-0.1.0-py3-none-any.whl
 ```
 
 And then they could import our package in their own Python environment:
@@ -398,7 +398,7 @@ After we have been working on our code for a while and want to publish an update
 uv can help easily increment the version number following Semantic Versioning conventions. For example, to increment the minor version number, we can do:
 
 ```bash
-uv version --bump minor
+$ uv version --bump minor
 ```
 Then the version number in `pyproject.toml` will be updated from 0.1.0 to 0.2.0.
 

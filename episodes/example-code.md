@@ -6,32 +6,31 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What is a minimum documentation needed for people to be able to reuse some else's code?
+- How to install dependencies and set up virtual environment for a Python project using `pip` and `venv`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Obtain and run example code used for this lesson
-- List documentation types missing from the example code
+- Obtain and inspect the example code used for this lesson
+- Install dependencies and set up virtual environment for running and developing the code using `pip` and `venv`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-For this lesson we'll be using some [example code that does spacewalks analysis](https://github.com/softwaresaved/spacewalks) available on GitHub, which we'll clone onto our machines using the Bash shell.
-The spacewalks code is available from: https://github.com/softwaresaved/spacewalks.
+For this lesson we'll be using the [example code that does spacewalks analysis](https://github.com/softwaresaved/spacewalks_example) available on GitHub, which we'll clone onto our machines using the Bash shell.
 
 ## Obtaining Example Code
 
-Create your own copy of the spacewalks repository above using `Use this template` button on GitHub.
+Create your own copy of the [spacewalks_example repository](https://github.com/softwaresaved/spacewalks_example) using `Use this template` button on GitHub.
 
 Open a command-line shell (e.g. via Git Bash in Windows, bash shell on Linux or Terminal on a Mac) and navigate to where you would like the example code to reside (e.g. to your home directory).
 
 Use Git to clone your copy of the spacewalks repository.
 
-shell
-cd
-git clone https://github.com/your-repository/spacewalks.git
-cd spacewalks
+```bash
+$ cd ~
+$ git clone https://github.com/YOUR-GITHUB/spacewalks_example.git
+$ cd spacewalks_example
 ```
 
 ## Examining the Code
@@ -48,26 +47,24 @@ The code is designed to:
 
 A few things to note about the software project:
 
-- `eva_data_analysis.py` Python script already contains comprehensive docstrings comments
-- `requirements.txt` file in the project root lists the software dependencies - such as Pandas, Pytest, Matplotlib
+- `requirements.txt` file in the project root lists the software dependencies - such as Pandas, Matplotlib, Pytest, MkDocs - and describes the software environment
 - `data` folder contains input data
 - `results` folder contains cleaned dataset converted to CSV format and the resulting plot
 - `tests` folder contains test code
+- `site` folder contains documentation compiled with MkDocs
 
 
-## Running the Example Code
+## Setting up the Environment
 
-Let's run the code.
+Before we can run the code, we need to create and activate a virtual environment called ".venv" from the root of the software project directory:
 
-First, we will create and activate a virtual environment called "venv" from the root of the software project directory:
-
-shell
-python3 -m venv venv
-source venv/bin/activate # Mac or Linux
-source venv_spacewalks/Scripts/activate # Windows
-(venv) $
+```bash
+$ python3 -m venv .venv
+$ source .venv/bin/activate # Mac or Linux
+$ source .venv/Scripts/activate # Windows
+(.venv) $
 ```
-The active virtual environment is indicated in the command line prompt between the round brackets: "(venv)".
+The active virtual environment is indicated in the command line prompt between the round brackets: "(.venv)".
 
 Next, we will install the necessary dependencies from the `requirements.txt` file using `pip`:
 
@@ -80,42 +77,23 @@ Note: some users may be able to just use the `python` command instead of `python
 To ensure the code is working correctly, run the tests using Pytest.
 
 ```
-python3 -m pytest
+$ python3 -m pytest
 ```
+
+## Running the Code
 
 To run the analysis using the `eva_data_analysis.py` script from the command line terminal, do:
 
 ```
-python3 eva_data_analysis.py data/eva-data.json results/eva-data.csv
+$ python3 eva_data_analysis.py data/eva-data.json results/eva-data.csv
 ```
 
 If the code runs successfully, you should get the resulting plot in `results/cumulative_eva_graph.png`.
 
 
-::: challenge
-
-## What documentation for this software is missing?
-
-::: hint
- 
-What documentation would you need to be able to run the code?
-
-:::
-
-:::
-
-With the code provided as is (e.g. someone sent you the code via email or on a memory stick), would you be able to answer the following questions:
-
-- Could you run the code on your platform/operating system (is there documentation that covers installation instructions)?
-- What programs or libraries do you need to install to make it work (and which versions)?
-- Are you allowed to use this code in your own work? If you did, would the owner expect credit in some form (paper authorship, citation or acknowledgement)?
-- Are you allowed to modify the files or share them with others?
-- How easy would it be to change its parameters to calculate a different statistic, or run the analysis on a different input file?
-
-
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Minimum information needed to be able to run someone else code should include the reuse licence, description and purpose of the code, installation and setup instructions (including dependencies), and usage example (how to run the code).
-- Additional information may include more detailed installation guides, API documentation or design documents, list of authors and how to cite the code (this list is not exhaustive).
+- `pip` and `venv` are traditional tools for installing dependencies and setting up virtual environments for running and developing Python code.
+- `requirements.txt` file can be used to record and share a snapshot of the virtual environment.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
