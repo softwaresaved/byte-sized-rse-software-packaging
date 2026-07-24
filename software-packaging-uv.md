@@ -36,44 +36,56 @@ exercises: 45
 `uv` is a multi-functional tool, that performs a number of tasks:
 
 - installs and manages Python versions,
-- provides comprehensive Python project and dependency management capabilities and handles virtual environments with a universal lockfile,
+- installs and runs Python tools (Python packages which provide applications that can be used as command line tools) published as Python packages (e.g. `ruff`, `pip`, etc.),
+- provides comprehensive Python project and dependency management capabilities and handles virtual environments with a universal lock file,
 - runs Python scripts,
-- runs and installs tools (Python modules) published as Python packages (e.g. `pip`, etc.),
 - includes a pip-compatible interface for users with existing pip-based development workflows,
 - is really performant and much faster than `pip`.
 
-The core `uv` project development workflow looks like as follows:
+The core `uv` software project development workflow looks like as follows:
 
 1. project creation and setup - `uv` can create a new project layout for you so you start with a clean structure instead of a blank folder
 2. virtual environments - `uv` manages virtual environments directly, which means you do not need to switch between different tools to create and activate environments
-3. dependency installation - `uv` installs packages quickly and consistently while still supporting the same dependency ecosystem you may already be familiar with
+3. dependency installation - `uv` installs packages quickly while still supporting the same dependency ecosystem you may already be familiar with
 4. running commands inside the environment - `uv` can run Python commands or scripts inside the environment without you having to manually activate it
 5. (optionally) package and publish your code.
 
-There is a number of `uv` commands to handle Python projects as part of the development workflow; we give a short summary below.
+### `uv` - key files to know
+
+`uv` uses a combination of the following files and directories in your project (which it keeps in sync with one another) to do its job:
+
+- `pyptoject.toml` file - to maintain the project's metadata and configuration
+- `.venv` folder - to maintain the development environment
+- `uv.lock` file - to record (lock) the development environment.
+
+### `uv` project commands
+
+There is a number of `uv` commands to handle Python projects as part of the development workflow (which manipulate and sync the files and directories above); we give a short summary below.
 
 ::: callout
 ### `uv` project commands
 
 A summary of `uv` commands for creating and working on Python projects, i.e., with a `pyproject.toml` file.
 
-- `uv init`: create a new Python project.
-- `uv add`: add a dependency to the project.
-- `uv remove`: remove a dependency from the project.
-- `uv sync`: sync the project's dependencies with the environment.
-- `uv lock`: create a lockfile for the project's dependencies (locking the virtual environment).
-- `uv run`: run a Python command or a Python script in the project environment.
+- `uv init`: create a new Python project (and start a new `pyptoject.toml` file).
+- `uv add`: add a dependency to the project (locking and syncing the environment).
+- `uv remove`: remove a dependency from the project (locking and syncing the environment).
+- `uv sync`: sync the project's dependencies with the environment (i.e. into the `.venv` folder in the project directory).
+- `uv lock`: create a lock file for the project's dependencies (i.e. "locking" the current environment).
+- `uv run`: run a Python command or a Python script in the project environment (automatically locking and syncing if anything is out-of-date).
 - `uv tree`: view the dependency tree for the project.
 - `uv build`: build the project into distribution archives.
 - `uv publish`: publish the project to a package index.
-:::
 
-The full list of all `uv` commands is available from the [`uv` features documentation](https://docs.astral.sh/uv/getting-started/features/).
-A number of [`uv` guides](https://docs.astral.sh/uv/guides/) covering the full set of commands and features is also available and highly recommended.
+Project commands are a subset of [all `uv` commands](https://docs.astral.sh/uv/getting-started/features/).
+
+Check out [the `uv` guides](https://docs.astral.sh/uv/guides/) covering the full set of `uv` features.
+
+:::
 
 ## Using `uv` for new projects
 
-If you are starting a new project then you can use `uv` straight away to replace all the other tools you may have used in the past in your development workflow.
+If you are starting a brand new Python project then you can use `uv` straight away to replace all the other tools you may have used in the past in your development workflow.
 
 ### Creating a new project
 
@@ -120,20 +132,22 @@ readme = "README.md"
 dependencies = []
 ```
 
+### `pyproject.toml` structure
+
 `pyproject.toml` is a configuration file introduced by [PEP 518](https://peps.python.org/pep-0518/) to standardise Python project setup. 
 Written in TOML (Tom’s Obvious, Minimal Language), it serves as a single source of truth for your project’s build system, metadata, and tool configurations. 
 It tells tools like `uv`, `pip`, `poetry`, or `hatch` how to construct your project.
 
-Unlike the older `setup.py` approach, which relied on executable Python code, `pyproject.toml` uses a declarative, static format. 
+Unlike the older `setup.py` approach, which contains executable Python code, `pyproject.toml` uses a declarative, static configuration format. 
 
 `pyptoject.toml` structure contains three main components (tables):
 
-- **\[build-system]**: defines the tools and other dependencies are needed to build your project's source distribution and wheel (built distribution).
-- **\[project]**: stores metadata like your project’s name, version, and dependencies.
-- **\[tool]**: configures settings for development tools like linters or formatters.
+- **\[build-system]** table: defines the tools and other dependencies are needed to build your project's source distribution and wheel (built distribution).
+- **\[project]** table: stores metadata like your project’s name, version, and dependencies.
+- **\[tool]** table: configures settings for development tools like linters or formatters.
 
 The [build-system] table is not compulsory - you can use `pyproject.toml` just to store metadata and configuration. 
-If your project is an application (not designed to be published as a package), you do not need a [build-system] table. 
+If your project is an application (i.e. not designed to be published as a package), you do not need a [build-system] table. 
 `uv` will install and manage your dependencies, but it will not attempt to build the project itself.
 If you are building a package or library to be published, the [build-system] table is required so `uv` knows which build backend to use (e.g. `uv_build`, `setuptools`, `hatch`).
 
@@ -152,15 +166,25 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 ```
 
-`uv` supports all build backends as specified by [PEP 517](https://peps.python.org/pep-0517/), but also provides a native build backend (`uv_build`) that integrates tightly with `uv` to improve performance and user experience.
+`uv` supports various build backends as specified by [PEP 517](https://peps.python.org/pep-0517/), but also provides a native build backend `uv_build` that integrates tightly with `uv` to improve performance and user experience.
+
 When you create a new project with `uv init`, the `uv_build` backend will be used by default if you issue the `uv build` command to create the source distribution and wheel for your project.
 `uv_build` backend has reasonable defaults and requires zero configuration for most users so you do not actually have to declare it in `pyptoject.toml` unless you want to change it to another build backend or configure it further.
+
 You can initialise projects as packages even even you are just developing applications by running `uv init --package` - this will setup the project using a src-layout structure and setup `uv_build` as a build system in your `pyptoject.toml`.
 
 The [tool] table has tool-specific subtables, e.g., [tool.uv], [tool.hatch], content of which are defined by each tool. 
 You would need to consult the particular tool’s documentation to know what it can contain.
 
-A minimal `pyproject.toml` just requires the [project] table (as shown above).
+A minimal `pyproject.toml` just requires the [project] table.
+
+::: callout
+### `pyproject.toml` guide
+
+`pyproject.toml` file can be used to declare many more configuration parameters about Python projects that we are not going into details here.
+A [good guide on writing `pyproject.toml` files](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/) can be found from [Python Packaging User Guides website](https://packaging.python.org/).
+
+:::
 
 ### Managing dependencies
 
@@ -171,10 +195,10 @@ For example, to add `requests` package, do:
 $ uv add requests
 ```
 
-You may now notice the new `.venv` virtual environment and `uv.lock` file being added to your project after running the `uv add` command.
-They will be updated each time you, e.g. add or remove a dependency or run the code (i.e. run either of the `uv run`, `uv add`, `uv sync`, or `uv lock` commands).
-
-The project structure now looks like the following - all these parts work together and allow `uv` to manage your project.
+You may now notice the new `.venv` virtual environment and `uv.lock` file being added to your project after running the `uv add` command for the first time.
+They will be updated each time you add or remove a dependency or run the code - i.e. run either of the `uv run`, `uv add`, `uv sync`, or `uv lock` commands.
+ 
+The project structure now looks like the following - with new parts added that all work together and allow `uv` to manage your project.
 
 ```text
 .
@@ -225,10 +249,10 @@ The `--upgrade-package` flag will attempt to update the specified package to the
 $ uv run main.py
 ```
 
-Prior to every `uv run` invocation, `uv` will verify that the lockfile is up-to-date with the `pyproject.toml`, and that the environment is up-to-date with the lock file, keeping your project in-sync without the need for manual intervention. 
+Prior to every `uv run` invocation, `uv` will verify that the lock file is up-to-date with the `pyproject.toml`, and that the environment is up-to-date with the lock file, keeping your project in-sync without the need for manual intervention. 
 `uv run` guarantees that your command is run in an environment with all required dependencies at their locked versions.
 
-Alternatively, you can use `uv sync` to manually update the environment (recorded in in `.venv/` folder) then activate it before executing a Python command or running your Python script:
+Alternatively, you can use `uv sync` to manually update the environment (recorded in `.venv` folder) then activate it before executing a Python command or running your Python script:
 
 ```bash
 $ uv sync
@@ -239,17 +263,16 @@ $ python3 main.py
 ```bash
 $ uv sync
 $ source .venv\Scripts\activate # Windows
-$ python3 main.py
+$ python main.py
 ```
 
-Note: the virtual environment must be active to run scripts and commands in the project without `uv run`. 
-Virtual environment activation differs per shell and platform.
+Note: if you want to run scripts and commands using the Python command (i.e. without `uv run`) - the virtual environment must be active. 
 
 ### Building distributions
 
-`uv build` command can be used to build source distributions and binary distributions (wheel) for your project.
+`uv build` command can be used to build source distributions and binary distributions (wheels) for your project.
 
-By default, `uv build` will build the project from the current directory, and place the built artifacts in a dist/ subdirectory:
+By default, `uv build` will build the project from the current directory, and place the built artifacts in the `dist` subdirectory:
 
 ```bash
 $ uv build
@@ -260,9 +283,10 @@ hello_world-0.1.0.tar.gz
 
 ## Switching to `uv` in existing projects
 
-If you already have an existing project that uses `venv` and `pip`, you might be wondering how to migrate to using `uv` for your development workflow. 
-It is rather straightforward.
-Let's have a look at the [example project we downloaded as part of the setup](./index.html#example-code).
+Let's go back to our example spacewalks code.
+
+This is an existing project where you currently use `venv` and `pip` tools to manage dependencies and environments.
+You want to migrate to using `uv` for your development workflow.
 
 If you have not done it already, make a copy of [example project repository](https://github.com/softwaresaved/spacewalks_example) into your GitHub account by using the `Use this template` button on GitHub.
 Next, clone your copy of the repository locally:
@@ -272,7 +296,7 @@ $ cd ~
 $ git clone https://github.com/YOUR-GITHUB/spacewalks_example
 ```
 
-Let's navigate into the `spacewalks_example` project directory.
+Let's navigate into the `spacewalks_example` project directory and examine it a bit.
 
 ```bash
 $ cd spacewalks_example
@@ -295,9 +319,11 @@ drwxr-xr-x   12 mbassan2  staff    384 23 Jul 17:21 site
 drwxr-xr-x    3 mbassan2  staff     96 23 Jul 17:21 tests
 ```
 
-Let's assume this project uses `venv`, `pip` and `requirements.txt` to manage and record dependencies and the virtual environment.
+We can see the `requirements.txt` file used to record dependencies from the development environment.
 
 To migrate from the existing development workflow to use `uv`, you need to use `uv init` first to initiate the project and get the basic `pyptoject.toml` file created.
+
+From within project root, do:
 
 ```bash
 $ uv init
